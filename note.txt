@@ -1,0 +1,3 @@
+command yang di butuhin
+php artisan db:seed --class=AdminSeeder
+php artisan db:seed --class=MobilSeeder

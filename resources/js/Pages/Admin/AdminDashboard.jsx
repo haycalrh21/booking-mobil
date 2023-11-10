@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from '@/Pages/admin/Navbar';
 import DataMobil from '@/Pages/Mobil/DataMobil';
 import DataPengguna from '@/Pages/Admin/DataPengguna';
+import DataBooking from '@/Pages/Admin/DataBooking'; // Pastikan Anda mengimpor komponen DataBooking
 
 function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState([]);
+  const [activeTab, setActiveTab] = useState('');
   const [mobilData, setMobilData] = useState([]);
   const [penggunaData, setPenggunaData] = useState([]);
+  const [bookingData, setBookingData] = useState([]); // Tambahkan state untuk data booking
 
   const handleTabClick = (tab) => {
     if (tab === activeTab) {
@@ -18,13 +20,9 @@ function AdminDashboard() {
 
   useEffect(() => {
     if (activeTab === 'dataMobil') {
+      // Fetch data mobil
       fetch('/admin/datamobil')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
           setMobilData(data);
         })
@@ -34,19 +32,26 @@ function AdminDashboard() {
     }
 
     if (activeTab === 'dataPengguna') {
+      // Fetch data pengguna
       fetch('/admin/datapengguna')
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
-          console.log('Data pengguna:', data);
           setPenggunaData(data);
         })
         .catch((error) => {
           console.error('Error fetching data pengguna:', error);
+        });
+    }
+
+    if (activeTab === 'dataBooking') {
+      // Fetch data booking
+      fetch('/admin/databooking')
+        .then((response) => response.json())
+        .then((data) => {
+          setBookingData(data); // Mengatur data booking
+        })
+        .catch((error) => {
+          console.error('Error fetching data booking:', error);
         });
     }
   }, [activeTab]);
@@ -67,9 +72,16 @@ function AdminDashboard() {
         >
           Data Pengguna
         </a>
+        <a
+          className={`tab tab-bordered ${activeTab === 'dataBooking' ? 'tab-active' : ''}`}
+          onClick={() => handleTabClick('dataBooking')}
+        >
+          Data Booking
+        </a>
       </div>
       {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} />}
       {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} />}
+      {activeTab === 'dataBooking' && <DataBooking bookings={bookingData} />}
     </div>
   );
 }

@@ -52,7 +52,7 @@ export const Navbar =() => {
                     <Link href={route('dashboard')}>dashboard</Link>
 
                         <Link href={route('datamobillengkap')}>mobil</Link>
-                    <Link href={route('testing')}>testing</Link>
+                    <Link href={route('booking')}>testing</Link>
 <br></br>
 
 

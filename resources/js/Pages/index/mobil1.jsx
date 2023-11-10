@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { LoadingSpinner } from '@/Pages/User/LoadingSpinner';
-import { Navbar } from '@/Pages/User/Navbar'; // Import navbar
+import { Navbar } from '@/Pages/User/Navbar';
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 function Mobil1({ mobils }) {
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('All'); // State untuk kategori yang dipilih
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showBookingForm, setShowBookingForm] = useState(false); // State untuk menampilkan/menyembunyikan form booking
+  const [bookingData, setBookingData] = useState({}); // State untuk data booking
   const categories = ['All', 'Sedan', 'SUV', 'Coupe', 'Pick-up', 'Sport', 'Listrik', 'Keluarga', 'Klasik', 'Off-road'];
 
-  // Simulate data loading. Replace this with your actual data fetching logic.
   useEffect(() => {
-    // Simulate data loading delay for 2 seconds (replace with actual data fetching).
     const fetchData = async () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading(false);
@@ -18,14 +19,29 @@ function Mobil1({ mobils }) {
     fetchData();
   }, []);
 
-  // Filter mobils berdasarkan kategori yang dipilih
   const filteredMobils = selectedCategory === 'All' ? mobils : mobils.filter(mobil => mobil.kategori === selectedCategory);
+
+  // Handle booking action
+  const handleBooking = (mobil) => {
+    setBookingData({ mobil });
+    setShowBookingForm(true);
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Implement your form submission logic here, for example, sending booking data to the server.
+    console.log("Booking data:", bookingData);
+    // Reset the form and hide it
+    setBookingData({});
+    setShowBookingForm(false);
+  };
 
   return (
     <div>
       <Navbar />
-      <div className="flex"> {/* Membungkus semua elemen dalam flex container */}
-        <div className="sidebar" style={{ flex: '0 0 5%' }}> {/* Sidebar berada di sisi kiri */}
+      <div className="flex">
+        <div className="sidebar" style={{ flex: '0 0 5%' }}>
           <h3>Filter Kategori</h3>
           <ul>
             {categories.map(category => (
@@ -52,12 +68,29 @@ function Mobil1({ mobils }) {
                   <p className='flex justify-center'><strong>Brand:</strong> {mobil.brand}</p>
                   <p className='flex justify-center'><strong>Harga:</strong> {mobil.harga}</p>
                   <p className='flex justify-center'><strong>Kategori:</strong> {mobil.kategori}</p>
+
+                  {/* Use InertiaLink to navigate to Booking page with mobil data */}
+                  <InertiaLink
+                    href={route('booking', { kodeMobil: mobil.id })} // Set the route for Booking page with kodeMobil as a parameter
+                    className="bg-blue-500 text-white rounded-full p-2 mt-2"
+                  >
+                    Booking
+                  </InertiaLink>
                 </div>
               </div>
             ))
           )}
         </div>
       </div>
+      {showBookingForm && (
+        <div>
+          <h2>Booking Form</h2>
+          <form onSubmit={handleSubmit}>
+            {/* Add input fields for booking details here */}
+            <button type="submit">Submit Booking</button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

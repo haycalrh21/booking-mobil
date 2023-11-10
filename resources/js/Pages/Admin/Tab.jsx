@@ -3,8 +3,10 @@ import React from 'react';
 export const Tab = ({
   showDataMobil,
   showDataPengguna,
+  showDataBooking, // Tambahkan prop untuk menampilkan Data Booking
   toggleDataMobil,
   toggleDataPengguna,
+  toggleDataBooking, // Tambahkan prop untuk mengganti tampilan Data Booking
 }) => {
   return (
     <div className="tabs">
@@ -13,6 +15,9 @@ export const Tab = ({
       </a>
       <a className={`tab tab-bordered ${showDataPengguna ? 'tab-active' : ''}`} onClick={toggleDataPengguna}>
         Data Pengguna
+      </a>
+      <a className={`tab tab-bordered ${showDataBooking ? 'tab-active' : ''}`} onClick={toggleDataBooking}>
+        Data Booking
       </a>
     </div>
   );

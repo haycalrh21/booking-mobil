@@ -53,6 +53,8 @@ export  function DataMobil({ mobils, pagination }) {
               <table className="min-w-full table-fixed">
               <thead>
                     <tr>
+                    <th className="border text-left text-orange-300">ID</th>
+
                         <th className="border text-left text-orange-300">Nama</th>
                         <th className="border text-left text-orange-300">Brand</th>
                         <th className="border text-left text-orange-300">Harga</th>
@@ -67,6 +69,7 @@ export  function DataMobil({ mobils, pagination }) {
                     {Array.isArray(getCurrentPageData()) ? (
   getCurrentPageData().map((mobil) => (
     <tr key={mobil.id}>
+        <td className="border text-left">{mobil.id}</td>
       <td className="border text-left">{mobil.nama}</td>
       <td className="border text-left">{mobil.brand}</td>
       <td className="border text-left">{mobil.harga}</td>
