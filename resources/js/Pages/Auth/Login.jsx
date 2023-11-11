@@ -6,6 +6,8 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
+import Swal from 'sweetalert2';
+
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,18 +15,48 @@ export default function Login({ status, canResetPassword }) {
         password: '',
         remember: false,
     });
+    const showAlert = () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Woot!',
+          text: 'I did it!',
+        }).then((result) => {
+          // Your logic when the user confirms the alert
+          if (result.isConfirmed) {
+            // Handle confirmation, for example, navigate to another page
+            // You can use the Inertia.js `visit` method to navigate to another page
+            // Example: visit(route('your.route.name'));
+            console.log('User confirmed the alert');
+          } else {
+            // Handle rejection, for example, do something else
+            console.log('User rejected the alert');
+          }
+        });
+      };
 
-    useEffect(() => {
+      const submit = async (e) => {
+        e.preventDefault();
+
+        // Show SweetAlert before making the API call
+        showAlert();
+
+        // Perform the login request after the SweetAlert is shown
+        const response = await post(route('login'));
+
+        // You can handle the response if needed
+        if (response) {
+            console.log('Login successful');
+        } else {
+            console.log('Login failed');
+        }
+    };
+         useEffect(() => {
         return () => {
             reset('password');
         };
     }, []);
 
-    const submit = (e) => {
-        e.preventDefault();
 
-        post(route('login'));
-    };
 
     return (
         <GuestLayout>

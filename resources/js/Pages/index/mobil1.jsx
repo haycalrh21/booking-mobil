@@ -6,8 +6,8 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 function Mobil1({ mobils }) {
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [showBookingForm, setShowBookingForm] = useState(false); // State untuk menampilkan/menyembunyikan form booking
-  const [bookingData, setBookingData] = useState({}); // State untuk data booking
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [bookingData, setBookingData] = useState({});
   const categories = ['All', 'Sedan', 'SUV', 'Coupe', 'Pick-up', 'Sport', 'Listrik', 'Keluarga', 'Klasik', 'Off-road'];
 
   useEffect(() => {
@@ -21,20 +21,9 @@ function Mobil1({ mobils }) {
 
   const filteredMobils = selectedCategory === 'All' ? mobils : mobils.filter(mobil => mobil.kategori === selectedCategory);
 
-  // Handle booking action
   const handleBooking = (mobil) => {
     setBookingData({ mobil });
     setShowBookingForm(true);
-  };
-
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Implement your form submission logic here, for example, sending booking data to the server.
-    console.log("Booking data:", bookingData);
-    // Reset the form and hide it
-    setBookingData({});
-    setShowBookingForm(false);
   };
 
   return (
@@ -71,8 +60,9 @@ function Mobil1({ mobils }) {
 
                   {/* Use InertiaLink to navigate to Booking page with mobil data */}
                   <InertiaLink
-                    href={route('booking', { kodeMobil: mobil.id })} // Set the route for Booking page with kodeMobil as a parameter
+                    href={route('booking.create', { kodeMobil: mobil.id })}
                     className="bg-blue-500 text-white rounded-full p-2 mt-2"
+                    onClick={() => setShowBookingForm(false)}
                   >
                     Booking
                   </InertiaLink>
@@ -85,10 +75,7 @@ function Mobil1({ mobils }) {
       {showBookingForm && (
         <div>
           <h2>Booking Form</h2>
-          <form onSubmit={handleSubmit}>
-            {/* Add input fields for booking details here */}
-            <button type="submit">Submit Booking</button>
-          </form>
+          <BookingForm mobilData={bookingData.mobil} setShowBookingForm={setShowBookingForm} />
         </div>
       )}
     </div>
@@ -96,3 +83,4 @@ function Mobil1({ mobils }) {
 }
 
 export default Mobil1;
+

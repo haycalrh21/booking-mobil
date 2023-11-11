@@ -44,7 +44,7 @@ Route::group(['middleware' => ['role:admin,manager,supervisor']], function () {
     Route::get('/admin/datapengguna', [AdminController::class, 'dataPengguna'])->name('datapengguna');
     Route::get('/admin/datamobil', [MobilController::class, 'datamobil'])->name('datamobil');
 
-    Route::get('/admin/mobil/tambahmobil', [MobilController::class, 'create'])->name('mobil.create');
+    Route::get('/admin/mobil/tambahmobil', [MobilController::class, 'store'])->name('mobil.create');
     // Route::post('/mobil', [MobilController::class, 'store'])->name('mobil.store');
     Route::put('/change-role/{userId}', [AdminController::class, 'changeRole'])->name('change-role');
     Route::get('/admin/databooking', [BookingController::class, 'index'])->name('databooking');
@@ -63,8 +63,8 @@ Route::middleware(['role:user'])->group(function () {
         return Inertia::render('testing');
     })->name('testing');
     Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobillengkap');
-    Route::get('/booking', [BookingController::class, 'create'])->name('booking');
-    Route::post('/booking', [BookingController::class, 'store'])->name('booking');
+    Route::get('/booking', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
     // Rute profil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
