@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Booking;
+use App\Models\Mobil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +16,16 @@ class BookingController extends Controller
         return Inertia::render('User/Booking', [
             'user' => Auth::user(), // Mengambil data pengguna yang sedang login
         ]);
-    }
 
+
+
+    }
+    public function datamobil1($id)
+    {
+        $mobils = Mobil::find($id);
+
+       return response()->json($mobils);
+    }
     public function store(Request $request)
     {
         // Validasi data yang dikirimkan oleh formulir

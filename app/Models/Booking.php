@@ -12,6 +12,6 @@ class Booking extends Model
 
     public function mobil()
     {
-        return $this->belongsTo(Mobil::class, 'kodeMobil', 'id'); // Mobil::class adalah model mobil
+        return $this->belongsTo(Mobil::class, 'kodeMobil', 'id', 'nama'  ); // Mobil::class adalah model mobil
     }
 }

@@ -17,9 +17,9 @@ export default function Login({ status, canResetPassword }) {
     });
     const showAlert = () => {
         Swal.fire({
-          icon: 'error',
-          title: 'Woot!',
-          text: 'I did it!',
+          icon: 'success',
+          title: 'Berhasil login!',
+          text: 'Selamat Login!',
         }).then((result) => {
           // Your logic when the user confirms the alert
           if (result.isConfirmed) {

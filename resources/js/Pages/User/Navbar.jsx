@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
-import { Link } from "@inertiajs/react"
+import { useEffect, useState } from 'react';
+import { Link, usePage } from '@inertiajs/react';
 
-export const Navbar =() => {
-
-    const [state, setState] = useState(false)
+export const Navbar = () => {
+    const [state, setState] = useState(false);
+    const { auth } = usePage().props;
 
     // Replace javascript:void(0) paths with your paths
 
@@ -47,12 +47,19 @@ export const Navbar =() => {
                 </div>
                 <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'} `}>
                     <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
-                    <Link href={route('login')}>Login</Link>
-                    <Link href={route('register')}>register</Link>
-                    <Link href={route('dashboard')}>dashboard</Link>
+                    {auth.user ? (
+                            <>
+                                <Link href={route('dashboard')}>Dashboard</Link><br></br>
+                                <Link href={route('datamobillengkap')}>Mobil</Link><br></br>
+                                <Link href={route('booking.store')}>Booking</Link>
+                            </>
+                        ) : (
+                            <>
+                                <Link href={route('login')}>Login</Link><></>
+                                <Link href={route('register')}>Register</Link>
+                            </>
+                        )}
 
-                        <Link href={route('datamobillengkap')}>mobil</Link>
-                    <Link href={route('booking.store')}>testing</Link>
 <br></br>
 
 

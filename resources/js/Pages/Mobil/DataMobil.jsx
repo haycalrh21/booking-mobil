@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 
 import { Link } from '@inertiajs/react';
-import { Paginator } from '@/Pages/admin/Paginator'; // Import komponen Pagination
+import { Paginator } from '@/Pages/admin/Paginator';// Import komponen Pagination
 
 export  function DataMobil({ mobils, pagination }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -27,6 +27,7 @@ export  function DataMobil({ mobils, pagination }) {
       setCanGoNext(false); // Jika mencoba melanjutkan ke halaman yang tidak ada, set canGoNext menjadi false
     }
   };
+
 
   // Update halaman saat komponen dimuat ulang
   useEffect(() => {
@@ -66,8 +67,7 @@ export  function DataMobil({ mobils, pagination }) {
                     </tr>
                     </thead>
                     <tbody>
-                    {Array.isArray(getCurrentPageData()) ? (
-  getCurrentPageData().map((mobil) => (
+                    {Array.isArray(getCurrentPageData()) ? (getCurrentPageData().map((mobil) => (
     <tr key={mobil.id}>
         <td className="border text-left">{mobil.id}</td>
       <td className="border text-left">{mobil.nama}</td>

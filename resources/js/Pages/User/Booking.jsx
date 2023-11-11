@@ -1,10 +1,14 @@
 import React from 'react';
 import { useForm } from '@inertiajs/inertia-react';
 import Swal from 'sweetalert2';
+import { Navbar } from '@/Pages/User/Navbar';
 
-const Booking = ({ user, mobilData }) => {
+
+export const Booking = ({ user, mobilData ,mobil}) => {
   const urlParams = new URLSearchParams(window.location.search);
   const kodeMobil = urlParams.get('kodeMobil');
+  const Brand = urlParams.get('Brand');
+  const NamaMobil = urlParams.get('NamaMobil');
 
 
 
@@ -13,9 +17,11 @@ const Booking = ({ user, mobilData }) => {
     namaPemesan: user.name,
     email: user.email,
     nomorHape: '',
-    kodeMobil: mobilData ? mobilData.id : kodeMobil || '',
+    kodeMobil: mobilData ? mobilData.id : kodeMobil ,
+
     tanggal: '',
     message: '',
+
   });
 
   const showAlert = () => {
@@ -63,23 +69,26 @@ const Booking = ({ user, mobilData }) => {
   };
 
   return (
+    <div><Navbar/>
     <div className="container flex justify-content-center align-items-center min-h-100">
-      <div className="card p-4">
+      <div className="card p-8 ">
         <h2 className="text-center mb-4">Pesan Mobil</h2>
         <form onSubmit={handleSubmit} className="text-center">
           <div className="form-group row justify-content-center">
-            <label htmlFor="namaPemesan" className="col-sm-2 col-form-label text-right">
+            <label htmlFor="namaPemesan" className="col-sm-2 col-form-label text-center">
               Nama Pemesan
             </label>
             <div className="col-sm-6">
               <input
                 type="text"
-                className="form-control"
+                className="form-control "
                 id="namaPemesan"
                 name="namaPemesan"
                 value={data.namaPemesan}
                 onChange={(e) => setData('namaPemesan', e.target.value)}
                 required
+              disabled
+
               />
             </div>
           </div>
@@ -93,6 +102,8 @@ const Booking = ({ user, mobilData }) => {
               value={data.email}
               onChange={(e) => setData('email', e.target.value)}
               required
+              disabled
+
             />
           </div>
           <div className="form-group">
@@ -153,11 +164,12 @@ const Booking = ({ user, mobilData }) => {
               alt="Mobil Image"
               className="img-fluid"
             />
-            <p>Nama Mobil: {mobilData && mobilData.namaMobil ? mobilData.namaMobil : 'Nama Mobil Default'}</p>
-            <p>Brand Mobil: {mobilData && mobilData.brandMobil ? mobilData.brandMobil : 'Brand Mobil Default'}</p>
+             <p>Nama Mobil: {NamaMobil} </p>
+              <p>Brand Mobil: {Brand}</p>
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 };

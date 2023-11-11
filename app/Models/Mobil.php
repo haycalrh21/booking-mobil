@@ -15,6 +15,6 @@ class Mobil extends Model
 
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'mobil_id', 'id');
+        return $this->hasMany(Booking::class, 'mobil_id', 'id' );
     }
 }

@@ -44,7 +44,7 @@ function DataPengguna({ users }) {
                   </tr>
                 </thead>
                 <tbody>
-                {updatedUsers && updatedUsers.map((user) => (
+                {users.map((user) => (
                     <tr key={user.id}>
                       <td className="border-b p-2 text-left">{user.name}</td>
                       <td className="border-b p-2 text-left">{user.email}</td>

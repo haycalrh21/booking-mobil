@@ -49,31 +49,37 @@ class MobilController extends Controller
             'pajak' => 'required',
             'deskripsi' => 'required',
             'kategori' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:png|max:2048',
         ]);
+
         if ($request->hasFile('image')) {
             // Proses penyimpanan gambar dan data mobil
+            $imagePath = $request->file('image')->store('product', 'public');
+
+            // Simpan data mobil baru ke dalam database
+            $mobil = new Mobil([
+                'nama' => $request['nama'],
+                'brand' => $request['brand'],
+                'harga' => $request['harga'],
+                'tahun' => $request['tahun'],
+                'pajak' => $request['pajak'],
+                'deskripsi' => $request['deskripsi'],
+                'kategori' => $request['kategori'],
+                'image' => $imagePath,  // Simpan path gambar ke dalam kolom 'image'
+            ]);
+
+            $mobil->save();
+
+            $imagePath = $request->file('image')->storeAs('product', $mobil->id . '.' . $request->file('image')->getClientOriginalExtension(), 'public');
+            $mobil->image = $imagePath;
+            $mobil->save();
+
+            return Inertia::location(route('admin.dashboard'));
         } else {
             return back()->withInput()->withErrors(['image' => 'Gambar diperlukan.']);
         }
-
-        $imagePath = $request->file('image')->store('product', 'public');
-        // Simpan data mobil baru ke dalam database
-        $mobil = new Mobil([
-            'nama' => $request['nama'],
-            'brand' => $request['brand'],
-            'harga' => $request['harga'],
-            'tahun' => $request['tahun'],
-            'pajak' => $request['pajak'],
-            'deskripsi' => $request['deskripsi'],
-            'kategori' => $request['kategori'],
-            'image' => $imagePath,
-        ]);
-
-        $mobil->save();
-
-        return Inertia::location(route('admin.dashboard'));
     }
+
 
 
 
