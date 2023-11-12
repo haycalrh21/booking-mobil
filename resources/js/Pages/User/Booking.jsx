@@ -9,7 +9,8 @@ export const Booking = ({ user, mobilData ,mobil}) => {
   const kodeMobil = urlParams.get('kodeMobil');
   const Brand = urlParams.get('Brand');
   const NamaMobil = urlParams.get('NamaMobil');
-
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString().split('T')[0];
 
 
 
@@ -19,7 +20,7 @@ export const Booking = ({ user, mobilData ,mobil}) => {
     nomorHape: '',
     kodeMobil: mobilData ? mobilData.id : kodeMobil ,
 
-    tanggal: '',
+    tanggal: formattedDate,
     message: '',
 
   });

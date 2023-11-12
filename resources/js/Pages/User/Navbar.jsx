@@ -1,9 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
+import { Box, Clock, Stack, Text } from 'grommet';
+import { Kodesamping } from '@/Pages/User/Sidebar';
+import { Button } from 'primereact/button';
+
+// import { Button } from 'primereact/button';
 
 export const Navbar = () => {
     const [state, setState] = useState(false);
     const { auth } = usePage().props;
+    // const [visible, setVisible] = useState(false);
+
 
     // Replace javascript:void(0) paths with your paths
 
@@ -21,8 +28,8 @@ export const Navbar = () => {
                 <div className="flex items-center justify-between py-5 md:block">
                     <a href="" >
                         <img
-                            src=""
-                            width={120}
+                            src="/images/iconBM1.png"
+                            width={50}
                             height={50}
                             alt="bin mahmud motor"
                         />
@@ -45,6 +52,7 @@ export const Navbar = () => {
                         </button>
                     </div>
                 </div>
+<Kodesamping/>
                 <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${state ? 'block' : 'hidden'} `}>
                     <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
                     {auth.user ? (
@@ -52,6 +60,7 @@ export const Navbar = () => {
                                 <Link href={route('dashboard')}>Dashboard</Link><br></br>
                                 <Link href={route('datamobillengkap')}>Mobil</Link><br></br>
                                 <Link href={route('booking.store')}>Booking</Link>
+
                             </>
                         ) : (
                             <>
@@ -60,13 +69,13 @@ export const Navbar = () => {
                             </>
                         )}
 
-<br></br>
 
 
                     </ul>
+
+
                     <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
-
-
+                    <Clock type="digital" />
 
                     </div>
                 </div>

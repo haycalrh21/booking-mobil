@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Mobil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class BookingController extends Controller
 {
@@ -26,26 +27,41 @@ class BookingController extends Controller
 
        return response()->json($mobils);
     }
-    public function store(Request $request)
-    {
-        // Validasi data yang dikirimkan oleh formulir
-        $request->validate([
-            'namaPemesan' => 'required',
-            'email' => 'required|email',
-            'nomorHape' => 'required',
-            'kodeMobil' => 'required',
-            'message' => 'required',
-            'tanggal' => 'required',
 
-        ]);
+public function store(Request $request)
+{
+    // Validasi data yang dikirimkan oleh formulir
+    $request->validate([
+        'namaPemesan' => 'required',
+        'email' => 'required|email',
+        'nomorHape' => 'required',
+        'kodeMobil' => 'required',
+        'message' => 'required',
+        'tanggal' => 'required|date',
+    ]);
 
-        // Simpan data pemesanan ke dalam database
-        Booking::create($request->all());
+    // Generate ID unik berdasarkan timestamp dan beberapa karakter acak
+//    $codeawal = 'kd_';
+   $dates = 'd-m-y';
+   $waktu = date($dates);
+   $randomInteger = random_int(100000, 999999);
+    $uniqueId = $randomInteger;
+    // .'@'.$waktu
 
-        // Redirect ke halaman yang sesuai setelah penyimpanan sukses
-        return Inertia::location(route('datamobillengkap'));
+    // Simpan data pemesanan ke dalam database
+    Booking::create([
+        'id' => $uniqueId,
+        'namaPemesan' => $request->namaPemesan,
+        'email' => $request->email,
+        'nomorHape' => $request->nomorHape,
+        'kodeMobil' => $request->kodeMobil,
+        'message' => $request->message,
+        'tanggal' => now()->toDateString(), // Set 'tanggal' to the current date in 'YYYY-MM-DD' format
+    ]);
 
-    }
+    // Redirect ke halaman yang sesuai setelah penyimpanan sukses
+    return Inertia::location(route('datamobillengkap'));
+}
 
     public function index()
     {

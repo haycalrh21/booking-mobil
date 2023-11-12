@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mobils', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 15)->primary();
+
             $table->string('nama');
             $table->string('brand');
             $table->decimal('harga', 10, 2);

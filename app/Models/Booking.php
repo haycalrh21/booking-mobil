@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+
+    public $incrementing = false;
+
     protected $fillable =['id','namaPemesan','email','nomorHape','kodeMobil','message','tanggal'];
 
 

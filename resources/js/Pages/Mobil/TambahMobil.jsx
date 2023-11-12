@@ -125,6 +125,7 @@
                     />
                     <label className="ml-2 text-orange-300">Mati</label>
                     </div>
+
                 </div>
                 <div className="mb-4">
                     <label className="block text-orange-300 mb-2">Deskripsi:</label>

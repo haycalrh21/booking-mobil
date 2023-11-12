@@ -1,45 +1,42 @@
-// Mobil1.jsx
 import React, { useState, useEffect } from 'react';
 import { LoadingSpinner } from '@/Pages/User/LoadingSpinner';
 import { Navbar } from '@/Pages/User/Navbar';
 import { InertiaLink } from '@inertiajs/inertia-react';
-import {Booking} from '@/Pages/user/booking'; // Import BookingForm component
-import { Paginator } from '@/Pages/admin/Paginator';// Import komponen Pagination
-
+import { Booking } from '@/Pages/user/booking';
+import { Paginator } from '@/Pages/admin/Paginator';
 
 function Mobil1({ mobils }) {
-
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedBrand, setSelectedBrand] = useState('All');
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [bookingData, setBookingData] = useState({});
   const categories = ['All', 'Sedan', 'SUV', 'Coupe', 'Pick-up', 'Sport', 'Listrik', 'Keluarga', 'Klasik', 'Off-road'];
-const itemsPerPage = 5;
+  const itemsPerPage = 1;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(mobils.length / itemsPerPage);
-  const [canGoNext, setCanGoNext] = useState(true); // Tambahkan state untuk melacak apakah bisa melanjutkan
+  const [canGoNext, setCanGoNext] = useState(true);
 
-  // Fungsi untuk mengambil data sesuai halaman saat ini
+  const uniqueBrands = [...new Set(mobils.map((mobil) => mobil.brand))];
+
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return mobils.slice(startIndex, endIndex);
   };
 
-  // Fungsi untuk mengganti halaman
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setCurrentPage(newPage);
-      setCanGoNext(true); // Setelah mengubah halaman, pengguna dapat melanjutkan lagi
+      setCanGoNext(true);
     } else {
-      setCanGoNext(false); // Jika mencoba melanjutkan ke halaman yang tidak ada, set canGoNext menjadi false
+      setCanGoNext(false);
     }
   };
 
-  // Update halaman saat komponen dimuat ulang
   useEffect(() => {
     setCurrentPage(1);
-    setCanGoNext(true); // Saat komponen dimuat ulang, pengguna dapat melanjutkan lagi
+    setCanGoNext(true);
   }, [mobils]);
 
   useEffect(() => {
@@ -51,7 +48,16 @@ const itemsPerPage = 5;
     fetchData();
   }, []);
 
-  const filteredMobils = selectedCategory === 'All' ? mobils : mobils.filter(mobil => mobil.kategori === selectedCategory);
+  const filteredMobils = mobils.filter((mobil) => {
+    if (selectedCategory !== 'All' && selectedBrand !== 'All') {
+      return mobil.kategori === selectedCategory && mobil.brand === selectedBrand;
+    } else if (selectedCategory !== 'All') {
+      return mobil.kategori === selectedCategory;
+    } else if (selectedBrand !== 'All') {
+      return mobil.brand === selectedBrand;
+    }
+    return true;
+  });
 
   const handleBooking = (mobil) => {
     setBookingData({ mobil });
@@ -62,16 +68,33 @@ const itemsPerPage = 5;
     <div>
       <Navbar />
       <div className="flex">
-        <div className="sidebar" style={{ flex: '0 0 5%' }}>
+        <div className="sidebar" style={{ flex: '0 0 20%' }}>
           <h3>Filter Kategori</h3>
-          <ul>
-            {categories.map(category => (
-              <li key={category} onClick={() => setSelectedCategory(category)} style={{ cursor: 'pointer', fontWeight: category === selectedCategory ? 'bold' : 'normal' }}>
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map((category) => (
+              <option key={category} value={category}>
                 {category}
-              </li>
+              </option>
             ))}
-          </ul>
+          </select>
+
+          <h3>Filter Brand</h3>
+          <select
+            value={selectedBrand}
+            onChange={(e) => setSelectedBrand(e.target.value)}
+          >
+            <option value="All">All</option>
+            {uniqueBrands.map((brand) => (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            ))}
+          </select>
         </div>
+
         <div className="content" style={{ flex: '1', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
           {loading ? (
             <LoadingSpinner />
@@ -91,9 +114,7 @@ const itemsPerPage = 5;
                   <p className='flex justify-center'><strong>Deksripsi:</strong> {mobil.deskripsi}</p>
                   <p className='flex justify-center'><strong>Kategori:</strong> {mobil.kategori}</p>
                   <InertiaLink
-
-
-                    href={route('booking.create', { kodeMobil: mobil.id , Brand: mobil.brand , NamaMobil: mobil.nama  },)}
+                    href={route('booking.create', { kodeMobil: mobil.id, Brand: mobil.brand, NamaMobil: mobil.nama })}
                     className="bg-blue-500 text-white rounded-full p-2 mt-2"
                     onClick={() => handleBooking(mobil)}
                   >
@@ -101,6 +122,7 @@ const itemsPerPage = 5;
                   </InertiaLink>
                 </div>
               </div>
+
             ))
           )}
         </div>

@@ -23,8 +23,12 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-react": "^0.8.1",
+        "grommet": "^2.35.0-alpha.1",
+        "primeicons": "^6.0.1",
+        "primereact": "^10.0.9",
         "react-bootstrap-sweetalert": "^5.2.0",
         "react-query": "^3.39.3",
-        "sweetalert2": "^11.9.0"
+        "reactstrap": "^9.2.1",
+        "sweetalert2": "^11.6.13"
     }
 }
