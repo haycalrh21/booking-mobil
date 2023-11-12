@@ -9,8 +9,13 @@ export const Booking = ({ user, mobilData ,mobil}) => {
   const kodeMobil = urlParams.get('kodeMobil');
   const Brand = urlParams.get('Brand');
   const NamaMobil = urlParams.get('NamaMobil');
+<<<<<<< HEAD
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split('T')[0];
+=======
+  const Gambar = urlParams.get('Gambar');
+
+>>>>>>> 5ee36c19015816b6b5afd274915c29b488389502
 
 
 
@@ -161,7 +166,7 @@ export const Booking = ({ user, mobilData ,mobil}) => {
           </div>
           <div className="col-md-6">
             <img
-              src={`storage/product/${kodeMobil}.png`}
+             src={`/storage/${Gambar}`}
               alt="Mobil Image"
               className="img-fluid"
             />

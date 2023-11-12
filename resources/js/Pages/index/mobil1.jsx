@@ -114,7 +114,17 @@ function Mobil1({ mobils }) {
                   <p className='flex justify-center'><strong>Deksripsi:</strong> {mobil.deskripsi}</p>
                   <p className='flex justify-center'><strong>Kategori:</strong> {mobil.kategori}</p>
                   <InertiaLink
+<<<<<<< HEAD
                     href={route('booking.create', { kodeMobil: mobil.id, Brand: mobil.brand, NamaMobil: mobil.nama })}
+=======
+
+
+                    href={route('booking.create',
+                     {
+                        kodeMobil: mobil.id , Brand: mobil.brand , NamaMobil: mobil.nama , Gambar: mobil.image
+                      },
+                      )}
+>>>>>>> 5ee36c19015816b6b5afd274915c29b488389502
                     className="bg-blue-500 text-white rounded-full p-2 mt-2"
                     onClick={() => handleBooking(mobil)}
                   >

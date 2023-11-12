@@ -39,6 +39,7 @@ class MobilController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+<<<<<<< HEAD
 {
     // Validasi data form jika diperlukan
     $request->validate([
@@ -70,6 +71,19 @@ class MobilController extends Controller
             'deskripsi' => $request['deskripsi'],
             'kategori' => $request['kategori'],
             'image' => $imagePath,  // Simpan path gambar ke dalam kolom 'image'
+=======
+    {
+        // Validasi data form jika diperlukan
+        $request->validate([
+            'nama' => 'required',
+            'brand' => 'required',
+            'harga' => 'required',
+            'tahun' => 'required',
+            'pajak' => 'required',
+            'deskripsi' => 'required',
+            'kategori' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
+>>>>>>> 5ee36c19015816b6b5afd274915c29b488389502
         ]);
 
         $mobil->save();

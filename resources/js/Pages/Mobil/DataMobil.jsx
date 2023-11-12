@@ -6,7 +6,7 @@ import { Paginator } from '@/Pages/admin/Paginator';// Import komponen Paginatio
 
 export  function DataMobil({ mobils, pagination }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(mobils.length / itemsPerPage);
   const [canGoNext, setCanGoNext] = useState(true); // Tambahkan state untuk melacak apakah bisa melanjutkan
@@ -77,7 +77,7 @@ export  function DataMobil({ mobils, pagination }) {
       <td className="border text-left">{mobil.pajak}</td>
       <td className="border text-left">{mobil.deskripsi}</td>
       <td className="border text-left">
-        <img src={`/storage/${mobil.image}`} alt={mobil.nama} style={{ maxWidth: '500px' }} />
+        <img src={`/storage/${mobil.image}`} alt={mobil.nama} style={{ maxWidth: '200px' }} />
       </td>
       <td className="border text-left">{mobil.kategori}</td>
     </tr>
