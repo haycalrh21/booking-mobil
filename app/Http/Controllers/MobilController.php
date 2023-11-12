@@ -49,7 +49,7 @@ class MobilController extends Controller
             'pajak' => 'required',
             'deskripsi' => 'required',
             'kategori' => 'required',
-            'image' => 'required|image|mimes:png|max:2048',
+            'image' => 'required|image|mimes:png,jpg,jpeg,gif|max:2048',
         ]);
 
         if ($request->hasFile('image')) {

@@ -4,34 +4,6 @@ import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 export default function Dashboard({ auth, isLoading }) {
-  const showAlert = () => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Woot!',
-      text: 'I did it!',
-    }).then((result) => {
-      // Your logic when the user confirms the alert
-      if (result.isConfirmed) {
-        // Handle confirmation, for example, navigate to another page
-        // You can use the Inertia.js `visit` method to navigate to another page
-        // Example: visit(route('your.route.name'));
-        console.log('User confirmed the alert');
-      } else {
-        // Handle rejection, for example, do something else
-        console.log('User rejected the alert');
-      }
-    });
-  };
-
-  useEffect(() => {
-    // Call showAlert when the component mounts
-    showAlert();
-
-    // You can also clean up the SweetAlert when the component unmounts
-    return () => {
-      Swal.close();
-    };
-  }, []); // Empty dependency array means this effect runs once after the initial render
 
   return (
     <div>

@@ -20,12 +20,14 @@ export const Navbar = () => {
             <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
                 <div className="flex items-center justify-between py-5 md:block">
                     <a href="" >
-                        <img
-                            src=""
+                        <iframe
+                            src="https://giphy.com/embed/7kJh0hq7T0l8I"
                             width={120}
-                            height={50}
+                            height={80}
                             alt="bin mahmud motor"
+
                         />
+                        <p>Bin Mahmoed Motors</p>
                     </a>
                     <div className="md:hidden">
                         <button className="menu-btn text-gray-500 hover:text-gray-800"

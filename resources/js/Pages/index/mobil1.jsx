@@ -93,7 +93,11 @@ const itemsPerPage = 5;
                   <InertiaLink
 
 
-                    href={route('booking.create', { kodeMobil: mobil.id , Brand: mobil.brand , NamaMobil: mobil.nama  },)}
+                    href={route('booking.create',
+                     {
+                        kodeMobil: mobil.id , Brand: mobil.brand , NamaMobil: mobil.nama , Gambar: mobil.image
+                      },
+                      )}
                     className="bg-blue-500 text-white rounded-full p-2 mt-2"
                     onClick={() => handleBooking(mobil)}
                   >
