@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Sidebar } from 'primereact/sidebar';
-import { Button } from 'primereact/button';
 
 export function Kodesamping() {
     const [visible, setVisible] = useState(false);
@@ -11,15 +10,25 @@ export function Kodesamping() {
     const textStyle = {
         color: '#2b3440', // Ganti dengan warna teks yang Anda inginkan
     };
+
+    const toggleSidebar = () => {
+        setVisible(!visible);
+    };
+
     return (
         <div className="card flex justify-content-center">
-            <Button className="btn btn-primary" icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
+            <img
+                src="/images/rightarrow.png"
+                alt="Right Arrow"
+                onClick={toggleSidebar}
+                width={25}
+                height={25}
+            />
             <Sidebar visible={visible} onHide={() => setVisible(false)} style={sidebarStyle}>
-                    <p style={textStyle}>
-                        Apa sih yang lu cari
-                    </p>
+                <p style={textStyle}>
+                    Apa sih yang lu cari
+                </p>
             </Sidebar>
-            <Button icon="pi pi-arrow-right" onClick={() => setVisible(true)} />
         </div>
-    )
+    );
 }

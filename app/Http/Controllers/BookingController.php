@@ -72,4 +72,14 @@ public function store(Request $request)
        // Mengirim data booking ke tampilan
     }
 
+
+    public function tampilanriwayat()
+    {
+        $userEmail = auth()->user()->email;
+        $bookings = Booking::where('email', $userEmail)->get();
+        return Inertia::render('User/riwayat', [
+            'bookings' => $bookings,
+        ]);
+    }
+
 }

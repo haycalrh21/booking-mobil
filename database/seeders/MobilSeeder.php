@@ -1,10 +1,13 @@
 <?php
 
 namespace Database\Seeders;
+use App\Models\Mobil;
+use Faker\Factory as Faker;
+use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
 
 
 class MobilSeeder extends Seeder
@@ -18,6 +21,7 @@ class MobilSeeder extends Seeder
 
         for ($i = 1; $i <= 25; $i++) {
             DB::table('mobils')->insert([
+                'id' => $this->generateUniqueId(),
                 'nama' => $faker->word,
                 'brand' => $faker->company,
                 'harga' => $faker->randomFloat(2, 5000, 50000),
@@ -30,4 +34,12 @@ class MobilSeeder extends Seeder
                 'updated_at' => now(),
             ]);
     }}
+    protected function generateUniqueId()
+    {
+        do {
+            $uniqueId = Str::random(15);
+        } while (Mobil::where('id', $uniqueId)->exists());
+
+        return $uniqueId;
+    }
 }
