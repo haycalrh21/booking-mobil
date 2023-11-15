@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mobils', function (Blueprint $table) {
-            $table->string('id', 15)->primary();
+            $table->id();
 
             $table->string('nama');
             $table->string('brand');
-            $table->decimal('harga', 10, 2);
+            $table->decimal('harga', 15, 2);
             $table->enum('kategori', ['Sedan','SUV','Coupe','Pick-up', 'Sport', 'Listrik', 'Keluarga','Klasik','Off-road']);
-
+            $table->integer('stok');
             $table->integer('tahun');
             $table->enum('pajak', ['Hidup', 'Mati']);
             $table->text('deskripsi')->nullable();
-            $table->string('image');
+            // $table->string('image');
             $table->timestamps();
         });
     }

@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use App\Models\Image;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Mobil extends Model
 {
     use HasFactory;
-    public $incrementing = false;
 
-    protected $table = 'mobils'; // Sesuaikan dengan nama tabel di database
+    protected $fillable = [
+        // your other fields
+        'nama', 'brand', 'harga', 'tahun', 'stok', 'pajak', 'deskripsi', 'kategori',
+    ];
 
-    protected $fillable = ['id','nama', 'brand', 'harga', 'tahun', 'pajak', 'deskripsi','kategori','image'];
-
-    public function bookings()
+    public function images()
     {
-        return $this->hasMany(Booking::class, 'mobil_id', 'id' );
+        return $this->hasMany(Image::class);
     }
 }
+
+

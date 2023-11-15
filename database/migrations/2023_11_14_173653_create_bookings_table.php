@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->string('id', 15)->primary();
+            $table->string('id', 15);
 
             $table->string('namaPemesan');
             $table->string('email');
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->timestamps();
             $table->date('tanggal')->nullable();
-            $table->foreign('kodeMobil')->references('id')->on('mobils'); // Menambahkan kunci asing ke tabel mobils
+            // $table->foreign('kodeMobil')->references('id')->on('mobils'); // Menambahkan kunci asing ke tabel mobils
         });
     }
 

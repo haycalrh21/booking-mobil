@@ -13,7 +13,8 @@ class MobilController extends Controller
      */
     public function index()
     {
-        $mobils = Mobil::all();
+        $mobils = Mobil::with('images')->get();
+
         return Inertia::render('index/mobil1', [
             'mobils' => $mobils,
         ]);
@@ -23,7 +24,8 @@ class MobilController extends Controller
 
     public function datamobil()
     {
-        $mobils = Mobil::all();
+        $mobils = Mobil::with('images')->get();
+
 
        return response()->json($mobils);
     }
@@ -39,46 +41,52 @@ class MobilController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    // Validasi data form jika diperlukan
-    $request->validate([
-        'nama' => 'required',
-        'brand' => 'required',
-        'harga' => 'required',
-        'tahun' => 'required',
-        'pajak' => 'required',
-        'deskripsi' => 'required',
-        'kategori' => 'required',
-        'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-    ]);
-
-    if ($request->hasFile('image')) {
-        // Proses penyimpanan gambar dan data mobil
-        $imagePath = $request->file('image')->store('product', 'public');
-
-        // Buat ID acak untuk mobil
-        $uniqueId = $this->generateUniqueId();
-
-        // Simpan data mobil baru ke dalam database
-        $mobil = new Mobil([
-            'id' => $uniqueId,
-            'nama' => $request['nama'],
-            'brand' => $request['brand'],
-            'harga' => $request['harga'],
-            'tahun' => $request['tahun'],
-            'pajak' => $request['pajak'],
-            'deskripsi' => $request['deskripsi'],
-            'kategori' => $request['kategori'],
-            'image' => $imagePath,  // Simpan path gambar ke dalam kolom 'image'
+    {
+        $request->validate([
+            'nama' => 'required',
+            'brand' => 'required',
+            'harga' => 'required',
+            'stok' => 'required',
+            'tahun' => 'required',
+            'pajak' => 'required',
+            'deskripsi' => 'required',
+            'kategori' => 'required',
+            'images.*' => 'required|image|mimes:png,jpg,jpeg|max:2048',
         ]);
 
-        $mobil->save();
+        if ($request->hasFile('images')) {
+            $mobil = new Mobil([
+                'nama' => $request['nama'],
+                'brand' => $request['brand'],
+                'harga' => $request['harga'],
+                'tahun' => $request['tahun'],
+                'stok' => $request['stok'],
+                'pajak' => $request['pajak'],
+                'deskripsi' => $request['deskripsi'],
+                'kategori' => $request['kategori'],
+            ]);
 
-        return Inertia::location(route('admin.dashboard'));
-    } else {
-        return back()->withInput()->withErrors(['image' => 'Gambar diperlukan.']);
+            $mobil->save();
+
+            $imagePaths = [];
+
+            foreach ($request->file('images') as $index => $image) {
+                $imagePath = $image->store('product', 'public');
+                $imagePaths[] = ['path' => $imagePath];
+            }
+
+            $mobil->images()->createMany($imagePaths);
+
+            return Inertia::location(route('admin.dashboard'));
+        } else {
+            return back()->withInput()->withErrors(['images' => 'Gambar diperlukan.']);
+        }
     }
-}
+
+
+
+
+
 
 protected function generateUniqueId()
 {
@@ -99,7 +107,10 @@ protected function generateUniqueId()
      */
     public function show(string $id)
     {
-        //
+        $mobil = Mobil::findOrFail($id); // Assuming your Eloquent model is named Mobil
+        $mobil = Mobil::find($id);
+        $images = $mobil->images;
+        return Inertia::render('User/DetailMobil', ['mobil' => $mobil]);
     }
 
     /**

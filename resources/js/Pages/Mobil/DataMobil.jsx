@@ -51,46 +51,48 @@ export  function DataMobil({ mobils, pagination }) {
               </Link>
             </h1>
             <div>
-              <table className="min-w-full table-fixed">
-              <thead>
-                    <tr>
-                    <th className="border text-left text-orange-300">ID</th>
-
-                        <th className="border text-left text-orange-300">Nama</th>
-                        <th className="border text-left text-orange-300">Brand</th>
-                        <th className="border text-left text-orange-300">Harga</th>
-                        <th className="border text-left text-orange-300">Tahun</th>
-                        <th className="border text-left text-orange-300">Pajak</th>
-                        <th className="border text-left text-orange-300">Deskripsi</th>
-                        <th className="border text-left text-orange-300">Gambar</th>
-                        <th className="border text-left text-orange-300">Kategori</th> {/* Tambahkan kolom kategori */}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {Array.isArray(getCurrentPageData()) ? (getCurrentPageData().map((mobil) => (
-    <tr key={mobil.id}>
-        <td className="border text-left">{mobil.id}</td>
-      <td className="border text-left">{mobil.nama}</td>
-      <td className="border text-left">{mobil.brand}</td>
-      <td className="border text-left">{mobil.harga}</td>
-      <td className="border text-left">{mobil.tahun}</td>
-      <td className="border text-left">{mobil.pajak}</td>
-      <td className="border text-left">{mobil.deskripsi}</td>
-      <td className="border text-left">
-        <img src={`/storage/${mobil.image}`} alt={mobil.nama} style={{ maxWidth: '200px' }} />
-      </td>
-      <td className="border text-left">{mobil.kategori}</td>
-    </tr>
-  ))
-) : (
-  <tr>
-    <td className="border text-left" colSpan="8">Tidak ada data yang ditemukan</td>
-  </tr>
-)}
-
-                    </tbody>
-
-              </table>
+            <table className="min-w-full table-fixed">
+          <thead>
+            <tr>
+              <th className="border text-left text-orange-300">ID</th>
+              <th className="border text-left text-orange-300">Nama</th>
+              <th className="border text-left text-orange-300">Brand</th>
+              <th className="border text-left text-orange-300">Harga</th>
+              <th className="border text-left text-orange-300">Tahun</th>
+              <th className="border text-left text-orange-300">Pajak</th>
+              <th className="border text-left text-orange-300">Deskripsi</th>
+              <th className="border text-left text-orange-300">Gambar</th>
+              <th className="border text-left text-orange-300">Kategori</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.isArray(getCurrentPageData()) ? (
+              getCurrentPageData().map((mobil) => (
+                <tr key={mobil.id}>
+                  <td className="border text-left">{mobil.id}</td>
+                  <td className="border text-left">{mobil.nama}</td>
+                  <td className="border text-left">{mobil.brand}</td>
+                  <td className="border text-left">{mobil.harga}</td>
+                  <td className="border text-left">{mobil.tahun}</td>
+                  <td className="border text-left">{mobil.pajak}</td>
+                  <td className="border text-left">{mobil.deskripsi}</td>
+                  <td className="border text-left">
+                    {mobil.images && mobil.images.length > 0 && (
+                      mobil.images.map((image) => (
+                        <img key={image.id} src={`/storage/${image.path}`} alt={mobil.nama} style={{ maxWidth: '200px' }} />
+                      ))
+                    )}
+                  </td>
+                  <td className="border text-left">{mobil.kategori}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="border text-left" colSpan="8">Tidak ada data yang ditemukan</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
             </div>
             <Paginator
               currentPage={currentPage}

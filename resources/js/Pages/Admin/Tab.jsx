@@ -19,6 +19,12 @@ export const Tab = ({
       <a className={`tab tab-bordered ${showDataBooking ? 'tab-active' : ''}`} onClick={toggleDataBooking}>
         Data Booking
       </a>
+      <a className={`tab tab-bordered ${showDataPegawai ? 'tab-active' : ''}`} onClick={toggleDataBooking}>
+        Data Pegawai
+      </a>
+      <a className={`tab tab-bordered ${showDataPembelian ? 'tab-active' : ''}`} onClick={toggleDataBooking}>
+        Data Pembelian
+      </a>
     </div>
   );
 };

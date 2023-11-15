@@ -78,6 +78,18 @@ function AdminDashboard() {
         >
           Data Booking
         </a>
+        <a
+          className={`tab tab-bordered ${activeTab === 'dataBooking' ? 'tab-active' : ''}`}
+          onClick={() => handleTabClick('dataBooking')}
+        >
+          Data Pegawai
+        </a>
+        <a
+          className={`tab tab-bordered ${activeTab === 'dataBooking' ? 'tab-active' : ''}`}
+          onClick={() => handleTabClick('dataBooking')}
+        >
+          Data Pembelian
+        </a>
       </div>
       {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} />}
       {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} />}

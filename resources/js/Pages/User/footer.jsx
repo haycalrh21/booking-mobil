@@ -2,7 +2,7 @@ import React from "react"
 
 export const Footer = () => {
     const footerStyle = {
-        position: "fixed",
+        position: "relative",
         bottom: "0",
         width: "100%",
         backgroundColor: "#0e5776",
@@ -13,7 +13,7 @@ export const Footer = () => {
       };
 
   return (
-    <footer style={footerStyle}>
+    <footer style={footerStyle} className="container-fluid">
       <aside>
         <p>Copyright © 2023 - All right reserved by Bin Mahmoed Motors</p>
       </aside>

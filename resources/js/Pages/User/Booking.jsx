@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import { Navbar } from '@/Pages/User/Navbar';
 import { Footer } from '@/Pages/User/Footer';
 
-
 const Booking = ({ user, mobilData, mobil }) => {
   const urlParams = new URLSearchParams(window.location.search);
   const kodeMobil = urlParams.get('kodeMobil');
@@ -120,23 +119,18 @@ const Booking = ({ user, mobilData, mobil }) => {
                     disabled
                   />
 
-
-
-<div>
-Tanggal Pemesanan
-  <input
-    type="date"
-    id="tanggal"
-    name="tanggal"
-    value={data.tanggal}
-    onChange={(e) => setData('tanggal', e.target.value)}
-
-    className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-    placeholder="Select a date" />
-
-</div>
-
-
+                  <div>
+                    Tanggal Pemesanan
+                    <input
+                      type="date"
+                      id="tanggal"
+                      name="tanggal"
+                      value={data.tanggal}
+                      onChange={(e) => setData('tanggal', e.target.value)}
+                      className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                      placeholder="Select a date"
+                    />
+                  </div>
 
                   <label htmlFor="message">Pesan</label>
                   <textarea
@@ -146,7 +140,8 @@ Tanggal Pemesanan
                     value={data.message}
                     onChange={(e) => setData('message', e.target.value)}
                   ></textarea>
-                </div><br></br>
+                </div>
+                <br></br>
                 <div className="form-group" style={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
                   <button type="submit" className="btn btn-primary">
                     Pesan
@@ -155,14 +150,24 @@ Tanggal Pemesanan
               </div>
               <div style={{ flex: '1' }}>
                 <div className="form-group" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                Mobil:
-                  <img
-                    src={`/storage/${Gambar}`}
-                    width={400}
-                    height={350}
-                    alt="Mobil Image"
-                    className="img-fluid"
-                  />
+                  Mobil:
+                  {Gambar && Gambar.length > 0 && (
+  <div style={{ display: 'flex', marginBottom: '10px' }}>
+    {Gambar.slice(0, 4).map((path, index) => (
+      <img
+        key={index}
+        src={`/storage/${path}`}
+        width={200}
+        height={150}
+        alt={`Mobil Image ${index + 1}`}
+        className="img-fluid"
+        style={{ marginRight: '10px' }}
+      />
+    ))}
+  </div>
+)}
+
+
                   <div className="p-4">
                     <p>Nama Mobil: {NamaMobil}</p>
                     <p>Brand Mobil: {Brand}</p>
@@ -171,7 +176,11 @@ Tanggal Pemesanan
               </div>
             </form>
           </div>
-        </div><br></br><br></br><br></br>
+          <div className='d-flex align-items-center position-relative'>
+            {/* Additional content if needed... */}
+          </div>
+        </div>
+        <br></br><br></br><br></br>
       </div>
       <Footer/>
     </div>

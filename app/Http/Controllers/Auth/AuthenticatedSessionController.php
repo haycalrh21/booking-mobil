@@ -38,11 +38,11 @@ class AuthenticatedSessionController extends Controller
                 case 'admin':
                 case 'supervisor':
                 case 'manager':
+
                     return redirect()->route('admin.dashboard');
-                case 'user':
-                    return redirect('/');
+
                 default:
-                    return redirect()->route('default.dashboard');
+                    return redirect('/');
             }
         }
 

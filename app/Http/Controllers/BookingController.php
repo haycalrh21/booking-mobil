@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\Booking;
+use App\Models\Image;
 use App\Models\Mobil;
+use App\Models\Booking;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class BookingController extends Controller
 {
     public function create()
     {
+        $images = Image::all(); // Adjust this based on how you fetch your images
+
         // Menampilkan formulir pemesanan menggunakan Inertia.js
         return Inertia::render('User/Booking', [
-            'user' => Auth::user(), // Mengambil data pengguna yang sedang login
+            'user' => Auth::user(),
+            'images' => $images, // Include the images data
         ]);
 
 

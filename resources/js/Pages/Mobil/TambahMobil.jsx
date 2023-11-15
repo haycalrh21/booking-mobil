@@ -10,46 +10,61 @@
         brand: '',
         harga: '',
         tahun: '',
+        stok:'',
         pajak: '', // Mengganti string menjadi empty string
         deskripsi: '',
-        image: '', // Menambah state untuk gambar
+        image: [], // Menambah state untuk gambar
         kategori: '', // Menambah state untuk kategori mobil
     });
 
     // Fungsi untuk menangani perubahan input form
     const handleInputChange = (e) => {
-        const { name, value, type } = e.target;
+        const { name, type } = e.target;
 
-        // Memeriksa apakah ini input berkas (gambar)
-        const newValue = type === 'file' ? e.target.files[0] : value;
-
-        setFormData({
-        ...formData,
-        [name]: newValue,
-        });
+        // Check if it's a file input and handle multiple files
+        if (type === 'file') {
+            const files = Array.from(e.target.files);
+            setFormData({
+                ...formData,
+                [name]: files,
+            });
+        } else {
+            const { value } = e.target;
+            setFormData({
+                ...formData,
+                [name]: value,
+            });
+        }
     };
+
 
     // Fungsi untuk menangani pengiriman form
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await Inertia.post('/admin/mobil', formData); // Menggunakan Inertia.post
-            if (response) {
-                // Handle respons dari server jika sukses
-                console.log(response);
+            const formDataObj = new FormData();
 
-                // Setelah berhasil menyimpan data, Anda dapat mengarahkan pengguna ke halaman lain jika diperlukan
-                Inertia.visit(route('datamobil'));
-            } else {
-                // Tangani kesalahan jika ada
-                console.error('Terjadi kesalahan saat mengirim data.');
-            }
+            // Append other form data fields
+            Object.keys(formData).forEach((key) => {
+                if (key === 'images') {
+                    // Handle multiple file uploads
+                    formData[key].forEach((file, index) => {
+                        formDataObj.append(`${key}[${index}]`, file);
+                    });
+                } else {
+                    formDataObj.append(key, formData[key]);
+                }
+            });
+
+            const response = await Inertia.post('/admin/mobil', formDataObj);
+
+            // Rest of the code...
         } catch (error) {
-            // Tangani kesalahan jika ada
-            console.error(error);
+            // Handle errors...
         }
-    }
+    };
+
 
 
     return (
@@ -89,6 +104,16 @@
                     type="text"
                     name="harga"
                     value={formData.harga}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-orange-300 mb-2">Stok:</label>
+                    <input
+                    type="text"
+                    name="stok"
+                    value={formData.stok}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 rounded border text-gray-700"
                     />
@@ -137,14 +162,16 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Gambar:</label>
-                    <input
-                    type="file"
-                    name="image"
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
-                    />
-                </div>
+    <label className="block text-orange-300 mb-2">Gambar:</label>
+    <input
+        type="file"
+        name="images"
+        onChange={handleInputChange}
+        className="w-full px-3 py-2 rounded border text-gray-700"
+        multiple  // allow multiple file selection
+    />
+</div>
+
                 <div className="mb-4">
                     <label className="block text-orange-300 mb-2">Kategori:</label>
                     <select

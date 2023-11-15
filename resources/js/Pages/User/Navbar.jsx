@@ -27,7 +27,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0' : ''}`} style={{ backgroundColor: '#0e5776' }}>
+    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0' : ''}`} style={{ backgroundColor: '#0576A7' }}>
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
         <div className="flex items-center justify-between py-5 md:block">
           <a href="">

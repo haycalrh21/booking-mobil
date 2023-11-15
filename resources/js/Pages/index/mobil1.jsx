@@ -5,7 +5,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 import { Paginator } from '@/Pages/admin/Paginator';
 
 import { Footer } from '@/Pages/User/Footer';
-
+import { DetailMobil} from '@/Pages/User/DetailMobil';
 
 function Mobil1({ mobils }) {
   const [loading, setLoading] = useState(true);
@@ -71,13 +71,15 @@ function Mobil1({ mobils }) {
           /* Gaya efek hover untuk elemen kartu (card) */
           .hover-effect:hover {
             background-color: #0e5776;
-            transform: translateY(-20px);
+            transform: translateY(-10px);
           }
 
           /* Gaya efek hover untuk tombol "Booking" */
           .hover-button:hover {
-            background-color: blue;
+            background-color: black;
             color: white;
+
+
           }
         `}
       </style>
@@ -112,24 +114,43 @@ function Mobil1({ mobils }) {
             ) : (
               getCurrentPageData().map((mobil) => (
                 <div key={mobil.id} className="bg-white rounded shadow-md p-2 mt-2 hover-effect" style={{ maxWidth: '300px', flexBasis: 'calc(33.33% - 10px)', margin: '5px' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                    <img
-                      src={`/storage/${mobil.image}`}
-                      alt={mobil.nama}
-                      className="w-auto h-full mt-5"
-                      style={{ maxWidth: '50%', height: 'auto' }}
-                    />
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent: 'center'  }}>
+                  {mobil.images.length > 0 && (
+  <img
+    key={mobil.images[0].id}
+    src={`/storage/${mobil.images[0].path}`}
+    alt={mobil.nama}
+    style={{ maxWidth: '100px' }}
+  />
+)}
+
+
                     <strong className='flex justify-center'>Nama: {mobil.nama}</strong>
-                    <p className='flex justify-center'><strong>Brand:</strong> {mobil.brand}</p>
-                    <p className='flex justify-center'><strong>Harga:</strong> {mobil.harga}</p>
+                    <p className='flex justify-center'  ><strong>Brand:</strong> {mobil.brand}</p>
+                    <p className='flex justify-center'>
+  <strong>Harga:</strong> {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(mobil.harga)}
+</p>
                     <p className='flex justify-center'><strong>Deksripsi:</strong> {mobil.deskripsi}</p>
                     <p className='flex justify-center'><strong>Kategori:</strong> {mobil.kategori}</p>
                     <InertiaLink
-                      href={route('booking.create', { kodeMobil: mobil.id, Brand: mobil.brand, NamaMobil: mobil.nama, Gambar: mobil.image })}
-                      className="bg-blue-500 text-white rounded-full p-2 mt-2"
-                    >
-                      Booking
-                    </InertiaLink>
+  href={route('booking.create', {
+    kodeMobil: mobil.id,
+    Brand: mobil.brand,
+    NamaMobil: mobil.nama,
+    Gambar: mobil.images.map((image) => image.path), // Send an array of image paths
+  })}
+  className="bg-blue-500 text-white rounded-full hover-button p-2 mt-2"
+>
+  Booking
+</InertiaLink>
+
+
+        <InertiaLink
+  href={route('detailmobil', { id: mobil.id })}
+  className="bg-green-500 text-white rounded-full hover-button p-2 mt-2"
+>
+  Detail
+</InertiaLink>
                   </div>
                 </div>
               ))

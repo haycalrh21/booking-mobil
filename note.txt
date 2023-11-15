@@ -1,3 +1,4 @@
 command yang di butuhin
 php artisan db:seed --class=AdminSeeder
 php artisan db:seed --class=MobilSeeder
+jangan lupa migrate bagian data mobil untuk harga
