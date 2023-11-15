@@ -67,7 +67,7 @@ export const Navbar = () => {
                 <Link href={linkToHome}>Home</Link>
                 <Link href={route('datamobillengkap')}>Mobil</Link>
                 <Link href={route('bookings')}>Riwayat</Link>
-                <Link href={route('booking.store')}>Booking</Link>
+                {/* <Link href={route('booking.store')}>Booking</Link> */}
               </>
             ) : (
               <>

@@ -4,14 +4,15 @@ import Swal from 'sweetalert2';
 import { Navbar } from '@/Pages/User/Navbar';
 import { Footer } from '@/Pages/User/Footer';
 
-const Booking = ({ user, mobilData, mobil }) => {
+const Booking = ({ user, mobilData, mobils }) => {
   const urlParams = new URLSearchParams(window.location.search);
   const kodeMobil = urlParams.get('kodeMobil');
   const Brand = urlParams.get('Brand');
   const NamaMobil = urlParams.get('NamaMobil');
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split('T')[0];
-  const Gambar = urlParams.get('Gambar');
+  const Gambar = urlParams.get('Gambar')?.split(',');
+
 
   const { data, setData, post } = useForm({
     namaPemesan: user.name,
@@ -33,6 +34,9 @@ const Booking = ({ user, mobilData, mobil }) => {
         console.log('User confirmed the alert');
       } else {
         console.log('User rejected the alert');
+
+
+
       }
     });
   };
@@ -66,6 +70,7 @@ const Booking = ({ user, mobilData, mobil }) => {
   };
 
   return (
+
     <div>
       <Navbar />
       <div className="container">
@@ -151,23 +156,19 @@ const Booking = ({ user, mobilData, mobil }) => {
               <div style={{ flex: '1' }}>
                 <div className="form-group" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   Mobil:
-                  {Gambar && Gambar.length > 0 && (
-  <div style={{ display: 'flex', marginBottom: '10px' }}>
-    {Gambar.slice(0, 4).map((path, index) => (
+
+                  {Array.isArray(Gambar) && Gambar.length > 0 && (
+  <div>
+    {Gambar.map((imageName, index) => (
       <img
         key={index}
-        src={`/storage/${path}`}
-        width={200}
-        height={150}
+        src={`/storage/${imageName}`}
         alt={`Mobil Image ${index + 1}`}
-        className="img-fluid"
-        style={{ marginRight: '10px' }}
+        style={{ maxWidth: '200px', maxHeight: '150px', marginRight: '10px' }}
       />
     ))}
   </div>
 )}
-
-
                   <div className="p-4">
                     <p>Nama Mobil: {NamaMobil}</p>
                     <p>Brand Mobil: {Brand}</p>

@@ -137,13 +137,12 @@ function Mobil1({ mobils }) {
     kodeMobil: mobil.id,
     Brand: mobil.brand,
     NamaMobil: mobil.nama,
-    Gambar: mobil.images.map((image) => image.path), // Send an array of image paths
+    Gambar: mobil.images.map(image => image.path).join(','), // Concatenate all image paths
   })}
   className="bg-blue-500 text-white rounded-full hover-button p-2 mt-2"
 >
   Booking
 </InertiaLink>
-
 
         <InertiaLink
   href={route('detailmobil', { id: mobil.id })}

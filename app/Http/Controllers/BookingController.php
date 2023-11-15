@@ -14,17 +14,16 @@ class BookingController extends Controller
 {
     public function create()
     {
-        $images = Image::all(); // Adjust this based on how you fetch your images
+        $mobils = Mobil::with('images')->get();
 
-        // Menampilkan formulir pemesanan menggunakan Inertia.js
         return Inertia::render('User/Booking', [
             'user' => Auth::user(),
-            'images' => $images, // Include the images data
+            'mobils' => $mobils, // Pass the mobils data to the Booking component
         ]);
-
-
-
     }
+
+
+
     public function datamobil1($id)
     {
         $mobils = Mobil::find($id);
