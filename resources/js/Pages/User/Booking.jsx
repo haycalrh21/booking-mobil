@@ -9,8 +9,8 @@ const Booking = ({ user, mobilData, mobils }) => {
   const kodeMobil = urlParams.get('kodeMobil');
   const Brand = urlParams.get('Brand');
   const NamaMobil = urlParams.get('NamaMobil');
-  const currentDate = new Date();
-  const formattedDate = currentDate.toISOString().split('T')[0];
+//   const currentDate = new Date();
+//   const formattedDate = currentDate.toISOString().split('T')[0];
   const Gambar = urlParams.get('Gambar')?.split(',');
 
 

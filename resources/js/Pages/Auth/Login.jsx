@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Checkbox from '@/Components/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
@@ -6,124 +6,113 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, Link, useForm } from '@inertiajs/react';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
+const Login = ({ status, canResetPassword, onLoginSuccess }) => {
+  const { data, setData, post, processing, errors, reset } = useForm({
+    email: '',
+    password: '',
+    remember: false,
+  });
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    });
-    const showAlert = () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Berhasil login!',
-          text: 'Selamat Login!',
-        }).then((result) => {
-          // Your logic when the user confirms the alert
-          if (result.isConfirmed) {
-            // Handle confirmation, for example, navigate to another page
-            // You can use the Inertia.js `visit` method to navigate to another page
-            // Example: visit(route('your.route.name'));
-            console.log('User confirmed the alert');
-          } else {
-            // Handle rejection, for example, do something else
-            console.log('User rejected the alert');
-          }
-        });
-      };
+  const [loading, setLoading] = useState(false);
 
-      const submit = async (e) => {
-        e.preventDefault();
+  const submit = async (e) => {
+    e.preventDefault();
 
-        // Show SweetAlert before making the API call
-        showAlert();
+    const response = await post(route('login'));
 
-        // Perform the login request after the SweetAlert is shown
-        const response = await post(route('login'));
+    if (response && response.success) {
+      // Set the login success message in local storage
+      localStorage.setItem('loginSuccessMessage', 'true');
 
-        // You can handle the response if needed
-        if (response) {
-            console.log('Login successful');
-        } else {
-            console.log('Login failed');
-        }
+      // Show SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'Welcome back!',
+      });
+
+      // Redirect or perform additional actions on successful login
+    } else {
+      console.log('Login failed');
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      reset();
     };
-         useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
+  }, []);
 
+  return (
+    <GuestLayout>
+      <Head title="Log in" />
 
+      {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-    return (
-        <GuestLayout>
-            <Head title="Log in" />
+      <form onSubmit={submit}>
+        <div>
+          <InputLabel htmlFor="email" value="Email" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+          <TextInput
+            id="email"
+            type="email"
+            name="email"
+            value={data.email}
+            className="mt-1 block w-full"
+            autoComplete="username"
+            isFocused={true}
+            onChange={(e) => setData('email', e.target.value)}
+          />
 
-            <form onSubmit={submit} >
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
+          <InputError message={errors.email} className="mt-2" />
+        </div>
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                    />
+        <div className="mt-4">
+          <InputLabel htmlFor="password" value="Password" />
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+          <TextInput
+            id="password"
+            type="password"
+            name="password"
+            value={data.password}
+            className="mt-1 block w-full"
+            autoComplete="current-password"
+            onChange={(e) => setData('password', e.target.value)}
+          />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+          <InputError message={errors.password} className="mt-2" />
+        </div>
 
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                    />
+        <div className="block mt-4">
+          <label className="flex items-center">
+            <Checkbox
+              name="remember"
+              checked={data.remember}
+              onChange={(e) => setData('remember', e.target.checked)}
+            />
+            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+          </label>
+        </div>
 
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
+        <div className="flex items-center justify-end mt-4">
+          {canResetPassword && (
+            <Link
+              href={route('password.request')}
+              className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Forgot your password?
+            </Link>
+          )}
 
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
+          <PrimaryButton className="ml-4" disabled={processing || loading}>
+            {loading ? 'Logging In...' : 'Log in'}
+          </PrimaryButton>
+        </div>
+      </form>
+    </GuestLayout>
+  );
+};
 
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ml-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
-    );
-}
+export default Login;

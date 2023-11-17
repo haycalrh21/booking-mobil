@@ -15,9 +15,7 @@ class MobilController extends Controller
     {
         $mobils = Mobil::with('images')->get();
 
-        return Inertia::render('index/mobil1', [
-            'mobils' => $mobils,
-        ]);
+        return Inertia::render('index/mobil1', ['mobils' => $mobils,]);
     }
 
 

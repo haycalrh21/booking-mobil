@@ -159,6 +159,7 @@
                     value={formData.deskripsi}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 rounded border text-gray-700"
+                    style={{ resize: 'vertical' }}
                     />
                 </div>
                 <div className="mb-4">

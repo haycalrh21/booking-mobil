@@ -3,11 +3,13 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\MobilController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MobilController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,22 @@ Route::group(['middleware' => ['role:admin,manager,supervisor']], function () {
     Route::get('/admin/databooking', [BookingController::class, 'index'])->name('databooking');
 
     Route::post('/admin/mobil', [MobilController::class, 'store'])->name('mobil.store');
+   // routes/web.php
+
+Route::get('/admin/datapegawai', [KaryawanController::class, 'index'])->name('datapegawai');
+// Route::get('/admin/datapegawai/tambah', [KaryawanController::class, 'create'])->name('tambahdatapegawai');
+// routes/web.php
+
+Route::post('/admin/datapegawai', [KaryawanController::class, 'store'])->name('tambahdatapegawai');
+
+
+
+
+Route::post('/admin/datapenjualan/tambah', [PenjualanController::class, 'create'])->name('tambahdatapenjualan');
+Route::get('/admin/datapenjualan', [PenjualanController::class, 'index'])->name('datapenjualan');
+
+
+
 });
 
 
