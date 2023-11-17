@@ -42,9 +42,7 @@ export const BookingPage = ({ bookings }) => {
         <Footer />
       </div>
       {/* Konten tambahan */}
-      <div style={{ height: '200px' }}>
-        {/* Di sini, Anda dapat menambahkan konten tambahan atau elemen yang Anda inginkan */}
-      </div>
+
     </div>
   );
 };

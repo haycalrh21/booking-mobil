@@ -78,8 +78,6 @@ function Mobil1({ mobils }) {
           .hover-button:hover {
             background-color: black;
             color: white;
-
-
           }
         `}
       </style>

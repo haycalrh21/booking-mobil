@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Box, Clock, Text } from 'grommet';
+import { Box,  Clock, Text } from 'grommet';
 import { Kodesamping } from '@/Pages/User/Sidebar';
 import { Inertia } from '@inertiajs/inertia-react';
+import { color } from 'framer-motion';
 
 export const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -27,20 +28,17 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'shadow-lg rounded-xl border mx-2 mt-2 md:shadow-none md:border-none md:mx-2 md:mt-0' : ''}`} style={{ backgroundColor: '#0576A7' }}>
+    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'text-black text-center' : ''}`} style={{  background: 'linear-gradient(113deg, rgba(1,134,191,1) 30%, rgba(12,100,138,1) 100%)'}}>
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
         <div className="flex items-center justify-between py-5 md:block">
-          <a href="">
-            <img
+          <a href="/">
+            <img className='justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0'
               src="/images/iconBM1.png"
               style={{ marginRight: '1px', paddingLeft: '35px' }}
               width={100}
               height={50}
-              alt="bin mahmud motor"
+              alt="BMLOGO"
             />
-            <div style={{ textAlign: 'left', paddingLeft: '10px' }}>
-              <p>Bin Mahmoed Motors</p>
-            </div>
           </a>
           <div className="md:hidden">
             <button
@@ -58,21 +56,27 @@ export const Navbar = () => {
               )}
             </button>
           </div>
+
         </div>
-        <Kodesamping />
+
+        <div  style={{ marginLeft: '-29px'  ,color:'#ffffff'}}>
+              <p>BIN MAHMOED MOTOR</p>
+            </div>
+
         <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${dropdownOpen ? 'block' : 'hidden'}`}>
           <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {auth.user ? (
               <>
-                <Link href={linkToHome}>Home</Link>
-                <Link href={route('datamobillengkap')}>Mobil</Link>
-                <Link href={route('bookings')}>Riwayat</Link>
+
+                <Link  style={{color:'#ffffff'}} href={linkToHome}>Beranda</Link>
+                <Link  style={{color:'#ffffff'}} href={route('datamobillengkap')}>Mobil</Link>
+                <Link  style={{color:'#ffffff'}} href={route('bookings')}>Riwayat</Link>
                 {/* <Link href={route('booking.store')}>Booking</Link> */}
               </>
             ) : (
               <>
-                <Link href={route('login')}>Login</Link>
-                <Link href={route('register')}>Register</Link>
+            <Link className='inline-flex justify-center absolute right-9 mb-2 w-28 h-8 round-md shadow-lg bg-white ring-2 ring-black ring-opacity-9'  style={{color:'#048853', fontWeight:900, fontSize: '16px ,' , paddingTop:'5px' , theme:''}} href={route('login')}>MASUK</Link>
+            <Link className='inline-flex justify-center absolute  right-9 mb-2 w-28 h-8 ' href={route('register')} style={{color:'#ffffff', fontWeight:500, fontSize: '16px ,' , paddingTop:'2px' , right: '200px' }}>DAFTAR</Link>
               </>
             )}
           </ul>
@@ -106,7 +110,7 @@ export const Navbar = () => {
                 )}
               </div>
             )}
-            <Clock type="digital" />
+
           </div>
         </div>
       </div>
