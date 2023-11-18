@@ -84,7 +84,6 @@ export const Navbar = () => {
   {auth.user && (
     <div className="relative inline-block text-left">
       <div>
-
         <button
           type="button"
           className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none"
@@ -92,7 +91,6 @@ export const Navbar = () => {
           aria-expanded="true"
           aria-haspopup="true"
           onClick={() => setDropdownOpen(!dropdownOpen)}
-
         >
           {auth.user.name}
         </button>
@@ -106,9 +104,7 @@ export const Navbar = () => {
       )}
     </div>
   )}
-  {auth.user && (
-     <Clock type="digital" />
-     )}
+  <Clock type="digital" />
 </div>
 
         </div>
