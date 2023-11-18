@@ -59,7 +59,7 @@ public function store(Request $request)
         'nomorHape' => $request->nomorHape,
         'kodeMobil' => $request->kodeMobil,
         'message' => $request->message,
-        'tanggal' => now()->toDateString(), // Set 'tanggal' to the current date in 'YYYY-MM-DD' format
+        'tanggal' => $request->tanggal, // Set 'tanggal' to the current date in 'YYYY-MM-DD' format
     ]);
 
     // Redirect ke halaman yang sesuai setelah penyimpanan sukses

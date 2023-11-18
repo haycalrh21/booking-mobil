@@ -17,4 +17,9 @@ class Booking extends Model
     {
         return $this->belongsTo(Mobil::class, 'kodeMobil', 'id', 'nama'  ); // Mobil::class adalah model mobil
     }
+
+    public function penjualan()
+    {
+        return $this->hasOne(Penjualan::class);
+    }
 }

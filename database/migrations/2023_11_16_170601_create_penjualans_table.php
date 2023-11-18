@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('booking_id'); // Menambahkan kolom booking_id
+            $table->foreign('booking_id')->references('id')->on('bookings');
 
             $table->string('namaPemesan');
             $table->string('email');
@@ -21,8 +24,9 @@ return new class extends Migration
             $table->text('message')->nullable();
             $table->timestamps();
             $table->date('tanggal');
-            // $table->foreign('kodeMobil')->references('id')->on('mobils'); // Menambahkan kunci asing ke tabel mobils
+            $table->foreign('kodeMobil')->references('id')->on('mobils'); // Menambahkan kunci asing ke tabel mobils
         });
+
     }
 
     /**
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('penjualans');
     }
 };

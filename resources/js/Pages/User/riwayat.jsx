@@ -39,7 +39,7 @@ export const BookingPage = ({ bookings }) => {
             </div>
           )}
         </div>
-        <Footer />
+        <Footer/>
       </div>
       {/* Konten tambahan */}
 

@@ -39,8 +39,6 @@ export const Footer = () => {
       </a>
       </div>
 
-               <Clock type="digital" style={{paddingLeft: '1020px'}}/>
-
                </div>
 
         <p>Copyright © 2023 - All right reserved by Bin Mahmoed Motors</p>
