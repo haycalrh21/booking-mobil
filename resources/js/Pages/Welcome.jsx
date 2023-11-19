@@ -20,9 +20,9 @@ export default function Welcome({}) {
 
                 <img src="/images/hero_section.jpg" style={{ width:'100%'}} alt="" />
 
-                <div className="hero-content" style={{maxWidth:1080}}>
+                <div className="hero-content text-center" style={{maxWidth:1080}}>
 
-                    <div className="" style={{ marginRight:'29px' ,paddingRight:'470px', paddingBottom:'240px' }}>
+                    <div className="text-left" style={{ marginRight:'29px' ,paddingRight:'470px', paddingBottom:'240px' }}>
 
                         <h1 className="text-5xl font-bold" style={{color:'#ffffff', fontWeight:'900', fontSize:'59px'}} >Membantu Temukan Mobil Impian.</h1>
                         <p className="mb-11 py-1" style={{color:'#ffffff' , fontSize:'19px',fontWeight:'bold'}}>Bin Mahmoed Motor <span style={{color:'#BAD0DB' ,fontSize:'19px' ,fontWeight:'regular'}}>hadir untuk temukan mobil terbaik untukmu, untuk di jual ataupun di pakai dengan sumber terpercaya.</span></p>
@@ -35,7 +35,8 @@ export default function Welcome({}) {
 
 
                 </div>
-                <Calendar size="small" style={{paddingBottom:'500px' , marginLeft:'1000px'}} />
+                <Calendar size="small" date={(new Date()).toISOString()}
+  onSelect={(date) => {}} style={{paddingBottom:'500px' , marginLeft:'1000px'}} />
             </div>
 
 

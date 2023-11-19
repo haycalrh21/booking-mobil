@@ -128,7 +128,7 @@ function Mobil1({ mobils }) {
                     <p className='flex justify-center'>
   <strong>Harga:</strong> {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(mobil.harga)}
 </p>
-                    <p className='flex justify-center'><strong>Deksripsi:</strong> {mobil.deskripsi}</p>
+<p className='flex justify-center' style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}><strong>Deksripsi:</strong> {mobil.deskripsi}</p>
                     <p className='flex justify-center'><strong>Kategori:</strong> {mobil.kategori}</p>
                     <InertiaLink
   href={route('booking.create', {

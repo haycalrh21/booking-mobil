@@ -9,10 +9,30 @@ use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $penjualan = Penjualan::all();
-        return response()->json($penjualan);
+
+        $formattedData = $penjualan->map(function ($item) {
+            $booking = $item->booking; // Ambil relasi booking
+            $mobil = $booking->mobil; // Ambil relasi mobil dari booking
+
+            return [
+                'id' => $item->id,
+                'booking_id' => $item->booking_id,
+                'namaPemesan' => $item->namaPemesan,
+                'email' => $item->email,
+                'kodeMobil' => $item->kodeMobil,
+                'hargaMobil' => $mobil->harga, // Ambil harga mobil dari relasi booking->mobil
+                'created_at' => $item->created_at,
+
+
+            ];
+        });
+
+        return response()->json($formattedData);
     }
+
 
 
     public function create(Request $request)

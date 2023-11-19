@@ -1,14 +1,9 @@
 import React from 'react';
 
-export const Paginator = ({ currentPage, lastPage, onPageChange }) => {
-
+export const Paginator = ({ currentPage, lastPage, onPageChange, prevText = '« Sebelumnya', nextText = 'Selanjutnya »' }) => {
   const handlePageChange = (newPage) => {
     if (newPage >= 1) {
       onPageChange(newPage);
-
-      // setting url anjing
-      const newURL = window.location.pathname + `?page=${newPage}`;
-      window.history.pushState({ path: newURL }, '', newURL);
     }
   };
 
@@ -19,7 +14,7 @@ export const Paginator = ({ currentPage, lastPage, onPageChange }) => {
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        « Sebelumnya
+        {prevText}
       </button>
       <button className="join-item btn">Page {currentPage}</button>
       <button
@@ -27,7 +22,7 @@ export const Paginator = ({ currentPage, lastPage, onPageChange }) => {
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === lastPage}
       >
-        Selanjutnya »
+        {nextText}
       </button>
     </div>
   );

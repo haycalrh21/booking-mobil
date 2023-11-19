@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Box,  Clock, Text } from 'grommet';
+import { Box, Clock, Text } from 'grommet';
 import { Kodesamping } from '@/Pages/User/Sidebar';
 import { Inertia } from '@inertiajs/inertia-react';
-import { color } from 'framer-motion';
 
 export const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -21,18 +20,17 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     Inertia.post(route('logout').url()).then(() => {
-        // Logika yang perlu dijalankan setelah logout berhasil
-        // Contoh: Muat ulang halaman atau navigasi ke halaman lain
-        Inertia.reload();
-      });
+      Inertia.reload();
+    });
   };
 
   return (
-    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'text-black text-center' : ''}`} style={{  background: 'linear-gradient(113deg, rgba(1,134,191,1) 30%, rgba(12,100,138,1) 100%)'}}>
+    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'text-black text-center' : ''}`} style={{ background: 'linear-gradient(113deg, rgba(1,134,191,1) 30%, rgba(12,100,138,1) 100%)' }}>
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
         <div className="flex items-center justify-between py-5 md:block">
           <a href="/">
-            <img className='justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0'
+            <img
+              className='justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0'
               src="/images/iconBM1.png"
               style={{ marginRight: '1px', paddingLeft: '35px' }}
               width={100}
@@ -56,57 +54,53 @@ export const Navbar = () => {
               )}
             </button>
           </div>
-
         </div>
 
-        <div  style={{ marginLeft: '-29px'  ,color:'#ffffff'}}>
-              <p>BIN MAHMOED MOTOR</p>
-            </div>
+        <div style={{ marginLeft: '-29px', color: '#ffffff' }}>
+          <p>BIN MAHMOED MOTOR</p>
+        </div>
 
         <div className={`flex-1 items-center mt-8 md:mt-0 md:flex ${dropdownOpen ? 'block' : 'hidden'}`}>
           <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {auth.user ? (
               <>
-
-                <Link  style={{color:'#ffffff'}} href={linkToHome}>Beranda</Link>
-                <Link  style={{color:'#ffffff'}} href={route('datamobillengkap')}>Mobil</Link>
-                <Link  style={{color:'#ffffff'}} href={route('bookings')}>Riwayat</Link>
-                {/* <Link href={route('booking.store')}>Booking</Link> */}
+                <Link style={{ color: '#ffffff' }} href={linkToHome}>Beranda</Link>
+                <Link style={{ color: '#ffffff' }} href={route('datamobillengkap')}>Mobil</Link>
+                <Link style={{ color: '#ffffff' }} href={route('bookings')}>Riwayat</Link>
               </>
             ) : (
               <>
-            <Link className='inline-flex justify-center absolute right-9 mb-2 w-28 h-8 round-md shadow-lg bg-white ring-2 ring-black ring-opacity-9'  style={{color:'#048853', fontWeight:900, fontSize: '16px ,' , paddingTop:'5px' , theme:''}} href={route('login')}>MASUK</Link>
-            <Link className='inline-flex justify-center absolute  right-9 mb-2 w-28 h-8 ' href={route('register')} style={{color:'#ffffff', fontWeight:500, fontSize: '16px ,' , paddingTop:'2px' , right: '200px' }}>DAFTAR</Link>
+                <Link className='inline-flex justify-center absolute right-9 mb-2 w-28 h-8 round-md shadow-lg bg-white ring-2 ring-black ring-opacity-9' style={{ color: '#048853', fontWeight: 900, fontSize: '16px', paddingTop: '5px', theme: '' }} href={route('login')}>MASUK</Link>
+                <Link className='inline-flex justify-center absolute right-9 mb-2 w-28 h-8 ' href={route('register')} style={{ color: '#ffffff', fontWeight: 500, fontSize: '16px', paddingTop: '2px', right: '200px' }}>DAFTAR</Link>
               </>
             )}
           </ul>
           <div className="flex-1 gap-x-6 items-center justify-end mt-6 space-y-6 md:flex md:space-y-0 md:mt-0">
-  {auth.user && (
-    <div className="relative inline-block text-left">
-      <div>
-        <button
-          type="button"
-          className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none"
-          id="options-menu"
-          aria-expanded="true"
-          aria-haspopup="true"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-        >
-          {auth.user.name}
-        </button>
-      </div>
-      {dropdownOpen && (
-        <div className="origin-top-right absolute right-2 mt-2 w-35 rounded-md shadow-lg bg-white ring-0 ring-opacity-0">
-          <div className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" role="none">
-            <Link href={route('logout')} method="post">Logout</Link>
+            {auth.user && (
+              <div className="relative inline-block text-left">
+                <div>
+                  <button
+                    type="button"
+                    className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none"
+                    id="options-menu"
+                    aria-expanded="true"
+                    aria-haspopup="true"
+                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                  >
+                    {auth.user.name}
+                  </button>
+                </div>
+                {dropdownOpen && (
+                  <div className="origin-top-right absolute right-2 mt-2 w-35 rounded-md shadow-lg bg-white ring-0 ring-opacity-0">
+                    <div className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" role="none">
+                      <Link href={route('logout')} method="post">Logout</Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            {auth.user && <Clock type="digital" className="text-white" />}
           </div>
-        </div>
-      )}
-    </div>
-  )}
-  <Clock type="digital" />
-</div>
-
         </div>
       </div>
     </nav>
