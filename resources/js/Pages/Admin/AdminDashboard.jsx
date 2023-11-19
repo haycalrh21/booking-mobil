@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '@/Pages/admin/Navbar';
 import DataMobil from '@/Pages/Mobil/DataMobil';
@@ -5,6 +6,9 @@ import DataPengguna from '@/Pages/Admin/DataPengguna';
 import DataBooking from '@/Pages/Admin/DataBooking';
 import Karyawan from '@/Pages/Admin/DataPegawai';
 import DataPenjualan from '@/Pages/Admin/DataPenjualan';
+import { Bar } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
+
 
 function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('');
@@ -14,6 +18,7 @@ function AdminDashboard() {
   const [karyawanData, setKaryawanData] = useState([]);
   const [penjualanData, setPenjualanData] = useState([]);
   const [isTestVisible, setIsTestVisible] = useState(true); // State untuk visibilitas elemen <div>
+  const [chartTotalHarga, setChartTotalHarga] = useState(0); // State to store total harga for the chart
 
   const handleTabClick = (tab) => {
     if (tab === activeTab) {
@@ -37,7 +42,7 @@ function AdminDashboard() {
         });
     }
 
-    if (activeTab === 'dataPengguna') {
+      if (activeTab === 'dataPengguna') {
       fetch('/admin/datapengguna')
         .then((response) => response.json())
         .then((data) => {
@@ -71,20 +76,56 @@ function AdminDashboard() {
     }
 
     if (activeTab === 'dataPenjualan') {
-      fetch('/admin/datapenjualan')
-        .then((response) => response.json())
-        .then((data) => {
-          setPenjualanData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data penjualan:', error);
-        });
-    }
-  }, [activeTab]);
+        fetch('/admin/datapenjualan')
+          .then((response) => response.json())
+          .then((data) => {
+            setPenjualanData(data);
+            const totalPrice = data.reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
+            console.log('Total Price:', totalPrice);
+            setChartTotalHarga(totalPrice);
+
+          })
+          .catch((error) => {
+            console.error('Error fetching data penjualan:', error);
+          });
+      }
+    }, [activeTab]);
+
+
+  // Define your chart data here (modify as needed)
+  const chartData = {
+    labels: ['Total Harga'],
+    datasets: [
+      {
+        label: 'Total Harga',
+        backgroundColor: 'rgba(75,192,192,0.4)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(75,192,192,0.6)',
+        hoverBorderColor: 'rgba(75,192,192,1)',
+        data: [chartTotalHarga],
+      },
+    ],
+  };
+
+  // Define your chart options with scales
+  const chartOptions = {
+    scales: {
+      x: {
+        type: 'category', // Specify the type of scale for x-axis (category for labels)
+        labels: ['Total Harga'], // Provide labels for the categories
+      },
+      y: {
+        beginAtZero: true, // Adjust as needed
+      },
+    },
+  };
 
   return (
     <div>
       <Navbar />
+
+
       <div className="tabs">
         <a
           className={`tab tab-bordered ${activeTab === 'dataMobil' ? 'tab-active' : ''}`}
@@ -128,6 +169,10 @@ function AdminDashboard() {
         Selamat Datang Di Dashboard Admin
     </h1>
         </div>}
+        {chartTotalHarga && (
+  <Bar data={chartData} options={chartOptions} />
+)}
+
     </div>
   );
 }

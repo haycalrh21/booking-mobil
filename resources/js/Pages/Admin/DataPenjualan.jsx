@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Paginator } from '@/Pages/admin/Paginator'; // Adjust the import path based on your project structure
+import { Paginator } from '@/Pages/admin/Paginator';
 
-const DataPenjualan = ({ penjualan }) => {
+const DataPenjualan = ({ penjualan,onMonthSelect }) => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalHarga, setTotalHarga] = useState(0);
   const [previousPage, setPreviousPage] = useState(null);
-  const totalPages = Math.ceil(penjualan.length / itemsPerPage);
+  const [totalPages, setTotalPages] = useState(0);
   const [canGoNext, setCanGoNext] = useState(true);
+  const [selectedMonth, setSelectedMonth] = useState('');
 
   const getCurrentPageData = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return penjualan.slice(startIndex, endIndex);
+    const filteredData = selectedMonth
+      ? penjualan.filter(data => new Date(data.created_at).getMonth() === parseInt(selectedMonth, 10) - 1)
+      : penjualan;
+
+    return filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  };
+
+  const calculateTotalPages = () => {
+    const filteredData = selectedMonth
+      ? penjualan.filter(data => new Date(data.created_at).getMonth() === parseInt(selectedMonth, 10) - 1)
+      : penjualan;
+
+    setTotalPages(Math.ceil(filteredData.length / itemsPerPage));
   };
 
   const handlePageChange = (newPage) => {
@@ -33,14 +44,34 @@ const DataPenjualan = ({ penjualan }) => {
 
   useEffect(() => {
     // Calculate total harga for the current page
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
     const totalPrice = getCurrentPageData().reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
     setTotalHarga(totalPrice);
-  }, [penjualan, currentPage, itemsPerPage]);
+  }, [penjualan, currentPage, itemsPerPage, selectedMonth]);
+
+  useEffect(() => {
+    // Recalculate total pages when the selected month changes
+    calculateTotalPages();
+  }, [penjualan, selectedMonth, itemsPerPage]);
 
   return (
     <div>
+              <label>Pilih Bulan: </label>
+              <select onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
+        <option value="">Semua Bulan</option>
+        <option value="01">Januari</option>
+        <option value="02">Februari</option>
+        <option value="03">Februari</option>
+        <option value="04">Februari</option>
+        <option value="05">Februari</option>
+        <option value="06">Februari</option>
+        <option value="07">Februari</option>
+        <option value="08">Februari</option>
+        <option value="09">Februari</option>
+        <option value="10">Februari</option>
+        <option value="11">November</option>
+        <option value="12">Desember</option>
+        {/* Tambahkan opsi untuk bulan-bulan lainnya */}
+      </select>
       <h2>Data Penjualan</h2>
       <table className="table">
         <thead>
