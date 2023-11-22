@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 
 class MobilController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
     public function index()
     {
         $mobils = Mobil::with('images')->get();

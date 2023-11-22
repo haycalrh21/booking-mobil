@@ -34,6 +34,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
+Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobillengkap');
 
 
 
@@ -72,7 +73,7 @@ Route::middleware(['role:user'])->group(function () {
     Route::get('/testing', function () {
         return Inertia::render('testing');
     })->name('testing');
-    Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobillengkap');
+    // Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobillengkap');
     Route::get('/riwayat_booking', [BookingController::class,'tampilanriwayat'])->name('bookings');
     Route::get('/booking', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');

@@ -85,80 +85,85 @@ function Mobil1({ mobils }) {
       <div>
         <Navbar />
         <div className="flex">
-        <div className="sidebar" style={{ flex: '0 5 10%', backgroundColor: 'white', marginLeft: '6px', marginTop: '6px', maxHeight: '50vh', overflowY: '0vh' }}>
-  <h3 style={{ marginLeft: '20px' }}>Filter Kategori:</h3>
-  <ul style={{ marginLeft: '40px' }}>
-    {categories.map((category) => (
-      <li key={category}>
-        <label>
-          <input
-            type="checkbox"
-            value={category}
-            checked={selectedCategories.includes(category)}
-            onChange={handleCategoryChange}
-          />
-          {category}
-        </label>
-      </li>
-    ))}
-  </ul>
-</div>
+        <div className="sidebar" style={{ flex: '0 0 9%', backgroundColor: 'white', marginLeft: '6px', marginTop: '6px', maxHeight: '40%', overflowY: '0vh' }}>
+        <h3 style={{ marginLeft: '20px' }}>Filter Kategori:</h3>
+        <ul style={{ marginLeft: '20px' }}>
+            {categories.map((category) => (
+            <li key={category}>
+                <label>
+                <input
+                    type="checkbox"
+                    value={category}
+                    checked={selectedCategories.includes(category)}
+                    onChange={handleCategoryChange}
+                />
+                {category}
+                </label>
+            </li>
+            ))}
+        </ul>
+        </div>
 
 
 
-          <div className="content" style={{ flex: '1', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <div className="content" style={{ flex: '1', display: 'flex', flexWrap: 'wrap', justifyContent: 'left' }}>
             {loading ? (
               <LoadingSpinner />
             ) : (
               getCurrentPageData().map((mobil) => (
-                <div key={mobil.id} className="bg-white rounded shadow-md p-2 mt-2 hover-effect" style={{ maxWidth: '300px', flexBasis: 'calc(33.33% - 10px)', margin: '5px' }}>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent: 'center'  }}>
-                  {mobil.images.length > 0 && (
-  <img
-    key={mobil.images[0].id}
-    src={`/storage/${mobil.images[0].path}`}
-    alt={mobil.nama}
-    style={{ maxWidth: '100px' }}
-  />
-)}
+                <div key={mobil.id} className="bg-white rounded shadow-md p-2 mt-5 hover-effect" style={{ maxWidth: '200px', flexBasis: 'calc(66.66% - 10px)', margin: '5px' }}>
+                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    {mobil.images.length > 0 && (
+                        <div className="text-center" style={{ width: '100%', height: '100px' }}>
+                        <img
+                            key={mobil.images[0].id}
+                            src={`/storage/${mobil.images[0].path}`}
+                            alt={mobil.nama}
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                        />
+                    </div>
 
+                    )}
+                </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center'}}>
+                        <strong className='text-center'>{mobil.nama}</strong>
+                        <p className='text-center'><strong></strong> {mobil.brand}</p>
+                        <p className='text-center'>
+                            <strong></strong> {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(mobil.harga)}
+                        </p>
+                        {/* <p className='text-center' style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}><strong>Deksripsi:</strong> {mobil.deskripsi}</p> */}
+                        {/* <p className='text-center'><strong>Kategori:</strong> {mobil.kategori}</p> */}
+                        <InertiaLink
+                            href={route('booking.create', {
+                                kodeMobil: mobil.id,
+                                Brand: mobil.brand,
+                                NamaMobil: mobil.nama,
+                                Gambar: mobil.images.map(image => image.path).join(','),
+                            })}
+                            className="bg-blue-500 text-white rounded-full hover-button p-2 mt-2"
+                        >
+                            Booking
+                        </InertiaLink>
 
-                    <strong className='flex justify-center'>Nama: {mobil.nama}</strong>
-                    <p className='flex justify-center'  ><strong>Brand:</strong> {mobil.brand}</p>
-                    <p className='flex justify-center'>
-  <strong>Harga:</strong> {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(mobil.harga)}
-</p>
-<p className='flex justify-center' style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}><strong>Deksripsi:</strong> {mobil.deskripsi}</p>
-                    <p className='flex justify-center'><strong>Kategori:</strong> {mobil.kategori}</p>
-                    <InertiaLink
-  href={route('booking.create', {
-    kodeMobil: mobil.id,
-    Brand: mobil.brand,
-    NamaMobil: mobil.nama,
-    Gambar: mobil.images.map(image => image.path).join(','), // Concatenate all image paths
-  })}
-  className="bg-blue-500 text-white rounded-full hover-button p-2 mt-2"
->
-  Booking
-</InertiaLink>
-
-        <InertiaLink
-  href={route('detailmobil', { id: mobil.id })}
-  className="bg-green-500 text-white rounded-full hover-button p-2 mt-2"
->
-  Detail
-</InertiaLink>
-                  </div>
+                        <InertiaLink
+                            href={route('detailmobil', { id: mobil.id })}
+                            className="bg-green-500 text-white rounded-full hover-button p-2 mt-2"
+                        >
+                            Detail
+                        </InertiaLink>
+                    </div>
                 </div>
               ))
             )}
           </div>
         </div>
-        <Paginator
-          currentPage={currentPage}
+
+        <div style={{ paddingLeft:'200px' }}>
+        <Paginator currentPage={currentPage}
           lastPage={totalPages}
           onPageChange={handlePageChange}
         /><br></br><br></br><br></br>
+        </div>
       </div>
       <Footer/>
     </div>
