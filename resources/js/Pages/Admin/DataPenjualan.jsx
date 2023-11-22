@@ -42,6 +42,7 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
     }
   };
 
+
   useEffect(() => {
     // Calculate total harga for the current page
     const totalPrice = getCurrentPageData().reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
@@ -54,20 +55,20 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
   }, [penjualan, selectedMonth, itemsPerPage]);
 
   return (
-    <div>
-              <label>Pilih Bulan: </label>
-              <select onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
+    <div className='bg-gray-800'>
+     <label>Pilih Bulan: </label>
+    <select onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
         <option value="">Semua Bulan</option>
         <option value="01">Januari</option>
         <option value="02">Februari</option>
-        <option value="03">Februari</option>
-        <option value="04">Februari</option>
-        <option value="05">Februari</option>
-        <option value="06">Februari</option>
-        <option value="07">Februari</option>
-        <option value="08">Februari</option>
-        <option value="09">Februari</option>
-        <option value="10">Februari</option>
+        <option value="03">Maret</option>
+        <option value="04">April</option>
+        <option value="05">Mei</option>
+        <option value="06">Juni</option>
+        <option value="07">Juli</option>
+        <option value="08">Agustus</option>
+        <option value="09">September</option>
+        <option value="10">Oktober</option>
         <option value="11">November</option>
         <option value="12">Desember</option>
         {/* Tambahkan opsi untuk bulan-bulan lainnya */}
