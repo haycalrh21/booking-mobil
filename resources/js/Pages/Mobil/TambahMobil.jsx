@@ -85,7 +85,7 @@
                     name="nama"
                     value={formData.nama}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    className="w-full px-3 py-2 rounded border text-gray-700" required
                     />
                 </div>
                 <div className="mb-4">
@@ -95,7 +95,7 @@
                     name="brand"
                     value={formData.brand}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    className="w-full px-3 py-2 rounded border text-gray-700" required
                     />
                 </div>
                 <div className="mb-4">
@@ -105,7 +105,7 @@
                     name="harga"
                     value={formData.harga}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    className="w-full px-3 py-2 rounded border text-gray-700" required
                     />
                 </div>
                 <div className="mb-4">
@@ -115,7 +115,7 @@
                     name="stok"
                     value={formData.stok}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    className="w-full px-3 py-2 rounded border text-gray-700" required
                     />
                 </div>
                 <div className="mb-4">
@@ -125,7 +125,7 @@
                     name="tahun"
                     value={formData.tahun}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    className="w-full px-3 py-2 rounded border text-gray-700" required
                     />
                 </div>
                 <div className="mb-4">
@@ -136,7 +136,7 @@
                         name="pajak"
                         value="Hidup"
                         checked={formData.pajak === 'Hidup'}
-                        onChange={handleInputChange}
+                        onChange={handleInputChange} required
                     />
                     <label className="ml-2 text-orange-300">Hidup</label>
                     </div>
@@ -146,7 +146,7 @@
                         name="pajak"
                         value="Mati"
                         checked={formData.pajak === 'Mati'}
-                        onChange={handleInputChange}
+                        onChange={handleInputChange} required
                     />
                     <label className="ml-2 text-orange-300">Mati</label>
                     </div>
@@ -159,7 +159,7 @@
                     value={formData.deskripsi}
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 rounded border text-gray-700"
-                    style={{ resize: 'vertical' }}
+                    style={{ resize: 'vertical' }} required
                     />
                 </div>
                 <div className="mb-4">
@@ -169,7 +169,7 @@
         name="images"
         onChange={handleInputChange}
         className="w-full px-3 py-2 rounded border text-gray-700"
-        multiple  // allow multiple file selection
+        multiple  required
     />
 </div>
 
@@ -179,8 +179,9 @@
                     name="kategori"
                     value={formData.kategori}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 rounded border text-gray-700"
+                    className="w-full px-3 py-2 rounded border text-gray-700" required
                     >
+                    <option value="Sedan">--Silahkan Pilih--</option>
                     <option value="Sedan">Sedan</option>
                     <option value="SUV">SUV</option>
                     <option value="Coupe">Coupe</option>

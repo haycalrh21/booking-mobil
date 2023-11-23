@@ -37,32 +37,32 @@ const BeliMobil = ({ onSubmit }) => {
       {/* Formulir Pembelian Mobil */}
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>Nama Pembeli:</label>
-        <input type="text" name="namaPembeli" value={data.namaPembeli} onChange={handleChange} style={{ width: '100%', padding: '8px' }} />
+        <input type="text" name="namaPembeli" value={data.namaPembeli} onChange={handleChange} style={{ width: '100%', padding: '8px' }} required/>
         {errors.namaPembeli && <div className="text-red-500">{errors.namaPembeli}</div>}
       </div>
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>No. HP:</label>
-        <input type="text" name="noHp" value={data.noHp} onChange={handleChange} style={{ width: '100%', padding: '8px' }} />
+        <input type="text" name="noHp" value={data.noHp} onChange={handleChange} style={{ width: '100%', padding: '8px' }} required/>
         {errors.noHp && <div className="text-red-500">{errors.noHp}</div>}
       </div>
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>Nama Mobil:</label>
-        <input type="text" name="namaMobil" value={data.namaMobil} onChange={handleChange} style={{ width: '100%', padding: '8px' }} />
+        <input type="text" name="namaMobil" value={data.namaMobil} onChange={handleChange} style={{ width: '100%', padding: '8px' }} required/>
         {errors.namaMobil && <div className="text-red-500">{errors.namaMobil}</div>}
       </div>
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>Brand:</label>
-        <input type="text" name="brand" value={data.brand} onChange={handleChange} style={{ width: '100%', padding: '8px' }} />
+        <input type="text" name="brand" value={data.brand} onChange={handleChange} style={{ width: '100%', padding: '8px' }} required/>
         {errors.brand && <div className="text-red-500">{errors.brand}</div>}
       </div>
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>Harga:</label>
-        <input type="text" name="harga" value={data.harga} onChange={handleChange} style={{ width: '100%', padding: '8px' }} />
+        <input type="text" name="harga" value={data.harga} onChange={handleChange} style={{ width: '100%', padding: '8px' }} required />
         {errors.harga && <div className="text-red-500">{errors.harga}</div>}
       </div>
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>Tahun:</label>
-        <input type="text" name="tahun" value={data.tahun} onChange={handleChange} style={{ width: '100%', padding: '8px' }} />
+        <input type="text" name="tahun" value={data.tahun} onChange={handleChange} style={{ width: '100%', padding: '8px'  }} required/>
         {errors.tahun && <div className="text-red-500">{errors.tahun}</div>}
       </div>
       <div>
@@ -83,7 +83,7 @@ const BeliMobil = ({ onSubmit }) => {
             name="pajak"
             value="Mati"
             checked={data.pajak === 'Mati'}
-            onChange={handleChange}
+            onChange={handleChange} required
           />
           <label className="ml-2 text-orange-300">Mati</label>
         </div>
@@ -99,7 +99,7 @@ const BeliMobil = ({ onSubmit }) => {
                 name="kategori"
                 value={kategori}
                 checked={data.kategori === kategori}
-                onChange={handleChange}
+                onChange={handleChange} required
               />
               <label className="ml-2 text-orange-300">{kategori}</label>
             </div>
