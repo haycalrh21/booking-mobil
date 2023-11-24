@@ -100,9 +100,10 @@ export function DataMobil({ mobils, pagination }) {
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>stok</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px', width: '500px' }}>Deskripsi</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px', width: '100%' }}>Deskripsi</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
@@ -116,6 +117,8 @@ export function DataMobil({ mobils, pagination }) {
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{formatRupiah(mobil.harga)}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.stok}</td>
+
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.pajak}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.deskripsi}</td>

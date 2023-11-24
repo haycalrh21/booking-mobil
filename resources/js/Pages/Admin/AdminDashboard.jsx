@@ -36,143 +36,84 @@ function AdminDashboard() {
     }
   };
 
+  const fetchData = (url, setDataCallback, processDataCallback) => {
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        setDataCallback(data);
+        processDataCallback(data);
+      })
+      .catch((error) => {
+        console.error(`Error fetching data from ${url}:`, error);
+      });
+  };
+
+  const processPembelianData = (data) => {
+    const totalPembelianData = {};
+    for (let month = 1; month <= 12; month++) {
+      totalPembelianData[month] = data
+        .filter((item) => new Date(item.created_at).getMonth() + 1 === month)
+        .reduce((acc, curr) => acc + parseFloat(curr.harga), 0);
+    }
+    setMonthlyTotalPembelianData(totalPembelianData);
+    setChartTotalPembelian(Object.values(totalPembelianData).reduce((acc, curr) => acc + curr, 0));
+  };
+
+  const processPenjualanData = (data) => {
+    const totalData = {};
+    for (let month = 1; month <= 12; month++) {
+      totalData[month] = data
+        .filter((item) => new Date(item.created_at).getMonth() + 1 === month)
+        .reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
+    }
+    setMonthlyTotalData(totalData);
+    setChartTotalHarga(Object.values(totalData).reduce((acc, curr) => acc + curr, 0));
+  };
+
   useEffect(() => {
     if (activeTab === 'dataMobil') {
-      fetch('/admin/datamobil')
-        .then((response) => response.json())
-        .then((data) => {
-          setMobilData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data mobil:', error);
-        });
+      fetchData('/admin/datamobil', setMobilData, () => {});
+    } else if (activeTab === 'dataPengguna') {
+      fetchData('/admin/datapengguna', setPenggunaData, () => {});
+    } else if (activeTab === 'dataBooking') {
+      fetchData('/admin/databooking', setBookingData, () => {});
+    } else if (activeTab === 'dataPegawai') {
+      fetchData('/admin/datapegawai', setKaryawanData, () => {});
+    } else if (activeTab === 'dataPembelian') {
+      fetchData('/admin/datapembelian', setPembelianData, processPembelianData);
+    } else if (activeTab === 'dataPenjualan') {
+      fetchData('/admin/datapenjualan', setPenjualanData, processPenjualanData);
     }
-
-      if (activeTab === 'dataPengguna') {
-      fetch('/admin/datapengguna')
-        .then((response) => response.json())
-        .then((data) => {
-          setPenggunaData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data pengguna:', error);
-        });
-    }
-
-    if (activeTab === 'dataBooking') {
-      fetch('/admin/databooking')
-        .then((response) => response.json())
-        .then((data) => {
-          setBookingData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data booking:', error);
-        });
-    }
-
-    if (activeTab === 'dataPegawai') {
-      fetch('/admin/datapegawai')
-        .then((response) => response.json())
-        .then((data) => {
-          setKaryawanData(data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data pegawai:', error);
-        });
-    }
-
-    if (activeTab === 'dataPembelian') {
-        fetch('/admin/datapembelian')
-          .then((response) => response.json())
-          .then((data) => {
-            setPembelianData(data);
-
-            const totalPembelianData = {};
-
-            // Mengumpulkan total harga pembelian untuk setiap bulan
-            for (let month = 1; month <= 12; month++) {
-              totalPembelianData[month] = data
-                .filter((item) => new Date(item.created_at).getMonth() + 1 === month)
-                .reduce((acc, curr) => acc + parseFloat(curr.harga), 0);
-            }
-
-            setMonthlyTotalPembelianData(totalPembelianData);
-            setChartTotalPembelian(Object.values(totalPembelianData).reduce((acc, curr) => acc + curr, 0));
-          })
-          .catch((error) => {
-            console.error('Error fetching data pembelian:', error);
-          });
-      }
+  }, [activeTab]);
 
 
-    if (activeTab === 'dataPenjualan') {
-        fetch('/admin/datapenjualan')
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Data Penjualan:', data);
-            setPenjualanData(data);
+  useEffect(() => {
+    // Fetch data penjualan tanpa harus menunggu tab di klik
+    fetch('/admin/datapenjualan')
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Data Penjualan:', data);
+        setPenjualanData(data);
 
-            const totalData = {};
+        const totalData = {};
 
-            // Mengumpulkan total harga untuk setiap bulan
-            for (let month = 1; month <= 12; month++) {
-              totalData[month] = data
-                .filter((item) => new Date(item.created_at).getMonth() + 1 === month)
-                .reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
-            }
+        // Mengumpulkan total harga untuk setiap bulan
+        for (let month = 1; month <= 12; month++) {
+          totalData[month] = data
+            .filter((item) => new Date(item.created_at).getMonth() + 1 === month)
+            .reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
+        }
 
-            console.log('Total Data:', totalData);
-            setMonthlyTotalData(totalData);
-            setChartTotalHarga(Object.values(totalData).reduce((acc, curr) => acc + curr, 0));
-          })
-          .catch((error) => {
-            console.error('Error fetching data penjualan:', error);
-          });
-      }
-    }, [activeTab]);
+        console.log('Total Data:', totalData);
+        setMonthlyTotalData(totalData);
+        setChartTotalHarga(Object.values(totalData).reduce((acc, curr) => acc + curr, 0));
+      })
+      .catch((error) => {
+        console.error('Error fetching data penjualan:', error);
+      });
 
-
-    const chartColors = [
-        'rgba(255, 99, 132, 0.4)',
-        'rgba(255, 159, 64, 0.4)',
-        'rgba(255, 205, 86, 0.4)',
-        'rgba(75, 192, 192, 0.4)',
-        'rgba(54, 162, 235, 0.4)',
-        'rgba(153, 102, 255, 0.4)',
-        'rgba(201, 203, 207, 0.4)',
-        'rgba(255, 99, 132, 0.4)',
-        'rgba(255, 159, 64, 0.4)',
-        'rgba(255, 205, 86, 0.4)',
-        'rgba(75, 192, 192, 0.4)',
-        'rgba(54, 162, 235, 0.4)',
-      ];
-
-
-    useEffect(() => {
-        // Fetch data penjualan tanpa harus menunggu tab di klik
-        fetch('/admin/datapenjualan')
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Data Penjualan:', data);
-            setPenjualanData(data);
-
-            const totalData = {};
-
-            // Mengumpulkan total harga untuk setiap bulan
-            for (let month = 1; month <= 12; month++) {
-              totalData[month] = data
-                .filter((item) => new Date(item.created_at).getMonth() + 1 === month)
-                .reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
-            }
-
-            console.log('Total Data:', totalData);
-            setMonthlyTotalData(totalData);
-            setChartTotalHarga(Object.values(totalData).reduce((acc, curr) => acc + curr, 0));
-          })
-          .catch((error) => {
-            console.error('Error fetching data penjualan:', error);
-          });
-      },fetch('/admin/datapembelian')
+    // Fetch data pembelian
+    fetch('/admin/datapembelian')
       .then((response) => response.json())
       .then((data) => {
         setPembelianData(data);
@@ -191,7 +132,25 @@ function AdminDashboard() {
       })
       .catch((error) => {
         console.error('Error fetching data pembelian:', error);
-      }), []);
+      });
+  }, []); // Empty dependency array to run the effect only once
+
+
+
+      const chartColors = [
+        'rgba(255, 99, 132, 0.4)',
+        'rgba(255, 159, 64, 0.4)',
+        'rgba(255, 205, 86, 0.4)',
+        'rgba(75, 192, 192, 0.4)',
+        'rgba(54, 162, 235, 0.4)',
+        'rgba(153, 102, 255, 0.4)',
+        'rgba(201, 203, 207, 0.4)',
+        'rgba(255, 99, 132, 0.4)',
+        'rgba(255, 159, 64, 0.4)',
+        'rgba(255, 205, 86, 0.4)',
+        'rgba(75, 192, 192, 0.4)',
+        'rgba(54, 162, 235, 0.4)',
+      ];
 
 
 

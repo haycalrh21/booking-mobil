@@ -39,7 +39,7 @@ Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobilleng
 
 
 // Role admin
-Route::group(['middleware' => ['role:admin,manager,supervisor']], function () {
+Route::group(['middleware' => ['role:admin,manager,supervisor ']], function () {
 
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/AdminDashboard');
@@ -62,8 +62,6 @@ Route::group(['middleware' => ['role:admin,manager,supervisor']], function () {
     Route::get('/admin/datamobil/{id}/edit', [MobilController::class, 'edit'])->name('mobil.edit');
     Route::put('admin/datamobil/{id}', [MobilController::class, 'update'])->name('mobil.update');
     Route::delete('admin/datamobil/{id}', [MobilController::class, 'destroy'])->name('mobil.delete');
-
-
 });
 
 

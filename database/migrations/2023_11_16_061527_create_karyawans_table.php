@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('nohp'); // Tambahkan kolom nomor telepon
             $table->text('alamat'); // Tambahkan kolom alamat
             $table->date('tanggal_lahir');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

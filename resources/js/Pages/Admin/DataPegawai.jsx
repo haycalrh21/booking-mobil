@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import EmployeeForm from '@/Pages/Admin/TambahPegawai';
@@ -7,17 +7,24 @@ function Karyawan({ karyawans }) {
   const [updatedPegawais, setUpdatedPegawais] = useState(karyawans || []);
   const [showForm, setShowForm] = useState(false);
 
+  // agar tampilan muncul
+  useEffect(() => {
+    setUpdatedPegawais(karyawans);
+  }, [karyawans]);
+
   const downloadPDF = () => {
     const pdf = new jsPDF();
 
     pdf.autoTable({
-      head: [['Nama', 'Jabatan', 'No. HP', 'Alamat', 'Tanggal Lahir']],
+      head: [['Nama', 'Jabatan', 'No. HP', 'Alamat', 'Tanggal Lahir', 'Email', 'Password']],
       body: updatedPegawais.map((karyawan) => [
         karyawan.nama,
         karyawan.jabatan,
         karyawan.nohp,
         karyawan.alamat,
         karyawan.tanggal_lahir,
+        karyawan.email,
+        karyawan.password,
       ]),
     });
 
@@ -31,17 +38,15 @@ function Karyawan({ karyawans }) {
   return (
     <div className='bg-gray-800'>
       <div className="flex flex-col items-center">
-
         <div className="bg-dark p-4 rounded-lg w-full">
-        <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
-              Data Pegawai
-
-            </h1>
+          <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
+            Data Pegawai
+          </h1>
 
           <button onClick={toggleForm} className="btn p-2 m-3">
-          Tambah Karyawan
-        </button>
-        <button onClick={downloadPDF} className="btn p-2 m-3">
+            Tambah Karyawan
+          </button>
+          <button onClick={downloadPDF} className="btn p-2 m-3">
             Download as PDF
           </button>
           <table className="min-w-full table-fixed border border-white">
@@ -52,6 +57,8 @@ function Karyawan({ karyawans }) {
                 <th className="border-b-2 p-2 text-left">No. HP</th>
                 <th className="border-b-2 p-2 text-left">Alamat</th>
                 <th className="border-b-2 p-2 text-left">Tanggal Lahir</th>
+                <th className="border-b-2 p-2 text-left">Email</th>
+                <th className="border-b-2 p-2 text-left">Password</th>
               </tr>
             </thead>
             <tbody>
@@ -62,11 +69,12 @@ function Karyawan({ karyawans }) {
                   <td className="border-b p-2 text-left">{karyawan.nohp}</td>
                   <td className="border-b p-2 text-left">{karyawan.alamat}</td>
                   <td className="border-b p-2 text-left">{karyawan.tanggal_lahir}</td>
+                  <td className="border-b p-2 text-left">{karyawan.email}</td>
+                  <td className="border-b p-2 text-left">{karyawan.password}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-
         </div>
         {showForm && <EmployeeForm />}
       </div>

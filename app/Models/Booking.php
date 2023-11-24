@@ -10,7 +10,7 @@ class Booking extends Model
 
     public $incrementing = false;
 
-    protected $fillable =['id','namaPemesan','email','nomorHape','kodeMobil','message','tanggal'];
+    protected $fillable =['id','namaPemesan','email','nomorHape','kodeMobil','message','tanggal','waktu'];
 
 
     public function mobil()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Log;
+use App\Models\Mobil;
 use App\Models\Booking;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
@@ -36,36 +37,47 @@ class PenjualanController extends Controller
 
 
     public function create(Request $request)
-    {
-        info('Request received:', $request->all());
+{
+    info('Request received:', $request->all());
 
-        $penjualan = new Penjualan([
-            'booking_id' => $request->input('bookingId'),
-            'namaPemesan' => $request->input('namaPemesan'),
-            'email' => $request->input('email'),
-            'nomorHape' => $request->input('nomorHape'),
-            'kodeMobil' => $request->input('kodeMobil'),
-            'message' => $request->input('message'),
-            'tanggal' => $request->input('tanggal'),
-        ]);
+    $penjualan = new Penjualan([
+        'booking_id' => $request->input('bookingId'),
+        'namaPemesan' => $request->input('namaPemesan'),
+        'email' => $request->input('email'),
+        'nomorHape' => $request->input('nomorHape'),
+        'kodeMobil' => $request->input('kodeMobil'),
+        'message' => $request->input('message'),
+        'tanggal' => $request->input('tanggal'),
+    ]);
 
-        info('Penjualan data:', $penjualan->toArray());
+    info('Penjualan data:', $penjualan->toArray());
 
-        try {
-            // Simpan data ke dalam database
-            $penjualan->save();
+    try {
+        // Simpan data ke dalam database
+        $penjualan->save();
 
-            info('Penjualan saved successfully.');
+        // Kurangi stok mobil
+        $mobil = Mobil::find($request->input('kodeMobil'));
 
-            // Tambahkan respons yang sesuai, misalnya:
-            return response()->json(['message' => 'Penjualan berhasil disimpan'], 200);
-        } catch (\Exception $e) {
-            // Log atau tangani pengecualian
-
-
-            // Tambahkan respons yang sesuai untuk menanggapi kesalahan
-            return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data'], 500);
+        if ($mobil) {
+            $mobil->stok -= 1; // Kurangi stok satu unit
+            $mobil->save();
+            info('Stok mobil berhasil dikurangi.');
+        } else {
+            // Handle jika mobil tidak ditemukan
+            info('Mobil not found.');
         }
+
+        info('Penjualan saved successfully.');
+
+        // Tambahkan respons yang sesuai, misalnya:
+        return response()->json(['message' => 'Penjualan berhasil disimpan'], 200);
+    } catch (\Exception $e) {
+        // Log atau tangani pengecualian
+
+        // Tambahkan respons yang sesuai untuk menanggapi kesalahan
+        return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data'], 500);
     }
+}
 
 }

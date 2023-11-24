@@ -1,5 +1,8 @@
 import React, { useRef, useState } from 'react';
 
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+
 const Databooking = ({ bookings }) => {
   const tableRef = useRef();
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -20,6 +23,8 @@ const Databooking = ({ bookings }) => {
   const handleEndDateChange = (event) => {
     setSelectedEndDate(event.target.value);
   };
+
+
   const handleConfirm = (booking) => {
     const formData = new FormData();
     formData.append('bookingId', booking.id);
@@ -34,8 +39,46 @@ const Databooking = ({ bookings }) => {
     fetch('/admin/datapenjualan/tambah', {
       method: 'POST',
       body: formData,
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Tampilkan SweetAlert 2 sesuai dengan respons dari server
+        Swal.fire({
+            title: 'Konfirmasi',
+            text: 'Anda yakin ingin mengkonfirmasi data ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Lakukan sesuatu jika pengguna menekan tombol Ya
+              Swal.fire({
+                title: 'Konfirmasi Berhasil!',
+                text: 'Data telah dikonfirmasi.',
+                icon: 'success',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+              });
+            } else {
+              // Lakukan sesuatu jika pengguna menekan tombol Tidak
+              Swal.fire({
+                title: 'Konfirmasi Dibatalkan',
+                text: 'Anda membatalkan konfirmasi data.',
+                icon: 'info',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'OK',
+              });
+            }
+          });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   };
+
 
   return (
     <div className='bg-gray-800'>
@@ -43,7 +86,7 @@ const Databooking = ({ bookings }) => {
               Data Pemesan
 
             </h1>
-    <div>
+    <div style={{ marginBottom:'20px' }}>
       <label>Pilih Tanggal Awal: </label>
       <input type="date" onChange={handleStartDateChange} />
       <label>Pilih Tanggal Akhir: </label>
@@ -58,6 +101,7 @@ const Databooking = ({ bookings }) => {
           <th style={{ border: '1px solid white' }}>Nomor Hape</th>
           <th style={{ border: '1px solid white' }}>Kode Mobil</th>
           <th style={{ border: '1px solid white' }}>Tanggal Pemesanan</th>
+          <th style={{ border: '1px solid white' }}>Waktu Pemesanan</th>
           <th style={{ border: '1px solid white' }}>Message</th>
           <th style={{ border: '1px solid white' }}>Aksi</th>
         </tr>
@@ -70,10 +114,11 @@ const Databooking = ({ bookings }) => {
             <td style={{ border: '1px solid white' }}>{booking.email}</td>
             <td style={{ border: '1px solid white' }}>{booking.nomorHape}</td>
             <td style={{ border: '1px solid white' }}>{booking.kodeMobil}</td>
+            <td style={{ border: '1px solid white' }}>{booking.waktu}</td>
             <td style={{ border: '1px solid white' }}>{booking.tanggal}</td>
             <td style={{ border: '1px solid white' }}>{booking.message}</td>
             <td style={{ border: '1px solid white' }}>
-              <button onClick={() => handleConfirm(booking)}  className='btn' style={{ width: '50%', padding: '8px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Konfirmasi</button>
+              <button onClick={() => handleConfirm(booking)}  className='btn' style={{ width: 'auto', padding: '8px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Konfirmasi</button>
             </td>
           </tr>
         ))}

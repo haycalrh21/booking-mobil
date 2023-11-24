@@ -41,6 +41,7 @@ public function store(Request $request)
         'kodeMobil' => 'required',
         'message' => 'required',
         'tanggal' => 'required|date',
+        'waktu' => 'required|date_format:H:i'
     ]);
 
     // Generate ID unik berdasarkan timestamp dan beberapa karakter acak
@@ -59,7 +60,8 @@ public function store(Request $request)
         'nomorHape' => $request->nomorHape,
         'kodeMobil' => $request->kodeMobil,
         'message' => $request->message,
-        'tanggal' => $request->tanggal, // Set 'tanggal' to the current date in 'YYYY-MM-DD' format
+        'tanggal' => $request->tanggal,
+        'waktu' => $request->waktu,
     ]);
 
     // Redirect ke halaman yang sesuai setelah penyimpanan sukses

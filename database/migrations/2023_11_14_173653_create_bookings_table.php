@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kodeMobil'); // Ini adalah kunci asing ke tabel mobils
             $table->text('message')->nullable();
             $table->timestamps();
+            $table->time('waktu');
             $table->date('tanggal');
             // $table->foreign('kodeMobil')->references('id')->on('mobils'); // Menambahkan kunci asing ke tabel mobils
         });
