@@ -37,53 +37,50 @@ const Databooking = ({ bookings }) => {
     });
   };
 
-
-
-
-
-
-
   return (
     <div className='bg-gray-800'>
-      <h2>Data Booking</h2>
-      <div>
-        <label>Pilih Tanggal Awal: </label>
-        <input type="date" onChange={handleStartDateChange} />
-        <label>Pilih Tanggal Akhir: </label>
-        <input type="date" onChange={handleEndDateChange} />
-      </div>
-      <table className="table" ref={tableRef}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nama Pemesan</th>
-            <th>Email</th>
-            <th>Nomor Hape</th>
-            <th>Kode Mobil</th>
-            <th>Tanggal Pemesanan</th>
-            <th>Message</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredBookings.map((booking) => (
-            <tr key={booking.id}>
-              <td>{booking.id}</td>
-              <td>{booking.namaPemesan}</td>
-              <td>{booking.email}</td>
-              <td>{booking.nomorHape}</td>
-              <td>{booking.kodeMobil}</td>
-              <td>{booking.tanggal}</td>
-              <td>{booking.message}</td>
-              <td>
-                <button onClick={() => handleConfirm(booking)}>Konfirmasi</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
+              Data Pemesan
+
+            </h1>
+    <div>
+      <label>Pilih Tanggal Awal: </label>
+      <input type="date" onChange={handleStartDateChange} />
+      <label>Pilih Tanggal Akhir: </label>
+      <input type="date" onChange={handleEndDateChange} />
     </div>
-  );
+    <table className="table" ref={tableRef} style={{ borderCollapse: 'collapse', width: '100%' }}>
+      <thead>
+        <tr>
+          <th style={{ border: '1px solid white' }}>ID</th>
+          <th style={{ border: '1px solid white' }}>Nama Pemesan</th>
+          <th style={{ border: '1px solid white' }}>Email</th>
+          <th style={{ border: '1px solid white' }}>Nomor Hape</th>
+          <th style={{ border: '1px solid white' }}>Kode Mobil</th>
+          <th style={{ border: '1px solid white' }}>Tanggal Pemesanan</th>
+          <th style={{ border: '1px solid white' }}>Message</th>
+          <th style={{ border: '1px solid white' }}>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        {filteredBookings.map((booking) => (
+          <tr key={booking.id}>
+            <td style={{ border: '1px solid white' }}>{booking.id}</td>
+            <td style={{ border: '1px solid white' }}>{booking.namaPemesan}</td>
+            <td style={{ border: '1px solid white' }}>{booking.email}</td>
+            <td style={{ border: '1px solid white' }}>{booking.nomorHape}</td>
+            <td style={{ border: '1px solid white' }}>{booking.kodeMobil}</td>
+            <td style={{ border: '1px solid white' }}>{booking.tanggal}</td>
+            <td style={{ border: '1px solid white' }}>{booking.message}</td>
+            <td style={{ border: '1px solid white' }}>
+              <button onClick={() => handleConfirm(booking)}  className='btn' style={{ width: '50%', padding: '8px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Konfirmasi</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 };
 
 export default Databooking;

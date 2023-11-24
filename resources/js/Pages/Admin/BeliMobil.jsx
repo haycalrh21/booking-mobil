@@ -108,7 +108,7 @@ const BeliMobil = ({ onSubmit }) => {
         {errors.kategori && <div className="text-red-500">{errors.kategori}</div>}
       </div><br></br>
       <div>
-        <button type="submit" style={{ width: '100%', padding: '8px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Beli Mobil</button>
+        <button type="submit" className="btn" style={{ width: '100%', padding: '8px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Beli Mobil</button>
       </div>
     </form>
   );

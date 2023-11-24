@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Paginator } from '@/Pages/admin/Paginator';
 
-const DataPenjualan = ({ penjualan,onMonthSelect }) => {
+const DataPenjualan = ({ penjualan, onMonthSelect }) => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalHarga, setTotalHarga] = useState(0);
@@ -12,7 +12,7 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
 
   const getCurrentPageData = () => {
     const filteredData = selectedMonth
-      ? penjualan.filter(data => new Date(data.created_at).getMonth() === parseInt(selectedMonth, 10) - 1)
+      ? penjualan.filter((data) => new Date(data.created_at).getMonth() === parseInt(selectedMonth, 10) - 1)
       : penjualan;
 
     return filteredData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -20,7 +20,7 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
 
   const calculateTotalPages = () => {
     const filteredData = selectedMonth
-      ? penjualan.filter(data => new Date(data.created_at).getMonth() === parseInt(selectedMonth, 10) - 1)
+      ? penjualan.filter((data) => new Date(data.created_at).getMonth() === parseInt(selectedMonth, 10) - 1)
       : penjualan;
 
     setTotalPages(Math.ceil(filteredData.length / itemsPerPage));
@@ -42,7 +42,6 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
     }
   };
 
-
   useEffect(() => {
     // Calculate total harga for the current page
     const totalPrice = getCurrentPageData().reduce((acc, curr) => acc + parseFloat(curr.hargaMobil), 0);
@@ -56,8 +55,13 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
 
   return (
     <div className='bg-gray-800'>
-     <label>Pilih Bulan: </label>
-    <select onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
+            <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
+              Data Penjualan
+
+            </h1>
+
+      <label>Pilih Bulan: </label>
+      <select onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
         <option value="">Semua Bulan</option>
         <option value="01">Januari</option>
         <option value="02">Februari</option>
@@ -73,29 +77,28 @@ const DataPenjualan = ({ penjualan,onMonthSelect }) => {
         <option value="12">Desember</option>
         {/* Tambahkan opsi untuk bulan-bulan lainnya */}
       </select>
-      <h2>Data Penjualan</h2>
-      <table className="table">
+      <table className="min-w-full table border border-white">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Booking ID</th>
-            <th>Nama Pemesan</th>
-            <th>Email</th>
-            <th>Kode Mobil</th>
-            <th>Harga Mobil</th>
-            <th>Tanggal Konfirmasi Penjualan</th>
+            <th className="border-b border-r p-2 text-left">ID</th>
+            <th className="border-b border-r p-2 text-left">Booking ID</th>
+            <th className="border-b border-r p-2 text-left">Nama Pemesan</th>
+            <th className="border-b border-r p-2 text-left">Email</th>
+            <th className="border-b border-r p-2 text-left">Kode Mobil</th>
+            <th className="border-b border-r p-2 text-left">Harga Mobil</th>
+            <th className="border-b border-r p-2 text-left">Tanggal Konfirmasi Penjualan</th>
           </tr>
         </thead>
         <tbody>
           {getCurrentPageData().map((data) => (
             <tr key={data.id}>
-              <td>{data.id}</td>
-              <td>{data.booking_id}</td>
-              <td>{data.namaPemesan}</td>
-              <td>{data.email}</td>
-              <td>{data.kodeMobil}</td>
-              <td>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.hargaMobil)}</td>
-              <td>{new Date(data.created_at).toLocaleString()}</td>
+              <td className="border-b border-r p-2 text-left">{data.id}</td>
+              <td className="border-b border-r p-2 text-left">{data.booking_id}</td>
+              <td className="border-b border-r p-2 text-left">{data.namaPemesan}</td>
+              <td className="border-b border-r p-2 text-left">{data.email}</td>
+              <td className="border-b border-r p-2 text-left">{data.kodeMobil}</td>
+              <td className="border-b border-r p-2 text-left">{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(data.hargaMobil)}</td>
+              <td className="border-b border-r p-2 text-left">{new Date(data.created_at).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>

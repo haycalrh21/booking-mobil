@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Models\Mobil;
 use Illuminate\Http\Request;
 
+
 class MobilController extends Controller
 {
 
@@ -115,7 +116,11 @@ protected function generateUniqueId()
      */
     public function edit(string $id)
     {
-        //
+        $mobil = Mobil::findOrFail($id);
+
+        return Inertia::render('Admin/Editmobil', [
+            'mobil' => $mobil,
+        ]);
     }
 
     /**
@@ -123,14 +128,75 @@ protected function generateUniqueId()
      */
     public function update(Request $request, string $id)
     {
-        //
+        $mobil = Mobil::findOrFail($id);
+
+        $request->validate([
+            'nama' => 'required|string',
+            'brand' => 'required|string',
+            'harga' => 'required',
+            'tahun' => 'required',
+            'stok' => 'required',
+            'pajak' => 'required',
+            'deskripsi' => 'required',
+            'kategori' => 'required',
+            'images.*' => 'image|mimes:png,jpg,jpeg|max:2048',
+        ]);
+
+        // Handle gambar jika ada yang diunggah
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+
+            foreach ($request->file('images') as $index => $image) {
+                $imagePath = $image->store('product', 'public');
+                $imagePaths[] = ['path' => $imagePath];
+            }
+
+            // Log untuk memastikan bahwa gambar benar-benar terkirim
+
+
+            // Hapus gambar lama setelah gambar baru terunggah dan diverifikasi
+            $mobil->images()->delete();
+
+            // Tambahkan gambar baru
+            $mobil->images()->createMany($imagePaths);
+        }
+
+        // Selain itu, update data mobil yang lain
+        $mobil->update([
+            'nama' => $request['nama'],
+            'brand' => $request['brand'],
+            'harga' => $request['harga'],
+            'tahun' => $request['tahun'],
+            'stok' => $request['stok'],
+            'pajak' => $request['pajak'],
+            'deskripsi' => $request['deskripsi'],
+            'kategori' => $request['kategori'],
+        ]);
+
+        return redirect()->route('adasds')->with('success', 'Data mobil berhasil diperbarui.');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        // Lakukan operasi penghapusan data berdasarkan ID
+        // Contoh:
+        $mobil = Mobil::find($id);
+
+        if (!$mobil) {
+            // Handle jika data tidak ditemukan
+            return redirect()->back()->with('error', 'Data not found.');
+        }
+
+        $mobil->delete();
+
+        // Redirect atau kirim respons sesuai kebutuhan aplikasi Anda
+        return redirect()->back()->with('success', 'Data deleted successfully.');
     }
+
+
 }

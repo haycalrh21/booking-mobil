@@ -59,6 +59,9 @@ Route::group(['middleware' => ['role:admin,manager,supervisor']], function () {
     Route::get('/admin/datapenjualan', [PenjualanController::class, 'index'])->name('datapenjualan');
     Route::post('/admin/belimobil', [PembelianController::class, 'store'])->name('belimobil');
     Route::get('/admin/datapembelian', [PembelianController::class, 'index'])->name('datapembelian');
+    Route::get('/admin/datamobil/{id}/edit', [MobilController::class, 'edit'])->name('mobil.edit');
+    Route::put('admin/datamobil/{id}', [MobilController::class, 'update'])->name('mobil.update');
+    Route::delete('admin/datamobil/{id}', [MobilController::class, 'destroy'])->name('mobil.delete');
 
 
 });

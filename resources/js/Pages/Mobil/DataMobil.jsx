@@ -5,10 +5,12 @@ import { Link } from '@inertiajs/react';
 import html2pdf from 'html2pdf.js'; // Make sure to import html2pdf.js
 import { Paginator } from '@/Pages/admin/Paginator';
 import html2canvas from 'html2canvas';
+import { InertiaLink } from '@inertiajs/inertia-react';
+
 
 export function DataMobil({ mobils, pagination }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const itemsPerPage = 3;
+  const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [previousPage, setPreviousPage] = useState(null);
   const totalPages = Math.ceil(mobils.length / itemsPerPage);
@@ -78,77 +80,84 @@ export function DataMobil({ mobils, pagination }) {
   return (
     <div>
       <div className="flex">
-        <div className="w-1/1"></div>
-        <div className="bg-gray-800 p-8 rounded-lg w-full flex flex-wrap">
-          <div className="w-full md:container md:mx-auto">
-            <h1 className="text-3xl font-semibold">
-              Data Mobil{' '}
-              <Link href={route('mobil.create')} className="btn p-2 m-3">
+
+        <div className="bg-gray-800 p-1 rounded-lg w-full flex flex-wrap">
+          <div >
+            <h1 className="text-3xl font-semibold text-center">
+              Data Mobil
+            </h1>
+            <Link href={route('mobil.create')} className="btn p-2 m-3">
                 Create data
               </Link>
               <button onClick={downloadPDF} className="btn p-2 m-3">
                 Download as PDF
               </button>
-            </h1>
-            <div id="table-container">
-                <table className="" style={{ marginTop: '10px' }}>
-                    <thead>
-                    <tr>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px', width: '500px' }}>Deskripsi</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
-                        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {Array.isArray(getCurrentPageData()) ? (
-                        getCurrentPageData().map((mobil) => (
-                        <tr key={mobil.id}>
-                            <td className="border text-left" style={{ padding: '10px' }}>{mobil.id}</td>
-                            <td className="border text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
-                            <td className="border text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
-                            <td className="border text-left" style={{ padding: '10px' }}>{formatRupiah(mobil.harga)}</td>
-                            <td className="border text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
-                            <td className="border text-left" style={{ padding: '10px' }}>{mobil.pajak}</td>
-                            <td className="border text-left" style={{ padding: '10px' }}>
-                            {mobil.deskripsi}
-                            </td>
+              <div id="table-container">
+  <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%' }}>
+    <thead>
+      <tr>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px', width: '500px' }}>Deskripsi</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {Array.isArray(getCurrentPageData()) ? (
+        getCurrentPageData().map((mobil) => (
+          <tr key={mobil.id}>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.id}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{formatRupiah(mobil.harga)}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.pajak}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.deskripsi}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>
+              <div style={{ display: 'flex' }}>
+                {mobil.images && mobil.images.length > 0 ? (
+                  mobil.images.map((image) => (
+                    <img
+                      key={image.id}
+                      src={`/storage/${image.path}`}
+                      alt={mobil.nama}
+                      style={{ maxWidth: '50px', maxHeight: '50px' }}
+                    />
+                  ))
+                ) : (
+                  <span>No Image</span>
+                )}
+              </div>
+            </td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>
+              <div className='flex gap-1' >
+              <Link href={route('mobil.edit', { id: mobil.id })} className='btn'>Edit</Link>
+              <InertiaLink
+  href={route('mobil.delete', { id: mobil.id })}
+  method="delete"
+  as="button"
+  className='btn'
+>
+  Delete
+</InertiaLink>
 
-                            <td className="border text-left" style={{ padding: '10px' }}>
-                            <div style={{ display: 'flex' }}>
-                                {mobil.images && mobil.images.length > 0 ? (
-                                mobil.images.map((image) => (
-                                    <img
-                                    key={image.id}
-                                    src={`/storage/${image.path}`}
-                                    alt={mobil.nama}
-                                    style={{ maxWidth: '150px', maxHeight: '100px' }}
-                                    />
-                                ))
-                                ) : (
-                                <span>No Image</span>
-                                )}
-                            </div>
-                            </td>
-                            <td className="border text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
-                        </tr>
-                        ))
-                    ) : (
-                        <tr>
-                        <td className="border text-left" colSpan="8">
-                            Tidak ada data yang ditemukan
-                        </td>
-                        </tr>
-                    )}
-                    </tbody>
-                </table>
 
-            </div>
+              </div>
+            </td>
+          </tr>
+        ))
+      ) : null}
+    </tbody>
+  </table>
+</div>
+
             {canGoNext && (
                 <Paginator
                   currentPage={currentPage}
