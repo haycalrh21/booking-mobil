@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     public $incrementing = false;
 
-    protected $fillable = ['name', 'email', 'password', 'isAdmin'];
+    protected $fillable = ['id','role','name', 'email', 'password', 'isAdmin'];
 
     /**
      * The attributes that should be hidden for serialization.

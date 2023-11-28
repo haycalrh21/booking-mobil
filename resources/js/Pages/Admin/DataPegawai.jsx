@@ -7,7 +7,7 @@ function Karyawan({ karyawans }) {
   const [updatedPegawais, setUpdatedPegawais] = useState(karyawans || []);
   const [showForm, setShowForm] = useState(false);
 
-  // agar tampilan muncul
+  // To update the component when karyawans change
   useEffect(() => {
     setUpdatedPegawais(karyawans);
   }, [karyawans]);
@@ -16,15 +16,11 @@ function Karyawan({ karyawans }) {
     const pdf = new jsPDF();
 
     pdf.autoTable({
-      head: [['Nama', 'Jabatan', 'No. HP', 'Alamat', 'Tanggal Lahir', 'Email', 'Password']],
+      head: [['Nama', 'Email', 'Role']], // Adjusted column headers
       body: updatedPegawais.map((karyawan) => [
-        karyawan.nama,
-        karyawan.jabatan,
-        karyawan.nohp,
-        karyawan.alamat,
-        karyawan.tanggal_lahir,
+        karyawan.name, // Adjusted field names
         karyawan.email,
-        karyawan.password,
+        karyawan.role,
       ]),
     });
 
@@ -39,7 +35,7 @@ function Karyawan({ karyawans }) {
     <div className='bg-gray-800'>
       <div className="flex flex-col items-center">
         <div className="bg-dark p-4 rounded-lg w-full">
-          <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
+          <h1 className="text-3xl font-semibold text-center" style={{ marginTop: '10px' }}>
             Data Pegawai
           </h1>
 
@@ -53,24 +49,16 @@ function Karyawan({ karyawans }) {
             <thead>
               <tr>
                 <th className="border-b-2 p-2 text-left">Nama</th>
-                <th className="border-b-2 p-2 text-left">Jabatan</th>
-                <th className="border-b-2 p-2 text-left">No. HP</th>
-                <th className="border-b-2 p-2 text-left">Alamat</th>
-                <th className="border-b-2 p-2 text-left">Tanggal Lahir</th>
                 <th className="border-b-2 p-2 text-left">Email</th>
-                <th className="border-b-2 p-2 text-left">Password</th>
+                <th className="border-b-2 p-2 text-left">Role</th>
               </tr>
             </thead>
             <tbody>
               {updatedPegawais.map((karyawan) => (
                 <tr key={karyawan.id}>
-                  <td className="border-b p-2 text-left">{karyawan.nama}</td>
-                  <td className="border-b p-2 text-left">{karyawan.jabatan}</td>
-                  <td className="border-b p-2 text-left">{karyawan.nohp}</td>
-                  <td className="border-b p-2 text-left">{karyawan.alamat}</td>
-                  <td className="border-b p-2 text-left">{karyawan.tanggal_lahir}</td>
+                  <td className="border-b p-2 text-left">{karyawan.name}</td>
                   <td className="border-b p-2 text-left">{karyawan.email}</td>
-                  <td className="border-b p-2 text-left">{karyawan.password}</td>
+                  <td className="border-b p-2 text-left">{karyawan.role}</td>
                 </tr>
               ))}
             </tbody>

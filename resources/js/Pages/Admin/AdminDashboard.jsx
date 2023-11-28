@@ -11,7 +11,7 @@ import { Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 
 
-function AdminDashboard() {
+function dashboard(role) {
   const [activeTab, setActiveTab] = useState('');
   const [mobilData, setMobilData] = useState([]);
   const [penggunaData, setPenggunaData] = useState([]);
@@ -26,6 +26,7 @@ function AdminDashboard() {
   const [monthlyTotalPembelianData, setMonthlyTotalPembelianData] = useState([]);
 
 
+  const apebetulrolenyeitu = role.auth.user.role;
   const handleTabClick = (tab) => {
     if (tab === activeTab) {
       setActiveTab('');
@@ -223,30 +224,39 @@ function AdminDashboard() {
 
 
       <div className="tabs">
+
+        {apebetulrolenyeitu === 'manager' ? null : (
         <a
           className={`tab tab-bordered ${activeTab === 'dataMobil' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataMobil')}
         >
           Data Mobil
         </a>
+        )}
+        {apebetulrolenyeitu === 'manager' ? null :(
         <a
           className={`tab tab-bordered ${activeTab === 'dataPengguna' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPengguna')}
         >
           Data Pengguna
         </a>
+        )}
+        {apebetulrolenyeitu === 'manager' ? null :(
         <a
           className={`tab tab-bordered ${activeTab === 'dataBooking' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataBooking')}
         >
           Data Pemesan
         </a>
+        )}
+       {apebetulrolenyeitu === 'sales' ? null : (
         <a
           className={`tab tab-bordered ${activeTab === 'dataPegawai' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPegawai')}
         >
           Data Pegawai
         </a>
+        )}
         <a
           className={`tab tab-bordered ${activeTab === 'dataPenjualan' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPenjualan')}
@@ -259,6 +269,7 @@ function AdminDashboard() {
         >
           Data Pembelian
         </a>
+
       </div>
       {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} />}
       {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} />}
@@ -295,4 +306,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default dashboard;

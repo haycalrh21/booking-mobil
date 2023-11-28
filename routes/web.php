@@ -39,7 +39,7 @@ Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobilleng
 
 
 // Role admin
-Route::group(['middleware' => ['role:admin,manager,supervisor ']], function () {
+Route::group(['middleware' => ['role:admin,manager,sales']], function () {
 
     Route::get('/admin/dashboard', function () {
         return Inertia::render('Admin/AdminDashboard');

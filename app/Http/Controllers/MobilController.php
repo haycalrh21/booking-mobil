@@ -173,7 +173,7 @@ protected function generateUniqueId()
             'kategori' => $request['kategori'],
         ]);
 
-        return redirect()->route('adasds')->with('success', 'Data mobil berhasil diperbarui.');
+        return redirect()->route('admin.dashboard')->with('success', 'Data mobil berhasil diperbarui.');
     }
 
 

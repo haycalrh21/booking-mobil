@@ -8,11 +8,18 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    // public function dashboard()
+    // {
+    //     return Inertia::render('Admin/AdminDashboard');
+    // }
+    // ini kalo mau pake controller di admindashboard ubah web.php nya biar rendering lewat controller
+
+
     public function dataPengguna()
     {
         // $users = User::where('role', 'user')->get();
-$users= User::all();
-return response()->json($users);
+    $users= User::all();
+    return response()->json($users);
 
 
     }

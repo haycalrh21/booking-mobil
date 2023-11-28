@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
             $user = Auth::user();
             switch ($user->role) {
                 case 'admin':
-                case 'supervisor':
+                case 'sales':
                 case 'manager':
 
                     return redirect()->route('admin.dashboard');

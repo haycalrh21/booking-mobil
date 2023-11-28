@@ -64,14 +64,17 @@ export const Navbar = () => {
           <ul className="justify-center items-center space-y-6 md:flex md:space-x-6 md:space-y-0">
             {auth.user ? (
               <>
-                <Link style={{ color: '#ffffff' }} href={linkToHome}>Beranda</Link>
-                <Link style={{ color: '#ffffff' }} href={route('datamobillengkap')}>Mobil</Link>
-                <Link style={{ color: '#ffffff' }} href={route('bookings')}>Riwayat</Link>
+                <Link className='hover:link' style={{ color: '#ffffff'  }} href={linkToHome}>Beranda</Link>
+                <Link className='hover:link' style={{ color: '#ffffff' }} href={route('datamobillengkap')}>Mobil</Link>
+                { auth.user.role === 'sales' ? null :(
+                <Link className='hover:link' style={{ color: '#ffffff' }} href={route('bookings')}>Riwayat</Link>
+                )}
+
               </>
             ) : (
               <>
-                <Link className='inline-flex justify-center absolute right-9 mb-2 w-28 h-8 round-md shadow-lg bg-white ring-2 ring-black ring-opacity-9' style={{ color: '#048853', fontWeight: 900, fontSize: '16px', paddingTop: '5px', theme: '' }} href={route('login')}>MASUK</Link>
-                <Link className='inline-flex justify-center absolute right-9 mb-2 w-28 h-8 ' href={route('register')} style={{ color: '#ffffff', fontWeight: 500, fontSize: '16px', paddingTop: '2px', right: '200px' }}>DAFTAR</Link>
+                <Link className='hover:link inline-flex justify-center absolute right-9 mb-2 w-28 h-8 round-md shadow-lg bg-white ring-2 ring-black ring-opacity-9' style={{ color: '#048853', fontWeight: 900, fontSize: '16px', paddingTop: '5px', theme: '' }} href={route('login')}>MASUK</Link>
+                <Link className='hover:link inline-flex justify-center absolute right-9 mb-2 w-28 h-8 ' href={route('register')} style={{ color: '#ffffff', fontWeight: 500, fontSize: '16px', paddingTop: '2px', right: '200px' }}>DAFTAR</Link>
               </>
             )}
           </ul>
@@ -92,8 +95,11 @@ export const Navbar = () => {
                 </div>
                 {dropdownOpen && (
                   <div className="origin-top-right absolute right-2 mt-2 w-35 rounded-md shadow-lg bg-white ring-0 ring-opacity-0">
-                    <div className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" role="none">
-                      <Link href={route('logout')} method="post">Logout</Link>
+                    <div className="w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" role="none">
+                     <Link href={route('logout')} method="post">Logout</Link>
+                      { auth.user.role === 'user' ? null :(
+                      <a className='btn btn-sm'style={{backgroundColor:"green" , color:"#0000f"}} href="admin/dashboard" method="post" as="button"> MODE_ADMIN</a>
+                )}
                     </div>
                   </div>
                 )}
