@@ -36,48 +36,47 @@ const Databooking = ({ bookings }) => {
     formData.append('tanggal', booking.tanggal);
 
     // Kirim permintaan ke server untuk menyimpan data ke dalam database
-    fetch('/admin/datapenjualan/tambah', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
         // Tampilkan SweetAlert 2 sesuai dengan respons dari server
         Swal.fire({
-            title: 'Konfirmasi',
-            text: 'Anda yakin ingin mengkonfirmasi data ini?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak',
-          }).then((result) => {
-            if (result.isConfirmed) {
-              // Lakukan sesuatu jika pengguna menekan tombol Ya
-              Swal.fire({
-                title: 'Konfirmasi Berhasil!',
-                text: 'Data telah dikonfirmasi.',
-                icon: 'success',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
+          title: 'Konfirmasi',
+          text: 'Anda yakin ingin mengkonfirmasi data ini?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Ya',
+          cancelButtonText: 'Tidak',
+        }).then((result) => {
+            // if (data === 'errornih') {
+
+            //     console.log(data);
+
+            //   }
+          if (result.isConfirmed) {
+            // Lakukan sesuatu jika pengguna menekan tombol Ya
+            // ...
+            // Setelah sukses, kirim permintaan ke server untuk menghapus data pemesan
+            fetch('/admin/datapenjualan/tambah', {
+                method: 'POST',
+                body: formData,
+              })
+              .catch((deleteError) => {
+                console.error('Error deleting data:', deleteError);
               });
-            } else {
-              // Lakukan sesuatu jika pengguna menekan tombol Tidak
-              Swal.fire({
-                title: 'Konfirmasi Dibatalkan',
-                text: 'Anda membatalkan konfirmasi data.',
-                icon: 'info',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-              });
-            }
-          });
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+          } else {
+            // Lakukan sesuatu jika pengguna menekan tombol Tidak
+            Swal.fire({
+              title: 'Konfirmasi Dibatalkan',
+              text: 'Anda membatalkan konfirmasi data.',
+              icon: 'info',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'OK',
+            });
+          }
+        });
+
   };
+
 
 
   return (
@@ -100,8 +99,8 @@ const Databooking = ({ bookings }) => {
           <th style={{ border: '1px solid white' }}>Email</th>
           <th style={{ border: '1px solid white' }}>Nomor Hape</th>
           <th style={{ border: '1px solid white' }}>Kode Mobil</th>
-          <th style={{ border: '1px solid white' }}>Tanggal Pemesanan</th>
           <th style={{ border: '1px solid white' }}>Waktu Pemesanan</th>
+          <th style={{ border: '1px solid white' }}>Tanggal Pemesanan</th>
           <th style={{ border: '1px solid white' }}>Message</th>
           <th style={{ border: '1px solid white' }}>Aksi</th>
         </tr>

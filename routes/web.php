@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StokController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
@@ -46,16 +47,19 @@ Route::group(['middleware' => ['role:admin,manager,sales']], function () {
     })->name('admin.dashboard');
     Route::get('/admin/datapengguna', [AdminController::class, 'dataPengguna'])->name('datapengguna');
     Route::get('/admin/datamobil', [MobilController::class, 'datamobil'])->name('datamobil');
+    Route::get('/admin/datastok', [StokController::class, 'datastok'])->name('datastok');
     Route::get('/admin/mobil/tambahmobil', [MobilController::class, 'create'])->name('mobil.create');
     // Route::post('/mobil', [MobilController::class, 'store'])->name('mobil.store');
     Route::put('/change-role/{userId}', [AdminController::class, 'changeRole'])->name('change-role');
     Route::get('/admin/databooking', [BookingController::class, 'index'])->name('databooking');
+    Route::delete('/admin/databooking/hapus/${id}', [BookingController::class, 'destroy'])->name('booking.delete');
     Route::post('/admin/mobil', [MobilController::class, 'store'])->name('mobil.store');
     Route::get('/admin/datapegawai', [KaryawanController::class, 'index'])->name('datapegawai');
     // Route::get('/admin/datapegawai/tambah', [KaryawanController::class, 'create'])->name('tambahdatapegawai');
 
     Route::post('/admin/datapegawai', [KaryawanController::class, 'store'])->name('tambahdatapegawai');
     Route::post('/admin/datapenjualan/tambah', [PenjualanController::class, 'create'])->name('tambahdatapenjualan');
+
     Route::get('/admin/datapenjualan', [PenjualanController::class, 'index'])->name('datapenjualan');
     Route::post('/admin/belimobil', [PembelianController::class, 'store'])->name('belimobil');
     Route::get('/admin/datapembelian', [PembelianController::class, 'index'])->name('datapembelian');

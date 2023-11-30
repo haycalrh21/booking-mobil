@@ -63,7 +63,7 @@ function DataPembelian({ pembelians }) {
   return (
     <div className='bg-gray-800'>
             <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' , marginBottom:'5px' }}>
-              Data Pemebelian Mobil
+              Data Pembelian Mobil
 
             </h1>
       <table style={{ borderCollapse: 'collapse', width: '100%' }}>
@@ -71,8 +71,8 @@ function DataPembelian({ pembelians }) {
           <tr>
             <th style={{ border: '1px solid white', padding: '8px' }}>ID</th>
             <th style={{ border: '1px solid white', padding: '8px' }}>Tanggal Pembelian</th>
-            <th style={{ border: '1px solid white', padding: '8px' }}>Nama Pembeli</th>
-            <th style={{ border: '1px solid white', padding: '8px' }}>NO HP</th>
+            <th style={{ border: '1px solid white', padding: '8px' }}>Nama Penjual</th>
+            <th style={{ border: '1px solid white', padding: '8px' }}>Nomor Hp</th>
             <th style={{ border: '1px solid white', padding: '8px' }}>Nama Mobil</th>
             <th style={{ border: '1px solid white', padding: '8px' }}>Brand</th>
             <th style={{ border: '1px solid white', padding: '8px' }}>Harga</th>

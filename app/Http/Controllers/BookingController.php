@@ -86,5 +86,21 @@ public function store(Request $request)
             'bookings' => $bookings,
         ]);
     }
+    public function destroy($id)
+    {
+             // Contoh:
+             $bookingId = Booking::find($id);
+
+             if (!$bookingId) {
+                 // Handle jika data tidak ditemukan
+                 return redirect()->back()->with('error', 'Data not found.');
+             }
+
+             $bookingId->delete();
+
+             // Redirect atau kirim respons sesuai kebutuhan aplikasi Anda
+             return redirect()->back()->with('success', 'Data deleted successfully.');
+    }
+
 
 }

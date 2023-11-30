@@ -10,7 +10,7 @@
         brand: '',
         harga: '',
         tahun: '',
-        stok:'',
+        stok:'1',
         pajak: '', // Mengganti string menjadi empty string
         deskripsi: '',
         image: [], // Menambah state untuk gambar
@@ -109,9 +109,10 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Stok:</label>
+                    <label className="block text-orange-300 mb-2">Stok bertambah 1:</label>
                     <input
-                    type="text"
+
+                    type="hidden"
                     name="stok"
                     value={formData.stok}
                     onChange={handleInputChange}

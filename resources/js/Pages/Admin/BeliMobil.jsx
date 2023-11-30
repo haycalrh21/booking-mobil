@@ -36,7 +36,7 @@ const BeliMobil = ({ onSubmit }) => {
     <form onSubmit={handleSubmit} style={{ textAlign: 'left', maxWidth: '300px', margin: '0 ' }}>
       {/* Formulir Pembelian Mobil */}
       <div>
-        <label style={{ display: 'block', marginBottom: '5px' }}>Nama Pembeli:</label>
+        <label style={{ display: 'block', marginBottom: '5px' }}>Nama Penjual:</label>
         <input type="text" name="namaPembeli" value={data.namaPembeli} onChange={handleChange} style={{ width: '100%', padding: '8px' }} required/>
         {errors.namaPembeli && <div className="text-red-500">{errors.namaPembeli}</div>}
       </div>

@@ -20,6 +20,31 @@ class MobilController extends Controller
 
 
 
+    public function datastok()
+    {
+        $mobils = Mobil::with('images')->get();
+        return response()->json($mobils);
+    }
+
+
+
+
+//     public function mergeStock()
+//     {
+//         // Fetch all data from the Mobil model
+//         $mobils = Mobil::all();
+
+//         // Group the data by name and calculate the total stock for each name
+//         $mergedData = $mobils->groupBy('nama')->map(function ($group) {
+//             return [
+//                 'nama' => $group->first()->nama,
+//                 'total_stok' => $group->sum('stok'),
+//             ];
+//         })->values();
+
+//         return response()->json(['mergedData' => $mergedData]);
+//     }
+// }
     public function datamobil()
     {
         $mobils = Mobil::with('images')->get();

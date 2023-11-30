@@ -8,6 +8,8 @@ use App\Models\Booking;
 use App\Models\Penjualan;
 use Illuminate\Http\Request;
 
+use function Laravel\Prompts\error;
+
 class PenjualanController extends Controller
 {
     public function index()
@@ -61,6 +63,10 @@ class PenjualanController extends Controller
 
         if ($mobil) {
             $mobil->stok -= 1; // Kurangi stok satu unit
+            if ($mobil->stok < 0) {
+                return false;
+            }
+
             $mobil->save();
             info('Stok mobil berhasil dikurangi.');
         } else {
@@ -79,5 +85,25 @@ class PenjualanController extends Controller
         return response()->json(['message' => 'Terjadi kesalahan saat menyimpan data'], 500);
     }
 }
+        public function deleteDataPenjualan($id)
+        {
+            try {
+                // Find the Penjualan record by ID
+                $pesanan = Booking::find($id);
+
+                if (!$pesanan) {
+                    return response()->json(['message' => 'Penjualan not found'], 404);
+                }
+
+                // Delete the Penjualan record
+                $pesanan->delete();
+
+                return response()->json(['message' => 'Penjualan deleted successfully'], 200);
+            } catch (\Exception $e) {
+                // Log or handle the exception
+                return response()->json(['message' => 'Error deleting Penjualan'], 500);
+            }
+        }
+
 
 }

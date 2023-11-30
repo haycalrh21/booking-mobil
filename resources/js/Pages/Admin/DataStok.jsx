@@ -8,7 +8,7 @@ import html2canvas from 'html2canvas';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 
-export function DataMobil({ mobils, pagination }) {
+export function DataStok({ mobils, pagination }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -61,6 +61,7 @@ export function DataMobil({ mobils, pagination }) {
       console.error('Error generating PDF:', error);
     }
   };
+  console.log(mobils);
 
 
   const formatRupiah = (angka) => {
@@ -84,11 +85,11 @@ export function DataMobil({ mobils, pagination }) {
         <div className="bg-gray-800 p-1 rounded-lg w-full flex flex-wrap">
           <div >
             <h1 className="text-3xl font-semibold text-center">
-              Data Mobil
+              Data Stok
             </h1>
-            <Link href={route('mobil.create')} className="btn p-2 m-3">
+            {/* <Link href={route('mobil.create')} className="btn p-2 m-3">
                 Create data
-              </Link>
+              </Link> */}
               <button onClick={downloadPDF} className="btn p-2 m-3">
                 Download as PDF
               </button>
@@ -98,14 +99,9 @@ export function DataMobil({ mobils, pagination }) {
       <tr>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Stok</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px', width: '100%' }}>Deskripsi</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
       </tr>
     </thead>
     <tbody>
@@ -114,12 +110,10 @@ export function DataMobil({ mobils, pagination }) {
           <tr key={mobil.id}>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.id}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.stok}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{formatRupiah(mobil.harga)}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.pajak}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.deskripsi}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>
+
+            {/* <td className="border text-left" style={{ padding: '10px' }}>
               <div style={{ display: 'flex' }}>
                 {mobil.images && mobil.images.length > 0 ? (
                   mobil.images.map((image) => (
@@ -134,9 +128,9 @@ export function DataMobil({ mobils, pagination }) {
                   <span>No Image</span>
                 )}
               </div>
-            </td>
+            </td> */}
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>
+            {/* <td className="border text-left" style={{ padding: '10px' }}>
               <div className='flex gap-1' >
               <Link href={route('mobil.edit', { id: mobil.id })} className='btn'>Edit</Link>
               <InertiaLink
@@ -150,7 +144,7 @@ export function DataMobil({ mobils, pagination }) {
 
 
               </div>
-            </td>
+            </td> */}
           </tr>
         ))
       ) : null}
@@ -176,4 +170,4 @@ export function DataMobil({ mobils, pagination }) {
   );
 }
 
-export default DataMobil;
+export default DataStok;

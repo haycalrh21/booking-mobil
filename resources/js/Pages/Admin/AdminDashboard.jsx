@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '@/Pages/admin/Navbar';
 import DataMobil from '@/Pages/Mobil/DataMobil';
+import DataStok from '@/Pages/admin/DataStok';
 import DataPengguna from '@/Pages/Admin/DataPengguna';
 import DataBooking from '@/Pages/Admin/DataBooking';
 import DataPembelian from '@/Pages/Admin/Databeli';
@@ -14,6 +15,7 @@ import Chart from 'chart.js/auto';
 function dashboard(role) {
   const [activeTab, setActiveTab] = useState('');
   const [mobilData, setMobilData] = useState([]);
+  const [mobilStok, setStokData] = useState([]);
   const [penggunaData, setPenggunaData] = useState([]);
   const [bookingData, setBookingData] = useState([]);
   const [karyawanData, setKaryawanData] = useState([]);
@@ -76,6 +78,8 @@ function dashboard(role) {
       fetchData('/admin/datamobil', setMobilData, () => {});
     } else if (activeTab === 'dataPengguna') {
       fetchData('/admin/datapengguna', setPenggunaData, () => {});
+    } else if (activeTab === 'dataStok') {
+      fetchData('/admin/datastok', setStokData, () => {});
     } else if (activeTab === 'dataBooking') {
       fetchData('/admin/databooking', setBookingData, () => {});
     } else if (activeTab === 'dataPegawai') {
@@ -225,7 +229,7 @@ function dashboard(role) {
 
       <div className="tabs">
 
-        {apebetulrolenyeitu === 'manager' ? null : (
+        {apebetulrolenyeitu === '' ? null : (
         <a
           className={`tab tab-bordered ${activeTab === 'dataMobil' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataMobil')}
@@ -233,7 +237,7 @@ function dashboard(role) {
           Data Mobil
         </a>
         )}
-        {apebetulrolenyeitu === 'manager' ? null :(
+        {apebetulrolenyeitu === 'sales' ? null :(
         <a
           className={`tab tab-bordered ${activeTab === 'dataPengguna' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPengguna')}
@@ -247,6 +251,14 @@ function dashboard(role) {
           onClick={() => handleTabClick('dataBooking')}
         >
           Data Pemesan
+        </a>
+        )}
+        {apebetulrolenyeitu === '' ? null :(
+        <a
+          className={`tab tab-bordered ${activeTab === 'dataStok' ? 'tab-active' : ''}`}
+          onClick={() => handleTabClick('dataStok')}
+        >
+          Data Stok
         </a>
         )}
        {apebetulrolenyeitu === 'sales' ? null : (
@@ -272,6 +284,7 @@ function dashboard(role) {
 
       </div>
       {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} />}
+      {activeTab === 'dataStok' && <DataStok mobils={mobilStok} />}
       {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} />}
       {activeTab === 'dataBooking' && <DataBooking bookings={bookingData} />}
       {activeTab === 'dataPegawai' && <Karyawan karyawans={karyawanData} />}
