@@ -216,7 +216,7 @@ function dashboard(role) {
         display: true,
       },
     },
-    barThickness: 50,
+    barThickness: 30,
     categorySpacing: 5,
   };
 
@@ -283,7 +283,7 @@ function dashboard(role) {
         </a>
 
       </div>
-      {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} />}
+      {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} role={apebetulrolenyeitu} />}
       {activeTab === 'dataStok' && <DataStok mobils={mobilStok} />}
       {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} />}
       {activeTab === 'dataBooking' && <DataBooking bookings={bookingData} />}

@@ -8,7 +8,7 @@ import html2canvas from 'html2canvas';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 
-export function DataMobil({ mobils, pagination }) {
+export function DataMobil({ mobils, role }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,6 +16,7 @@ export function DataMobil({ mobils, pagination }) {
   const totalPages = Math.ceil(mobils.length / itemsPerPage);
   const [canGoNext, setCanGoNext] = useState(true);
 
+  console.log(role);
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -86,9 +87,11 @@ export function DataMobil({ mobils, pagination }) {
             <h1 className="text-3xl font-semibold text-center">
               Data Mobil
             </h1>
+            {role != 'admin' ? null : (
             <Link href={route('mobil.create')} className="btn p-2 m-3">
                 Create data
               </Link>
+              )}
               <button onClick={downloadPDF} className="btn p-2 m-3">
                 Download as PDF
               </button>

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState ,useEffect} from 'react';
 
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
@@ -7,6 +7,19 @@ const Databooking = ({ bookings }) => {
   const tableRef = useRef();
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   const [selectedEndDate, setSelectedEndDate] = useState(null);
+  const [confirmedBookings, setConfirmedBookings] = useState([]);
+
+  useEffect(() => {
+    const storedConfirmedBookings = localStorage.getItem('confirmedBookings');
+    if (storedConfirmedBookings) {
+      setConfirmedBookings(JSON.parse(storedConfirmedBookings));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('confirmedBookings', JSON.stringify(confirmedBookings));
+  }, [confirmedBookings]);
+
 
   const filteredBookings = bookings.filter((booking) => {
     if (selectedStartDate && selectedEndDate) {
@@ -53,6 +66,8 @@ const Databooking = ({ bookings }) => {
 
             //   }
           if (result.isConfirmed) {
+            setConfirmedBookings((prevConfirmedBookings) => [...prevConfirmedBookings, booking.id]);
+
             // Lakukan sesuatu jika pengguna menekan tombol Ya
             // ...
             // Setelah sukses, kirim permintaan ke server untuk menghapus data pemesan
@@ -78,6 +93,7 @@ const Databooking = ({ bookings }) => {
   };
 
 
+const isBookingConfirmed = (bookingId) => confirmedBookings.includes(bookingId);
 
   return (
     <div className='bg-gray-800'>
@@ -117,8 +133,22 @@ const Databooking = ({ bookings }) => {
             <td style={{ border: '1px solid white' }}>{booking.tanggal}</td>
             <td style={{ border: '1px solid white' }}>{booking.message}</td>
             <td style={{ border: '1px solid white' }}>
-              <button onClick={() => handleConfirm(booking)}  className='btn' style={{ width: 'auto', padding: '8px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Konfirmasi</button>
-            </td>
+              <button onClick={() => handleConfirm(booking)}
+               disabled={isBookingConfirmed(booking.id)} // Disable the button if booking is confirmed
+               className='btn'
+               style={{
+                 width: 'auto',
+                 padding: '8px',
+                 backgroundColor: isBookingConfirmed(booking.id) ? 'grey' : '#4CAF50',
+                 color: 'white',
+                 border: 'none',
+                 borderRadius: '4px',
+                 cursor: 'pointer',
+               }}
+             >
+               {isBookingConfirmed(booking.id) ? 'Sudah Di Konfirmasi' : 'Konfirmasi'}
+             </button>
+           </td>
           </tr>
         ))}
       </tbody>

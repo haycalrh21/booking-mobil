@@ -13,11 +13,12 @@ class MobilController extends Controller
 
     public function index()
     {
-        $mobils = Mobil::with('images')->get();
+        $mobils = Mobil::with('images')
+            ->where('stok', '>', 0)
+            ->get();
 
-        return Inertia::render('index/mobil1', ['mobils' => $mobils,]);
+        return Inertia::render('index/mobil1', ['mobils' => $mobils]);
     }
-
 
 
     public function datastok()

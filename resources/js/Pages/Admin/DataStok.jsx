@@ -10,6 +10,7 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 
 export function DataStok({ mobils, pagination }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
+  const [selectedGroupBy, setSelectedGroupBy] = useState(''); // Default value
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [previousPage, setPreviousPage] = useState(null);
@@ -38,6 +39,10 @@ export function DataStok({ mobils, pagination }) {
     }
   };
 
+  const handleGroupByChange = (event) => {
+    setSelectedGroupBy(event.target.value);
+  };
+
   const downloadPDF = async () => {
     try {
         const content = document.getElementById('pdf-content');
@@ -63,7 +68,7 @@ export function DataStok({ mobils, pagination }) {
   };
   console.log(mobils);
 
-
+console.log();
   const formatRupiah = (angka) => {
     const formatter = new Intl.NumberFormat('id-ID', {
       style: 'currency',
@@ -96,59 +101,38 @@ export function DataStok({ mobils, pagination }) {
               <div id="table-container">
   <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%' }}>
     <thead>
+    <select name="group_by" value={selectedGroupBy} onChange={handleGroupByChange}>
+              <option name="group_by" value="nama">Nama</option>
+              <option name="group_by" value="tahun">Tahun</option>
+              </select>
       <tr>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Stok</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
+        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
       </tr>
     </thead>
     <tbody>
-      {Array.isArray(getCurrentPageData()) ? (
-        getCurrentPageData().map((mobil) => (
-          <tr key={mobil.id}>
+  {Array.isArray(getCurrentPageData()) ? (
+    getCurrentPageData().map((yearData) => (
+      Object.keys(yearData).map((year) => {
+        const mobil = yearData[year];
+        return (
+          <tr>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.id}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.stok}</td>
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
-
-            {/* <td className="border text-left" style={{ padding: '10px' }}>
-              <div style={{ display: 'flex' }}>
-                {mobil.images && mobil.images.length > 0 ? (
-                  mobil.images.map((image) => (
-                    <img
-                      key={image.id}
-                      src={`/storage/${image.path}`}
-                      alt={mobil.nama}
-                      style={{ maxWidth: '50px', maxHeight: '50px' }}
-                    />
-                  ))
-                ) : (
-                  <span>No Image</span>
-                )}
-              </div>
-            </td> */}
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
-            {/* <td className="border text-left" style={{ padding: '10px' }}>
-              <div className='flex gap-1' >
-              <Link href={route('mobil.edit', { id: mobil.id })} className='btn'>Edit</Link>
-              <InertiaLink
-  href={route('mobil.delete', { id: mobil.id })}
-  method="delete"
-  as="button"
-  className='btn'
->
-  Delete
-</InertiaLink>
-
-
-              </div>
-            </td> */}
+            <td className="border text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
           </tr>
-        ))
-      ) : null}
-    </tbody>
+        );
+      })
+    ))
+  ) : null}
+</tbody>
   </table>
 </div>
 
