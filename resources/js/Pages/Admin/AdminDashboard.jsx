@@ -293,7 +293,7 @@ function dashboard(role) {
 
       {isTestVisible && <div>
         <h1 style={{ fontSize: '2em', fontWeight: 'bold' }}>
-        Selamat Datang Di Dashboard Admin
+        Selamat Datang Di Dashboard Bin Mahmoed Motor
     </h1>
 
    <b><h1 style={{ textAlign:'center' }}> Chart Penjualan Dan Pembelian Mobil</h1></b>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navbar } from '@/Pages/User/Navbar';
 import { InertiaLink } from '@inertiajs/inertia-react';
+import { Textarea } from '@chakra-ui/react';
 
 const Carousel = ({ images }) => {
     const [currentImage, setCurrentImage] = useState(0);
@@ -43,10 +44,10 @@ export const DetailMobil = ({ mobil }) => {
       </div>
 
       {mobil.images && mobil.images.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div className='' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Carousel images={mobil.images.slice(0, 4)} />
 
-          <table style={{ borderCollapse: 'collapse', width: '70%', border: '1px solid #ddd', marginTop: '20px' }}>
+          <table style={{ borderCollapse: 'collapse', width: '55%', border: '1px solid #ddd', marginTop: '20px' }}>
             <tbody>
               <tr>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}><strong>Nama:</strong></td>
@@ -62,7 +63,15 @@ export const DetailMobil = ({ mobil }) => {
               </tr>
               <tr>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}><strong>Deskripsi:</strong></td>
-                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{mobil.deskripsi}</td>
+                <p style={{ border: '1px solid #ddd', padding: '8px' }}>
+                <Textarea readOnly="true" style={{minWidth:'720px'
+                ,minHeight:'320px'
+                ,backgroundColor:'#1d232a'
+                ,marginBottom:'-12px'
+                ,marginLeft:'-6px'
+                ,marginRight:'-5px'
+                ,marginTop:'-6px'
+            }}>{mobil.deskripsi}</Textarea></p>
               </tr>
               <tr>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}><strong>Kategori:</strong></td>

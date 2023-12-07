@@ -109,6 +109,7 @@ export function DataMobil({ mobils, role }) {
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
+
       </tr>
     </thead>
     <tbody>
@@ -141,7 +142,10 @@ export function DataMobil({ mobils, role }) {
             <td className="border text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
             <td className="border text-left" style={{ padding: '10px' }}>
               <div className='flex gap-1' >
+                { role === 'manager' ? null : (
               <Link href={route('mobil.edit', { id: mobil.id })} className='btn'>Edit</Link>
+              )}
+              { role === 'manager' ? null : (
               <InertiaLink
   href={route('mobil.delete', { id: mobil.id })}
   method="delete"
@@ -150,6 +154,10 @@ export function DataMobil({ mobils, role }) {
 >
   Delete
 </InertiaLink>
+)}
+{ role != 'manager' ? null : (
+ <div>---</div>
+)}
 
 
               </div>

@@ -146,7 +146,7 @@ const isBookingConfirmed = (bookingId) => confirmedBookings.includes(bookingId);
                  cursor: 'pointer',
                }}
              >
-               {isBookingConfirmed(booking.id) ? 'Sudah Di Konfirmasi' : 'Konfirmasi'}
+               {isBookingConfirmed(booking.id) ? 'Berhasil Terjual' : 'Konfirmasi penjualan'}
              </button>
            </td>
           </tr>
