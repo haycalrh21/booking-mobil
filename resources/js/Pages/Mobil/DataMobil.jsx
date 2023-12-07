@@ -87,7 +87,7 @@ export function DataMobil({ mobils, role }) {
             <h1 className="text-3xl font-semibold text-center">
               Data Mobil
             </h1>
-            {role != 'admin' ? null : (
+            {role === 'manager' ? null : (
             <Link href={route('mobil.create')} className="btn p-2 m-3">
                 Create data
               </Link>
