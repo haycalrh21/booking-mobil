@@ -80,6 +80,7 @@ class MobilController extends Controller
 
         if ($request->hasFile('images')) {
             $mobil = new Mobil([
+                'id' => strval(rand(100, 999)),
                 'nama' => $request['nama'],
                 'brand' => $request['brand'],
                 'harga' => $request['harga'],
@@ -106,25 +107,6 @@ class MobilController extends Controller
             return back()->withInput()->withErrors(['images' => 'Gambar diperlukan.']);
         }
     }
-
-
-
-
-
-
-protected function generateUniqueId()
-{
-    do {
-        $uniqueId = strval(random_int(100000, 999999));
-    } while (Mobil::where('id', $uniqueId)->exists());
-
-    return $uniqueId;
-}
-
-
-
-
-
 
     /**
      * Display the specified resource.

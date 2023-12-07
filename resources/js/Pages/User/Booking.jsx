@@ -103,7 +103,7 @@ const Booking = ({ user, mobilData, mobils }) => {
                     required
                     disabled
                   />
-                  <label htmlFor="nomorHape">Nomor Hape</label>
+                  <label htmlFor="nomorHape">Nomor Hp</label>
                   <input
                     type="text"
                     className="form-control"

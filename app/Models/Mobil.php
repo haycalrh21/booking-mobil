@@ -13,7 +13,7 @@ class Mobil extends Model
 
     protected $fillable = [
         // your other fields
-        'nama', 'brand', 'harga', 'tahun', 'stok', 'pajak', 'deskripsi', 'kategori',
+        'id','nama', 'brand', 'harga', 'tahun', 'stok', 'pajak', 'deskripsi', 'kategori',
     ];
 
     public function images()
