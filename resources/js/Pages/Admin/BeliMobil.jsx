@@ -22,8 +22,8 @@ const BeliMobil = ({ onSubmit }) => {
     e.preventDefault();
 
     post('/admin/belimobil', data)
-      .then((response) => {
-        console.log('Pembelian mobil berhasil:', response);
+      .then(() => {
+        // console.log('Pembelian mobil berhasil:', response);
         window.location.href = '/admin/dashboard'; // Redirect ke halaman setelah berhasil
       })
       .catch((error) => {

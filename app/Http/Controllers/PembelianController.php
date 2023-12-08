@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PembelianController extends Controller
 {
@@ -35,6 +36,7 @@ class PembelianController extends Controller
         $pembelian = Pembelian::create($request->all());
 
         // Response sukses atau redirect ke halaman lain jika diperlukan
-        return response()->json(['message' => 'Pembelian mobil berhasil disimpan'], 200);
+        // return response()->json(['message' => 'Pembelian mobil berhasil disimpan'], 200);
+        return Inertia::location(route('admin.dashboard'));
     }
 }
