@@ -64,6 +64,8 @@ useEffect(() => {
 
   return (
     <div>
+      <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+
       <h1>Edit Mobil</h1>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div>

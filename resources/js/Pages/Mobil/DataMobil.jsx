@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { Link } from '@inertiajs/react';
-import html2pdf from 'html2pdf.js'; // Make sure to import html2pdf.js
 import { Paginator } from '@/Pages/admin/Paginator';
-import html2canvas from 'html2canvas';
 import { InertiaLink } from '@inertiajs/inertia-react';
 import { Textarea } from '@chakra-ui/react';
 
@@ -129,13 +127,15 @@ const downloadPDFSemua = () => {
 
             </h1>
             {role === 'manager' ? null : (
-            <Link href={route('mobil.create')} className="btn btn-info glass p-2 m-3">
-                Create data
+            <Link href={route('mobil.create')} className="btn btn-info glass bg-blue-400 p-2 m-3">
+                Tambah data
               </Link>
               )}
-              <button onClick={downloadPDFSemua} className="btn btn-success glass p-2 m-3">
+              {role != 'manager' ? null : (
+              <button onClick={downloadPDFSemua} className="btn btn-success bg-teal-200 glass p-2 m-3">
                 Download as PDF
               </button>
+              )}
               <div id="table-container">
   <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%',borderColor:'#00000'  }}>
     <thead>
@@ -192,24 +192,23 @@ const downloadPDFSemua = () => {
             <td className="border border-black text-left" style={{ padding: '10px' }}>
               <div className='flex gap-1' >
                 { role === 'manager' ? null : (
-              <Link href={route('mobil.edit', { id: mobil.id })} className='btn btn-warning glass'>Edit</Link>
+              <Link href={route('mobil.edit', { id: mobil.id })} className='btn btn-warning bg-orange-200 glass'>Edit</Link>
               )}
               { role === 'manager' ? null : (
               <InertiaLink
   href={route('mobil.delete', { id: mobil.id })}
   method="delete"
   as="button"
-  className='btn btn-error glass'
+  className='btn btn-error bg-red-200 glass'
 >
   Delete
 </InertiaLink>
 )}
 { role != 'manager' ? null : (
- <div>---</div>
-)}
-            <button className='btn btn-success glass' onClick={() => downloadPDF(mobil)}>
+            <button className='btn btn-accent bg-teal-500 glass' onClick={() => downloadPDF(mobil)}>
                       Print
                     </button>
+                    )}
 
               </div>
             </td>

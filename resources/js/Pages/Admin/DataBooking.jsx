@@ -96,7 +96,9 @@ const Databooking = ({ bookings }) => {
 const isBookingConfirmed = (bookingId) => confirmedBookings.includes(bookingId);
 
   return (
-    <div className='bg-gray-800'>
+    <div >
+             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+
             <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
               Data Pemesan
 

@@ -227,11 +227,11 @@ function dashboard(role) {
       <Navbar />
 
 
-      <div className="tabs">
+      <div className="tabs" >
 
         {apebetulrolenyeitu === '' ? null : (
         <a
-          className={`tab tab-bordered ${activeTab === 'dataMobil' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataMobil' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataMobil')}
         >
           Data Mobil
@@ -239,7 +239,7 @@ function dashboard(role) {
         )}
         {apebetulrolenyeitu === 'sales' ? null :(
         <a
-          className={`tab tab-bordered ${activeTab === 'dataPengguna' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataPengguna' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPengguna')}
         >
           Data Pengguna
@@ -247,7 +247,7 @@ function dashboard(role) {
         )}
         {apebetulrolenyeitu === 'manager' ? null :(
         <a
-          className={`tab tab-bordered ${activeTab === 'dataBooking' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataBooking' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataBooking')}
         >
           Data Pemesan
@@ -255,7 +255,7 @@ function dashboard(role) {
         )}
         {apebetulrolenyeitu === '' ? null :(
         <a
-          className={`tab tab-bordered ${activeTab === 'dataStok' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataStok' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataStok')}
         >
           Data Stok
@@ -263,20 +263,20 @@ function dashboard(role) {
         )}
        {apebetulrolenyeitu === 'sales' ? null : (
         <a
-          className={`tab tab-bordered ${activeTab === 'dataPegawai' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataPegawai' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPegawai')}
         >
           Data Pegawai
         </a>
         )}
         <a
-          className={`tab tab-bordered ${activeTab === 'dataPenjualan' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataPenjualan' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPenjualan')}
         >
           Data Penjualan
         </a>
         <a
-          className={`tab tab-bordered ${activeTab === 'dataPembelian' ? 'tab-active' : ''}`}
+          className={`tab tab-bordered font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800 hover:from-pink-600 hover:to-yellow-700 ${activeTab === 'dataPembelian' ? 'tab-active' : ''}`}
           onClick={() => handleTabClick('dataPembelian')}
         >
           Data Pembelian
@@ -284,8 +284,8 @@ function dashboard(role) {
 
       </div>
       {activeTab === 'dataMobil' && <DataMobil mobils={mobilData} role={apebetulrolenyeitu} />}
-      {activeTab === 'dataStok' && <DataStok mobils={mobilStok} />}
-      {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} />}
+      {activeTab === 'dataStok' && <DataStok mobils={mobilStok}  role={apebetulrolenyeitu}/>}
+      {activeTab === 'dataPengguna' && <DataPengguna users={penggunaData} role={apebetulrolenyeitu} />}
       {activeTab === 'dataBooking' && <DataBooking bookings={bookingData} />}
       {activeTab === 'dataPegawai' && <Karyawan karyawans={karyawanData} />}
       {activeTab === 'dataPenjualan' && <DataPenjualan penjualan={penjualanData} />}
@@ -295,8 +295,8 @@ function dashboard(role) {
 
 
     <img src="/images/bgputih.jpg" style={{ minWidth:'100%' ,minHeight:'100%', position:'absolute', zIndex:'-10',
-     fontSize: '2em', fontWeight: 'bold'}} alt="" />Selamat Datang Di Dashboard Maifrenz
-   <b><h1 style={{ textAlign:'center' }}> Chart Penjualan Dan Pembelian Mobil</h1></b>
+     fontSize: '2em', fontWeight: 'bold'}}/>
+   <b><h1 className='mt-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800' style={{ textAlign:'center' }}> Chart Penjualan Dan Pembelian Mobil</h1></b>
     <div style={{ display: 'flex' }}>
   {chartTotalHarga && (
     <div style={{ width: '50%', height: 'auto' }}>

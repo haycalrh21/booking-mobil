@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-function DataPengguna({ users }) {
+function DataPengguna({users,role}) {
   const [updatedUsers, setUpdatedUsers] = useState(users);
+
+console.log(role);
 
   useEffect(() => {
     // Perbarui updatedUsers saat nilai users berubah
@@ -25,20 +27,23 @@ function DataPengguna({ users }) {
   const userOnly = updatedUsers.filter((user) => user.role );
 
   return (
-    <div className='bg-gray-800'>
+    <div >
+             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+
       <div className="flex">
         <div></div>
         <div className="bg-dark p-4 rounded-lg w-full">
-          <div>
-            <h1 className="text-3xl font-semibold text-center">
+          {/* <div>
+            <h1 className="text-3xl font-semibold text-center mt-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800">
               Data Pengguna
             </h1>
-          </div>
+          </div> */}
           <div>
-            <button onClick={downloadPDF} className="btn p-2 m-3">
+            {role != 'manager' ? null : (
+            <button onClick={downloadPDF} className="btn btn-success bg-teal-200 glass p-2 m-3">
               Download as PDF
             </button>
-
+)}
             <div className="mx-auto text-center">
               <table className="min-w-full table-fixed border border-white ">
                 <thead>

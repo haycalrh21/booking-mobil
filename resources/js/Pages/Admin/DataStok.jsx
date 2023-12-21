@@ -8,7 +8,7 @@ import html2canvas from 'html2canvas';
 import { InertiaLink } from '@inertiajs/inertia-react';
 
 
-export function DataStok({ mobils, pagination }) {
+export function DataStok({ mobils, role }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [selectedGroupBy, setSelectedGroupBy] = useState(''); // Default value
   const itemsPerPage = 10;
@@ -66,17 +66,6 @@ export function DataStok({ mobils, pagination }) {
       console.error('Error generating PDF:', error);
     }
   };
-  console.log(mobils);
-
-console.log();
-  const formatRupiah = (angka) => {
-    const formatter = new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-    });
-
-    return formatter.format(angka);
-  };
 
   useEffect(() => {
     setCurrentPage(1);
@@ -87,24 +76,24 @@ console.log();
     <div>
       <div className="flex">
 
-        <div className="bg-gray-800 p-1 rounded-lg w-full flex flex-wrap">
+        <div className=" rounded-lg w-full flex flex-wrap">
+        <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+
           <div >
-            <h1 className="text-3xl font-semibold text-center">
+            <h1 className='mt-4 font-extrabold text-lg text-transparent bg-clip-text bg-gradient-to-r from-warning to-orange-500 via-50%' style={{ textAlign:'center' }}>
               Data Stok
             </h1>
             {/* <Link href={route('mobil.create')} className="btn p-2 m-3">
                 Create data
               </Link> */}
-              <button onClick={downloadPDF} className="btn p-2 m-3">
+              {role != 'manager' ? null : (
+              <button onClick={downloadPDF} className="btn btn-success bg-teal-200 glass p-2 m-3">
                 Download as PDF
               </button>
+              )}
               <div id="table-container">
   <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%' }}>
     <thead>
-    <select name="group_by" value={selectedGroupBy} onChange={handleGroupByChange}>
-              <option name="group_by" value="nama">Nama</option>
-              <option name="group_by" value="tahun">Tahun</option>
-              </select>
       <tr>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
         <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
@@ -144,9 +133,6 @@ console.log();
                   canGoNext={canGoNext}
                 />
               )}
-              <button onClick={handleGoBack} className="btn p-2 m-3" disabled={previousPage === null}>
-                Kembali
-              </button>
           </div>
         </div>
       </div>
