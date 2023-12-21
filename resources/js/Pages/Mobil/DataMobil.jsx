@@ -219,15 +219,11 @@ const downloadPDFSemua = () => {
     </tbody>
   </table>
 </div>
-
-            {canGoNext && (
-                <Paginator
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPageChange={handlePageChange}
-                  canGoNext={canGoNext}
-                />
-              )}
+        <Paginator
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+            />
           </div>
         </div>
       </div>

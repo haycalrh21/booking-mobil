@@ -16,7 +16,7 @@ export const Paginator = ({ currentPage, lastPage, onPageChange, prevText = '« 
       >
         {prevText}
       </button>
-      <button className="join-item btn">Page {currentPage}</button>
+      <button className="join-item btn">Halaman {currentPage}</button>
       <button
         className="join-item btn"
         onClick={() => handlePageChange(currentPage + 1)}

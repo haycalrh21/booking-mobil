@@ -70,16 +70,18 @@
     return (
         <div>
         <Navbar />
-        <div className="flex">
+        <div className="flex" style={{backgroundColor:'',color:'#00000A'}}>
+      <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+
             <div className="w-1/1">
             {/* <Sidebar /> */}
             </div>
-            <div className="bg-gray-800 p-8 rounded-lg w-full flex flex-wrap">
+            <div className=" p-8 rounded-lg w-full flex flex-wrap">
             <div className="w-full md:container md:mx-auto">
-                <h2 className="text-3xl font-semibold mb-4">Create Data Mobil</h2>
+                <h2 className="text-3xl font-semibold mb-2 mt-2 ">Tambah Data Mobil</h2>
                 <form onSubmit={handleSubmit}>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Nama:</label>
+                    <label className="block text-yellow-600 mb-2">Nama:</label>
                     <input
                     type="text"
                     name="nama"
@@ -89,7 +91,7 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Brand:</label>
+                    <label className="block text-yellow-600 mb-2">Brand:</label>
                     <input
                     type="text"
                     name="brand"
@@ -99,7 +101,7 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Harga:</label>
+                    <label className="block text-yellow-600 mb-2">Harga:</label>
                     <input
                     type="text"
                     name="harga"
@@ -109,7 +111,7 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Stok bertambah 1:</label>
+                    <label className="block text-yellow-600 mb-2">Stok bertambah 1:</label>
                     <input
 
                     type="hidden"
@@ -120,7 +122,7 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Tahun:</label>
+                    <label className="block text-yellow-600 mb-2">Tahun:</label>
                     <input
                     type="text"
                     name="tahun"
@@ -130,7 +132,7 @@
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Pajak:</label>
+                    <label className="block text-yellow-600 mb-2">Pajak:</label>
                     <div>
                     <input
                         type="radio"
@@ -139,7 +141,7 @@
                         checked={formData.pajak === 'Hidup'}
                         onChange={handleInputChange} required
                     />
-                    <label className="ml-2 text-orange-300">Hidup</label>
+                    <label className="ml-2 text-yellow-600">Hidup</label>
                     </div>
                     <div>
                     <input
@@ -149,12 +151,12 @@
                         checked={formData.pajak === 'Mati'}
                         onChange={handleInputChange} required
                     />
-                    <label className="ml-2 text-orange-300">Mati</label>
+                    <label className="ml-2 text-yellow-600">Mati</label>
                     </div>
 
                 </div>
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Deskripsi:</label>
+                    <label className="block text-yellow-600 mb-2">Deskripsi:</label>
                     <textarea
                     name="deskripsi"
                     value={formData.deskripsi}
@@ -164,18 +166,19 @@
                     />
                 </div>
                 <div className="mb-4">
-    <label className="block text-orange-300 mb-2">Gambar:</label>
+    <label className="block text-yellow-600 mb-2">Gambar:</label>
+    <span className='glass text-sm rounded-md bg-gradient-to-r from-green-200 to-blue-500 '>Bisa Memuat Lebih Dari 1 Gambar</span>
     <input
         type="file"
         name="images"
         onChange={handleInputChange}
-        className="w-full px-3 py-2 rounded border text-gray-700"
+        className="w-full px-3 py-2 rounded border text-ghost input-ghost glass"
         multiple  required
     />
 </div>
 
                 <div className="mb-4">
-                    <label className="block text-orange-300 mb-2">Kategori:</label>
+                    <label className="block text-yellow-600 mb-2">Kategori:</label>
                     <select
                     name="kategori"
                     value={formData.kategori}
@@ -195,7 +198,7 @@
                     </select>
                 </div>
                 <div className="mb-4">
-                    <button type="submit" className="btn bg-blue-500 text-white">
+                    <button type="submit" className="btn bg-blue-500 glass text-white btn-success">
                     Simpan
                     </button>
                 </div>

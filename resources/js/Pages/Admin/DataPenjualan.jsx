@@ -113,9 +113,6 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
-      <button onClick={handleGoBack} className="btn p-2 m-3" disabled={previousPage === null}>
-        Kembali
-      </button>
     </div>
   );
 };
