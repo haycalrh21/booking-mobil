@@ -80,7 +80,7 @@ class MobilController extends Controller
 
         if ($request->hasFile('images')) {
             $mobil = new Mobil([
-                'id' => strval(rand(100, 999)),
+                'id' => strval(rand(100, 999)),  #ini buat random id nya pake strval(rand(darisegini,sampesegitudehhaha))
                 'nama' => $request['nama'],
                 'brand' => $request['brand'],
                 'harga' => $request['harga'],

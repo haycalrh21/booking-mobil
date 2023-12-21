@@ -6,11 +6,12 @@ import html2pdf from 'html2pdf.js'; // Make sure to import html2pdf.js
 import { Paginator } from '@/Pages/admin/Paginator';
 import html2canvas from 'html2canvas';
 import { InertiaLink } from '@inertiajs/inertia-react';
+import { Textarea } from '@chakra-ui/react';
 
 
 export function DataMobil({ mobils, role }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [previousPage, setPreviousPage] = useState(null);
   const totalPages = Math.ceil(mobils.length / itemsPerPage);
@@ -39,30 +40,65 @@ export function DataMobil({ mobils, role }) {
     }
   };
 
-  const downloadPDF = async () => {
-    try {
-        const content = document.getElementById('pdf-content');
-        const tableContainer = document.getElementById('table-container');
+//   const downloadPDF = async () => {
+//     try {
+//         const content = document.getElementById('pdf-content');
+//         const tableContainer = document.getElementById('table-container');
 
-        // Use html2canvas to capture the content as a canvas
-        const canvas = await html2canvas(tableContainer);
-      // Create a PDF using jsPDF
-      const pdf = new jsPDF({
-        unit: 'mm',
-        format: 'a4',
-        orientation: 'landscape',
-      });
+//         const canvas = await html2canvas(tableContainer);
+//       const pdf = new jsPDF({
+//         unit: 'mm',
+//         format: 'a4',
+//         orientation: 'landscape',
+//       });
 
-      // Add the canvas as an image to the PDF
-      pdf.addImage(canvas.toDataURL('image/png'), 'JPG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+//       pdf.addImage(canvas.toDataURL('image/png'), 'JPG', 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
 
-      // Save the PDF
-      pdf.save('mobil_data.pdf');
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-    }
+//       pdf.save('mobil_data.pdf');
+//     } catch (error) {
+//       console.error('Error generating PDF:', error);
+//     }
+//   };
+
+const downloadPDFSemua = () => {
+    const pdf = new jsPDF();
+
+    pdf.autoTable({
+      head: [['Id', 'Nama', 'Brand', 'Harga', 'Tahun', 'Pajak', 'Deskripsi', 'Kategori']],
+      body: mobils.map((mobil) => [
+        mobil.id,
+        mobil.nama,
+        mobil.brand,
+        formatRupiah(mobil.harga),
+        mobil.tahun,
+        mobil.pajak,
+        mobil.deskripsi,
+        mobil.kategori,
+      ]),
+    });
+
+    pdf.save(`data_mobil_keseluruhan.pdf`);
   };
 
+ const downloadPDF = (mobil) => {
+    const pdf = new jsPDF();
+
+    pdf.autoTable({
+      head: [['Id', 'Nama', 'Brand', 'Harga', 'Tahun', 'Pajak', 'Deskripsi', 'Kategori']],
+      body: [[
+        mobil.id,
+        mobil.nama,
+        mobil.brand,
+        mobil.harga,
+        mobil.tahun,
+        mobil.pajak,
+        mobil.deskripsi,
+        mobil.kategori,
+      ]],
+    });
+
+    pdf.save(`data_mobil$(mobil.id).pdf`);
+  };
 
   const formatRupiah = (angka) => {
     const formatter = new Intl.NumberFormat('id-ID', {
@@ -79,36 +115,41 @@ export function DataMobil({ mobils, role }) {
   }, [mobils]);
 
   return (
-    <div>
-      <div className="flex">
+    <div style={{backgroundColor:'transparent'}}>
+      <div className="flex" style={{backgroundColor:'',color:'#00000A'}}>
+      <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
 
-        <div className="bg-gray-800 p-1 rounded-lg w-full flex flex-wrap">
+        <div
+         className="p-1 rounded-lg w-full flex flex-wrap"
+        >
           <div >
+
             <h1 className="text-3xl font-semibold text-center">
-              Data Mobil
+
+
             </h1>
             {role === 'manager' ? null : (
-            <Link href={route('mobil.create')} className="btn p-2 m-3">
+            <Link href={route('mobil.create')} className="btn btn-info glass p-2 m-3">
                 Create data
               </Link>
               )}
-              <button onClick={downloadPDF} className="btn p-2 m-3">
+              <button onClick={downloadPDFSemua} className="btn btn-success glass p-2 m-3">
                 Download as PDF
               </button>
               <div id="table-container">
-  <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%' }}>
+  <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%',borderColor:'#00000'  }}>
     <thead>
       <tr>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px', width: '100%' }}>Deskripsi</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px', width:'100%'}}>Deskripsi</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
 
       </tr>
     </thead>
@@ -116,14 +157,22 @@ export function DataMobil({ mobils, role }) {
       {Array.isArray(getCurrentPageData()) ? (
         getCurrentPageData().map((mobil) => (
           <tr key={mobil.id}>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.id}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{formatRupiah(mobil.harga)}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.pajak}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.deskripsi}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{mobil.id}</td>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{mobil.nama}</td>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{mobil.brand}</td>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{formatRupiah(mobil.harga)}</td>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{mobil.tahun}</td>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{mobil.pajak}</td>
+            <Textarea className="border text-left" style={{
+            padding: '80px',
+            marginBottom:'-8px',
+            paddingTop:'50px',
+            textAlign: 'left',
+            minWidth:'290px',
+            minHeight:'20px',
+            backgroundColor:'transparent',
+             }}>{mobil.deskripsi}</Textarea>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>
               <div style={{ display: 'flex' }}>
                 {mobil.images && mobil.images.length > 0 ? (
                   mobil.images.map((image) => (
@@ -135,22 +184,22 @@ export function DataMobil({ mobils, role }) {
                     />
                   ))
                 ) : (
-                  <span>No Image</span>
+                  <span>Gambar Kosong</span>
                 )}
               </div>
             </td>
-            <td className="border text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
-            <td className="border text-left" style={{ padding: '10px' }}>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>{mobil.kategori}</td>
+            <td className="border border-black text-left" style={{ padding: '10px' }}>
               <div className='flex gap-1' >
                 { role === 'manager' ? null : (
-              <Link href={route('mobil.edit', { id: mobil.id })} className='btn'>Edit</Link>
+              <Link href={route('mobil.edit', { id: mobil.id })} className='btn btn-warning glass'>Edit</Link>
               )}
               { role === 'manager' ? null : (
               <InertiaLink
   href={route('mobil.delete', { id: mobil.id })}
   method="delete"
   as="button"
-  className='btn'
+  className='btn btn-error glass'
 >
   Delete
 </InertiaLink>
@@ -158,7 +207,9 @@ export function DataMobil({ mobils, role }) {
 { role != 'manager' ? null : (
  <div>---</div>
 )}
-
+            <button className='btn btn-success glass' onClick={() => downloadPDF(mobil)}>
+                      Print
+                    </button>
 
               </div>
             </td>
@@ -177,9 +228,6 @@ export function DataMobil({ mobils, role }) {
                   canGoNext={canGoNext}
                 />
               )}
-              <button onClick={handleGoBack} className="btn p-2 m-3" disabled={previousPage === null}>
-                Kembali
-              </button>
           </div>
         </div>
       </div>

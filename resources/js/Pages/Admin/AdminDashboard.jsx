@@ -292,10 +292,10 @@ function dashboard(role) {
       {activeTab === 'dataPembelian' && <DataPembelian pembelians={pembelianData} />}
 
       {isTestVisible && <div>
-        <h1 style={{ fontSize: '2em', fontWeight: 'bold' }}>
-        Selamat Datang Di Dashboard Bin Mahmoed Motor
-    </h1>
 
+
+    <img src="/images/bgputih.jpg" style={{ minWidth:'100%' ,minHeight:'100%', position:'absolute', zIndex:'-10',
+     fontSize: '2em', fontWeight: 'bold'}} alt="" />Selamat Datang Di Dashboard Maifrenz
    <b><h1 style={{ textAlign:'center' }}> Chart Penjualan Dan Pembelian Mobil</h1></b>
     <div style={{ display: 'flex' }}>
   {chartTotalHarga && (
