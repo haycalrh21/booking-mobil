@@ -97,7 +97,7 @@ const isBookingConfirmed = (bookingId) => confirmedBookings.includes(bookingId);
 
   return (
     <div >
-             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute',zIndex:'-15'}} alt="" />
 
             <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
               Data Pemesan
