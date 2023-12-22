@@ -72,7 +72,9 @@ const Booking = ({ user, mobilData, mobils }) => {
 
   return (
 
-    <div>
+    <div className='text-black'>
+            <img src="/images/bgputih.jpg" style={{ minWidth:'100%',maxHeight:'106%', position:'absolute', position:'absolute',zIndex:'-1'}} alt="" />
+
       <Navbar />
       <div className="container">
         <div className="row justify-content-center">
@@ -133,9 +135,10 @@ const Booking = ({ user, mobilData, mobils }) => {
                     id="waktu"
                     name="waktu"
                     value={data.waktu}
+                    style={{colorScheme:'black'}}
                     onChange={(e) => setData('waktu', e.target.value)}
-                    className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                    placeholder="Select a time"
+                    className="peer block min-h-[auto] w-full rounded border-0 px-3 "
+                                       placeholder="Pilih Waktu"
                 />
                 </div>
 
@@ -147,8 +150,9 @@ const Booking = ({ user, mobilData, mobils }) => {
                       name="tanggal"
                       value={data.tanggal}
                       onChange={(e) => setData('tanggal', e.target.value)}
-                      className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      placeholder="Select a date"
+                      style={{colorScheme:'black'}}
+                      className="peer block min-h-[auto] w-full rounded "
+                      placeholder="Pilih Tanggal"
                     />
                   </div>
 

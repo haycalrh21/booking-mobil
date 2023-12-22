@@ -33,7 +33,10 @@ const BeliMobil = ({ onSubmit }) => {
   };
 
   return (
+
     <form onSubmit={handleSubmit} style={{ textAlign: 'left', maxWidth: '300px', margin: '0 ' }}>
+            <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'150%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+
       {/* Formulir Pembelian Mobil */}
       <div>
         <label style={{ display: 'block', marginBottom: '5px' }}>Nama Penjual:</label>
@@ -75,7 +78,7 @@ const BeliMobil = ({ onSubmit }) => {
             checked={data.pajak === 'Hidup'}
             onChange={handleChange}
           />
-          <label className="ml-2 text-orange-300">Hidup</label>
+          <label className="ml-2 ">Hidup</label>
         </div>
         <div>
           <input
@@ -85,7 +88,7 @@ const BeliMobil = ({ onSubmit }) => {
             checked={data.pajak === 'Mati'}
             onChange={handleChange} required
           />
-          <label className="ml-2 text-orange-300">Mati</label>
+          <label className="ml-2">Mati</label>
         </div>
         {errors.pajak && <div className="text-red-500">{errors.pajak}</div>}
       </div>
@@ -101,7 +104,7 @@ const BeliMobil = ({ onSubmit }) => {
                 checked={data.kategori === kategori}
                 onChange={handleChange} required
               />
-              <label className="ml-2 text-orange-300">{kategori}</label>
+              <label className="ml-2">{kategori}</label>
             </div>
           ))}
         </div>

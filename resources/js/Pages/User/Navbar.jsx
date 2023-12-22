@@ -25,7 +25,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className={`pb-5 md:text-sm ${dropdownOpen ? 'text-black text-center' : ''}`} style={{ background: 'linear-gradient(113deg, rgba(1,134,191,1) 30%, rgba(12,100,138,1) 100%)' }}>
+    <nav className={`pb-5 md:text-sm text-black ${dropdownOpen ? 'text-black text-center' : ''}`} style={{ background: 'linear-gradient(113deg, rgba(1,134,191,1) 30%, rgba(12,100,138,1) 100%)' }}>
       <div className="gap-x-14 items-center max-w-screen-xl mx-auto px-4 md:flex md:px-8">
         <div className="flex items-center justify-between py-5 md:block">
           <a href="/">
@@ -96,9 +96,9 @@ export const Navbar = () => {
                 {dropdownOpen && (
                   <div className="origin-top-right absolute right-2 mt-2 w-35 rounded-md shadow-lg bg-white ring-0 ring-opacity-0">
                     <div className="w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none" role="none">
-                     <Link href={route('logout')} method="post">Logout</Link>
+                     <Link className='btn bg-orange-300 text-black btn-error' href={route('logout')} method="post">Logout</Link>
                       { auth.user.role === 'user' ? null :(
-                      <a className='btn btn-sm'style={{backgroundColor:"green" , color:"#0000f"}} href="admin/dashboard" method="post" as="button"> MODE_ADMIN</a>
+                      <a className='btn bg-teal-300 text-black btn-success' href="admin/dashboard" method="post" as="button"> MODE_ADMIN</a>
                 )}
                     </div>
                   </div>

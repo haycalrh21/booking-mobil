@@ -136,8 +136,8 @@ const downloadPDFSemua = () => {
                 Download as PDF
               </button>
               )}
-              <div id="table-container">
-  <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%',borderColor:'#00000'  }}>
+              <div>
+  <table className="" style={{ borderCollapse: 'collapse', width: '100%',borderColor:'#00000'  }}>
     <thead>
       <tr>
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
@@ -146,7 +146,7 @@ const downloadPDFSemua = () => {
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Harga</th>
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Pajak</th>
-        <th className="border border-black text-left text-orange-300" style={{ padding: '10px', width:'100%'}}>Deskripsi</th>
+        <th className="border border-black text-left text-orange-300" style={{ padding: '10px', maxWidth:'100%'}}>Deskripsi</th>
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Gambar</th>
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
         <th className="border border-black text-left text-orange-300" style={{ padding: '10px' }}>Aksi</th>
@@ -192,7 +192,7 @@ const downloadPDFSemua = () => {
             <td className="border border-black text-left" style={{ padding: '10px' }}>
               <div className='flex gap-1' >
                 { role === 'manager' ? null : (
-              <Link href={route('mobil.edit', { id: mobil.id })} className='btn btn-warning bg-orange-200 glass'>Edit</Link>
+              <Link href={route('mobil.edit', { id: mobil.id })} className='btn btn-warning bg-orange-200 glass'>Ubah</Link>
               )}
               { role === 'manager' ? null : (
               <InertiaLink
@@ -201,7 +201,7 @@ const downloadPDFSemua = () => {
   as="button"
   className='btn btn-error bg-red-200 glass'
 >
-  Delete
+  Hapus
 </InertiaLink>
 )}
 { role != 'manager' ? null : (

@@ -38,7 +38,9 @@ const Carousel = ({ images }) => {
 export const DetailMobil = ({ mobil }) => {
   console.log('mobil:', mobil);
   return (
-    <div>
+    <div className='text-black'>
+           <img src="/images/bgputih.jpg" style={{ minWidth:'100%',minHeight:'150%', position:'absolute', position:'absolute',zIndex:'-1'}} alt="" />
+
       <div>
         <Navbar />
       </div>
@@ -47,7 +49,7 @@ export const DetailMobil = ({ mobil }) => {
         <div className='' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <Carousel images={mobil.images.slice(0, 4)} />
 
-          <table style={{ borderCollapse: 'collapse', width: '55%', border: '1px solid #ddd', marginTop: '20px' }}>
+          <table style={{ borderCollapse: 'collapse', width: '25%', border: '1px solid #ddd', marginTop: '20px' }}>
             <tbody>
               <tr>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}><strong>Nama:</strong></td>
@@ -64,13 +66,13 @@ export const DetailMobil = ({ mobil }) => {
               <tr>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}><strong>Deskripsi:</strong></td>
                 <p style={{ border: '1px solid #ddd', padding: '8px' }}>
-                <Textarea readOnly="true" style={{minWidth:'720px'
+                <Textarea className='' readOnly="true" style={{minWidth:'500px'
+                ,maxWidth:'100%'
                 ,minHeight:'320px'
-                ,backgroundColor:'#1d232a'
-                ,marginBottom:'-12px'
-                ,marginLeft:'-6px'
-                ,marginRight:'-5px'
-                ,marginTop:'-6px'
+                ,marginBottom:'-15px'
+                ,marginLeft:'-9px'
+                ,marginRight:'-9px'
+                ,marginTop:'-9px'
             }}>{mobil.deskripsi}</Textarea></p>
               </tr>
               <tr>

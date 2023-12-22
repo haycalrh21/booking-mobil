@@ -54,16 +54,16 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
   }, [penjualan, selectedMonth, itemsPerPage]);
 
   return (
-    <div >
+    <div className='text-black'>
              <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
 
-            <h1 className="text-3xl font-semibold text-center" style={{ marginTop:'10px' }}>
+            <h1 className="text-3xl font-semibold text-center">
               Data Penjualan
 
             </h1>
 
       <label>Pilih Bulan: </label>
-      <select onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
+      <select className='ml-4 normal-case text-sm bg-orange-100 bg-gradient-to-r hover:from-yellow-300 hover:to-pink-100' onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
         <option value="">Semua Bulan</option>
         <option value="01">Januari</option>
         <option value="02">Februari</option>

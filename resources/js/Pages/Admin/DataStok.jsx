@@ -74,13 +74,13 @@ export function DataStok({ mobils, role }) {
 
   return (
     <div>
-      <div className="flex">
+      <div className="flex text-black">
 
         <div className=" rounded-lg w-full flex flex-wrap">
         <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
 
           <div >
-            <h1 className='mt-4 font-extrabold text-lg text-transparent bg-clip-text bg-gradient-to-r from-warning to-orange-500 via-50%' style={{ textAlign:'center' }}>
+            <h1 className='mt-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-700 via-100%' style={{ textAlign:'center' }}>
               Data Stok
             </h1>
             {/* <Link href={route('mobil.create')} className="btn p-2 m-3">
@@ -95,12 +95,12 @@ export function DataStok({ mobils, role }) {
   <table className="min-w-full" style={{ borderCollapse: 'collapse', width: '100%' }}>
     <thead>
       <tr>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>ID</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Nama</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Stok</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Brand</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Kategori</th>
-        <th className="border text-left text-orange-300" style={{ padding: '10px' }}>Tahun</th>
+        <th className="border text-left font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-800" style={{ padding: '10px' }}>ID</th>
+        <th className="border text-left font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-800" style={{ padding: '10px' }}>Nama</th>
+        <th className="border text-left font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-800" style={{ padding: '10px' }}>Stok</th>
+        <th className="border text-left font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-800" style={{ padding: '10px' }}>Brand</th>
+        <th className="border text-left font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-800" style={{ padding: '10px' }}>Kategori</th>
+        <th className="border text-left font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-orange-800" style={{ padding: '10px' }}>Tahun</th>
       </tr>
     </thead>
     <tbody>

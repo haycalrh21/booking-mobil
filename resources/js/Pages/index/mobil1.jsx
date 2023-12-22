@@ -9,7 +9,7 @@ import { DetailMobil} from '@/Pages/User/DetailMobil';
 
 function Mobil1({ mobils }) {
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState(['All']); // Gunakan array untuk menyimpan kategori yang dipilih
   const categories = ['All', 'Sedan', 'SUV', 'Coupe', 'Pick-up', 'Sport', 'Listrik', 'Keluarga', 'Klasik', 'Off-road'];
@@ -65,7 +65,9 @@ function Mobil1({ mobils }) {
   }, []);
 
   return (
-    <div>
+    <div className='text-black'>
+              <img src="/images/bgputih.jpg" style={{ minWidth:'100%',maxHeight:'130%', position:'absolute', position:'absolute',zIndex:'-1'}} alt="" />
+
       <style>
         {`
           /* Gaya efek hover untuk elemen kartu (card) */

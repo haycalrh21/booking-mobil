@@ -13,31 +13,31 @@ import Chart from 'chart.js/auto';
 
 
 function dashboard(role) {
-  const [activeTab, setActiveTab] = useState('');
-  const [mobilData, setMobilData] = useState([]);
-  const [mobilStok, setStokData] = useState([]);
-  const [penggunaData, setPenggunaData] = useState([]);
-  const [bookingData, setBookingData] = useState([]);
-  const [karyawanData, setKaryawanData] = useState([]);
-  const [penjualanData, setPenjualanData] = useState([]);
-  const [pembelianData, setPembelianData] = useState([]);
-  const [isTestVisible, setIsTestVisible] = useState(true); // State untuk visibilitas elemen <div>
-  const [chartTotalHarga, setChartTotalHarga] = useState(0); // State to store total harga for the chart
-  const [monthlyTotalData, setMonthlyTotalData] = useState([]);
-  const [chartTotalPembelian, setChartTotalPembelian] = useState(0); // State untuk menyimpan total pembelian
-  const [monthlyTotalPembelianData, setMonthlyTotalPembelianData] = useState([]);
+    const [activeTab, setActiveTab] = useState('');
+    const [mobilData, setMobilData] = useState([]);
+    const [mobilStok, setStokData] = useState([]);
+    const [penggunaData, setPenggunaData] = useState([]);
+    const [bookingData, setBookingData] = useState([]);
+    const [karyawanData, setKaryawanData] = useState([]);
+    const [penjualanData, setPenjualanData] = useState([]);
+    const [pembelianData, setPembelianData] = useState([]);
+    const [isTestVisible, setIsTestVisible] = useState(true);
+    const [chartTotalHarga, setChartTotalHarga] = useState(0);
+    const [monthlyTotalData, setMonthlyTotalData] = useState([]);
+    const [chartTotalPembelian, setChartTotalPembelian] = useState(0);
+    const [monthlyTotalPembelianData, setMonthlyTotalPembelianData] = useState([]);
 
+    const apebetulrolenyeitu = role.auth.user.role;
 
-  const apebetulrolenyeitu = role.auth.user.role;
-  const handleTabClick = (tab) => {
+    const handleTabClick = (tab) => {
     if (tab === activeTab) {
-      setActiveTab('');
-      setIsTestVisible(true); // Menampilkan kembali elemen <div> ketika tab ditutup
+        setActiveTab('');
+        setIsTestVisible(true);
     } else {
-      setActiveTab(tab);
-      setIsTestVisible(false); // Menyembunyikan elemen <div> ketika tab diklik
+        setActiveTab(tab);
+        setIsTestVisible(false);
     }
-  };
+    };
 
   const fetchData = (url, setDataCallback, processDataCallback) => {
     fetch(url)
@@ -296,7 +296,7 @@ function dashboard(role) {
 
     <img src="/images/bgputih.jpg" style={{ minWidth:'100%' ,minHeight:'100%', position:'absolute', zIndex:'-10',
      fontSize: '2em', fontWeight: 'bold'}}/>
-   <b><h1 className='mt-4 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800' style={{ textAlign:'center' }}> Chart Penjualan Dan Pembelian Mobil</h1></b>
+   <b><h1 className=' font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-black to-purple-800' style={{ textAlign:'center' }}> Chart Penjualan Dan Pembelian Mobil</h1></b>
     <div style={{ display: 'flex' }}>
   {chartTotalHarga && (
     <div style={{ width: '50%', height: 'auto' }}>

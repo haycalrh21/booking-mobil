@@ -5,14 +5,18 @@ import { Footer } from '@/Pages/User/Footer';
 
 export const BookingPage = ({ bookings }) => {
   return (
-    <div>
-      <Navbar />
-      <div>
-        <div>
+    <div className='text-black'>
+
+      <Navbar/>
+
+    <div className='' style={{}}>
+                <img src="/images/bgputih.jpg" style={{ width:'100%'}} alt="" />
+                <div className="" style={{maxWidth:1080 }}>
+                    <div className='' >
           <h2 style={{ textAlign: 'center' }}>Riwayat Booking</h2>
           {bookings.length > 0 ? (
-            <table className="table" style={{ marginTop: '20px', marginLeft: 'auto', marginRight: 'auto' }}>
-              <thead>
+            <table className="table text-xl" style={{ maxWidth:1080, marginTop:'-720px'}}>
+              <thead className='text-black text-xl'>
                 <tr>
                   <th>Nama Pemesan</th>
                   <th>Email</th>
@@ -34,15 +38,14 @@ export const BookingPage = ({ bookings }) => {
               </tbody>
             </table>
           ) : (
-            <div style={{ margin: '20px', textAlign: 'center' }}>
+            <div >
               Tidak ada data booking yang tersedia.
             </div>
           )}
+          </div>
         </div>
-        <Footer/>
       </div>
-      {/* Konten tambahan */}
-
+      <Footer/>
     </div>
   );
 };

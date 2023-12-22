@@ -44,21 +44,21 @@ console.log(role);
               Download as PDF
             </button>
 )}
-            <div className="mx-auto text-center">
-              <table className="min-w-full table-fixed border border-white ">
+            <div className="mx-auto text-black " >
+              <table className="min-w-full table-fixed border" style={{minHeight:'340px' , textIndent:'20px'  }}>
                 <thead>
-                  <tr>
-                    <th className="border-b-2 border-r p-2 text-left">Nama</th>
-                    <th className="border-b-2 p-2 text-left">Email</th>
-                    <th className="border-b-2 p-2 text-left">Role</th>
+                  <tr  className='text-left'>
+                    <th style={{ border: '1px solid black' }} >Nama</th>
+                    <th style={{ border: '1px solid black' }} >Email</th>
+                    <th style={{ border: '1px solid black' }} >Role</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody >
                   {userOnly.map((user) => (
                     <tr key={user.id}>
-                      <td className="border-b border-r p-2 text-left">{user.name}</td>
-                      <td className="border-b p-2 text-left">{user.email}</td>
-                      <td className="border-b p-2 text-left">{user.role}</td>
+                      <td style={{ border: '1px solid black' }}>{user.name}</td>
+                      <td style={{ border: '1px solid black' }}>{user.email}</td>
+                      <td style={{ border: '1px solid black' }}>{user.role}</td>
                     </tr>
                   ))}
                 </tbody>

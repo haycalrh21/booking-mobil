@@ -30,10 +30,10 @@ Route::get('/', function () {
 
     ]);
 });
-// role admin
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+// // role admin
+// Route::get('/dashboard', function () {
+//     return Inertia::render('Dashboard');
+// })->name('dashboard');
 
 Route::get('/datamobil1', [MobilController::class,'index'])->name('datamobillengkap');
 
