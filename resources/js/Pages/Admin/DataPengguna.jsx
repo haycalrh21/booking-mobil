@@ -40,7 +40,7 @@ console.log(role);
           </div> */}
           <div>
             {role != 'manager' ? null : (
-            <button onClick={downloadPDF} className="btn btn-success bg-teal-200 glass p-2 m-3">
+            <button onClick={downloadPDF} className="btn btn-success bg-teal-200  p-2 m-3">
               Download as PDF
             </button>
 )}

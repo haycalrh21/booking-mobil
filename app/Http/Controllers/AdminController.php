@@ -17,8 +17,8 @@ class AdminController extends Controller
 
     public function dataPengguna()
     {
-        // $users = User::where('role', 'user')->get();
-    $users= User::all();
+        $users = User::where('role', 'user')->get();
+    // $users= User::all();
     return response()->json($users);
 
 

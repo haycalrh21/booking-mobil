@@ -167,12 +167,12 @@
                 </div>
                 <div className="mb-4">
     <label className="block text-yellow-600 mb-2">Gambar:</label>
-    <span className='glass text-sm rounded-md bg-gradient-to-r from-green-200 to-blue-500 '>Bisa Memuat Lebih Dari 1 Gambar</span>
+    <span className=' text-sm rounded-md bg-gradient-to-r from-green-200 to-blue-500 '>Bisa Memuat Lebih Dari 1 Gambar</span>
     <input
         type="file"
         name="images"
         onChange={handleInputChange}
-        className="w-full px-3 py-2 rounded border text-ghost input-ghost glass"
+        className="w-full px-3 py-2 rounded border text-ghost input-ghost "
         multiple  required
     />
 </div>
@@ -198,7 +198,7 @@
                     </select>
                 </div>
                 <div className="mb-4">
-                    <button type="submit" className="btn bg-blue-500 glass text-white btn-success">
+                    <button type="submit" className="btn bg-blue-500  text-white btn-success">
                     Simpan
                     </button>
                 </div>

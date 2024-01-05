@@ -9,7 +9,7 @@ export const Navbar =()=>{
         <div className="navbar" style={{padding:'unset'}}>
     <img src="/images/bgputih.jpg" style={{ minWidth:'100%',maxHeight:'22%',position:'absolute', zIndex:'-1'}} alt="" />
   <div className="flex-1">
-    <Link href={route('admin.dashboard')} className="btn btn-info glass normal-case text-xl bg-gradient-to-r from-sky-200 via-30% to-emerald-200 to-90% hover:from-emerald-300 hover:to-sky-200 hover:via-orange-100">Dashboard</Link>
+    <Link href={route('admin.dashboard')} className="btn btn-info normal-case text-xl from-sky-200 ">Dashboard</Link>
   </div>
   <div className="flex-none gap-2">
     <div className="dropdown dropdown-end" >

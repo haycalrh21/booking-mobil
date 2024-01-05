@@ -127,12 +127,12 @@ const downloadPDFSemua = () => {
 
             </h1>
             {role === 'manager' ? null : (
-            <Link href={route('mobil.create')} className="btn btn-info glass bg-blue-400 p-2 m-3">
+            <Link href={route('mobil.create')} className="btn bg-blue-500 text-white rounded-full hover-button p-2 m-3">
                 Tambah data
               </Link>
               )}
               {role != 'manager' ? null : (
-              <button onClick={downloadPDFSemua} className="btn btn-success bg-teal-200 glass p-2 m-3">
+              <button onClick={downloadPDFSemua} className="btn bg-teal-500 text-white rounded-full hover-button p-2 m-3">
                 Download as PDF
               </button>
               )}
@@ -192,20 +192,20 @@ const downloadPDFSemua = () => {
             <td className="border border-black text-left" style={{ padding: '10px' }}>
               <div className='flex gap-1' >
                 { role === 'manager' ? null : (
-              <Link href={route('mobil.edit', { id: mobil.id })} className='btn btn-warning bg-orange-200 glass'>Ubah</Link>
+              <Link href={route('mobil.edit', { id: mobil.id })} className='btn bg-orange-500 text-white rounded-full hover-button '>Ubah</Link>
               )}
               { role === 'manager' ? null : (
               <InertiaLink
   href={route('mobil.delete', { id: mobil.id })}
   method="delete"
   as="button"
-  className='btn btn-error bg-red-200 glass'
+  className='btn btn bg-red-200 text-black rounded-full hover-button '
 >
   Hapus
 </InertiaLink>
 )}
 { role != 'manager' ? null : (
-            <button className='btn btn-accent bg-teal-500 glass' onClick={() => downloadPDF(mobil)}>
+            <button className='btn btn-accent bg-teal-500 ' onClick={() => downloadPDF(mobil)}>
                       Print
                     </button>
                     )}

@@ -106,13 +106,13 @@ const isBookingConfirmed = (bookingId) => confirmedBookings.includes(bookingId);
     <div style={{ marginBottom:'20px' ,marginLeft:'20px' }}>
       <label>Pilih Tanggal Awal: </label>
       <input type="date" onChange={handleStartDateChange}
-      className='ml-4 glass normal-case text-sm bg-orange-100 bg-gradient-to-r hover:from-yellow-300 hover:to-pink-100'
+      className='ml-4 normal-case text-sm bg-orange-100 '
       style={{colorScheme:'black'}}
       />
       <label className='ml-4'>Pilih Tanggal Akhir: </label>
       <input type="date"
       style={{colorScheme:'black'}}
-      className='ml-4 glass normal-case text-sm bg-orange-100 bg-gradient-to-r hover:from-pink-100 hover:to-yellow-300'
+      className='ml-4 normal-case text-sm bg-orange-100 '
       onChange={handleEndDateChange} />
     </div>
     <table className="table" ref={tableRef} style={{ borderCollapse: 'collapse', width: '100%' }}>

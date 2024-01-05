@@ -106,11 +106,11 @@ function DataPembelian({ pembelians }) {
         Total Pembelian: {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalPembelian)}
       </div>
       {!showForm ? (
-        <button onClick={handleShowForm}  className='btn btn-info glass bg-blue-400 p-2 m-3'>Tambah Pembelian</button>
+        <button onClick={handleShowForm}  className='btn bg-blue-500 text-white rounded-full hover-button p-2 m-3'>Tambah Pembelian</button>
       ) : (
         <div>
           <BeliMobil onSubmit={handleSubmit} />
-          <button onClick={() => setShowForm(false)} className='btn btn-error bg-red-200 glass'>Batal</button>
+          <button onClick={() => setShowForm(false)} className='btn bg-red-500 text-white rounded-full hover-button p-2 m-3'>Batal</button>
         </div>
       )}
     </div>

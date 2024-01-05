@@ -41,10 +41,10 @@ function Karyawan({ karyawans }) {
             Data Pegawai
           </h1>
 
-          <button onClick={toggleForm} className="btn btn-info glass bg-blue-400 p-2 m-3">
+          <button onClick={toggleForm} className="btn bg-blue-500 text-white rounded-full hover-button p-2 m-3">
             Tambah Karyawan
           </button>
-          <button onClick={downloadPDF} className="btn btn-success bg-teal-200 glass p-2 m-3">
+          <button onClick={downloadPDF} className="btn bg-teal-500 text-white rounded-full hover-button p-2 m-3">
             Download as PDF
           </button>
           <table className="min-w-full table-fixed border border-white">

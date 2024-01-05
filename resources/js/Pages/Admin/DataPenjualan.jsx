@@ -63,7 +63,7 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
             </h1>
 
       <label>Pilih Bulan: </label>
-      <select className='ml-4 normal-case text-sm bg-orange-100 bg-gradient-to-r hover:from-yellow-300 hover:to-pink-100' onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
+      <select className='ml-4 normal-case text-sm bg-orange-100 ' onChange={(e) => { setSelectedMonth(e.target.value); onMonthSelect(e.target.value); }} value={selectedMonth}>
         <option value="">Semua Bulan</option>
         <option value="01">Januari</option>
         <option value="02">Februari</option>
