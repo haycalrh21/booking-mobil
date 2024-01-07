@@ -28,7 +28,7 @@ console.log(role);
 
   return (
     <div >
-             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute',zIndex:'-15'}} alt="" />
 
       <div className="flex">
         <div></div>

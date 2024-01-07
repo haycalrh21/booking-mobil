@@ -17,9 +17,9 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
     const pdf = new jsPDF();
 
     pdf.autoTable({
-      head: [['id','Id_Booking','Nama Pemesan', 'Email','Harga Mobil', 'Kode Mobil', 'Tanggal Pesanan',]], // Adjusted column headers
+      head: [['id', 'Id_Booking', 'Nama Pemesan', 'Email', 'Harga Mobil', 'Kode Mobil', 'Tanggal Pesanan']],
       body: penjualan.map((penjualan) => [
-        penjualan.id, // Adjusted field names
+        penjualan.id,
         penjualan.booking_id,
         penjualan.namaPemesan,
         penjualan.email,
@@ -27,11 +27,43 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
         penjualan.kodeMobil,
         penjualan.created_at,
       ]),
+      columnStyles: {
+        0: {
+            halign : 'center',
+          columnWidth: 12,
+        },
+        1: {
+            halign : 'center',
+          columnWidth: 24,
+        },
+        2: {
+            halign : 'center',
+          columnWidth: 45,
+        },
+        3: {
+            halign : 'center',
+          columnWidth: 45,
+        },
+        4: {
+            halign : 'center',
+          columnWidth: 25,
+        },
+        5: {
+            halign : 'center',
+          columnWidth: 15,
+        },
+        6: {
+            halign : 'center',
+          columnWidth: 25,
+        },
+      },
+
+      headStyles: {halign :'center',}
     });
-    console.log(penjualan);
 
     pdf.save('data_Penjualan.pdf');
   };
+
 
   const getCurrentPageData = () => {
     const filteredData = selectedMonth
@@ -78,11 +110,10 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
 
   return (
     <div className='text-black'>
-             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+             <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'200%', position:'absolute',zIndex:'-15'}} alt="" />
 
             <h1 className="text-3xl font-semibold text-center">
               Data Penjualan
-
             </h1>
 
       <label>Pilih Bulan: </label>

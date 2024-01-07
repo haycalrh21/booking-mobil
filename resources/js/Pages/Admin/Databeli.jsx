@@ -36,8 +36,49 @@ console.log(pembelians);
         pembelians.pajak,
         pembelians.kategori,
       ]),
+       columnStyles: {
+        0: {
+            halign : 'center',
+          columnWidth: 12,
+        },
+        1: {
+            halign : 'center',
+          columnWidth: 28,
+        },
+        2: {
+            halign : 'center',
+          columnWidth: 25,
+        },
+        3: {
+            halign : 'center',
+          columnWidth: 27,
+        },
+        4: {
+            halign : 'center',
+          columnWidth: 18,
+        },
+        5: {
+            halign : 'center',
+          columnWidth: 35,
+        },
+        6: {
+            halign : 'center',
+          columnWidth: 15,
+        },
+        7: {
+            halign : 'center',
+          columnWidth: 19,
+        },
+        8: {
+            halign : 'center',
+          columnWidth: 19,
+        },
+      },
+
+      headStyles: {halign :'center',}
     });
-    pdf.save('Data_Pembelian.pdf');
+
+    pdf.save('data_Pembelian.pdf');
   };
   useEffect(() => {
 
@@ -84,7 +125,7 @@ console.log(pembelians);
 
   return (
     <div className='text-black'>
-                     <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'150%', position:'absolute', position:'absolute',zIndex:'-15'}} alt="" />
+                     <img src="/images/bgputihkebalik.jpg" style={{ minWidth:'100%',maxHeight:'150%', position:'absolute',zIndex:'-15'}} alt="" />
 
             <h1 className="text-3xl font-semibold text-center" style={{marginBottom:'5px' }}>
               Data Pembelian Mobil

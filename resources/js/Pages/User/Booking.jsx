@@ -73,7 +73,7 @@ const Booking = ({ user, mobilData, mobils }) => {
   return (
 
     <div className='text-black'>
-            <img src="/images/bgputih.jpg" style={{ minWidth:'100%',maxHeight:'106%', position:'absolute', position:'absolute',zIndex:'-1'}} alt="" />
+            <img src="/images/bgputih.jpg" style={{ minWidth:'100%',maxHeight:'106%', position:'absolute', zIndex:'-1'}} alt="" />
 
       <Navbar />
       <div className="container">
