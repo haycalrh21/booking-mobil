@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BeliMobil from '@/Pages/Admin/BeliMobil';
+import 'jspdf-autotable';
+import jsPDF from 'jspdf';
 
 function DataPembelian({ pembelians }) {
   const [formData, setFormData] = useState({
@@ -16,7 +18,27 @@ function DataPembelian({ pembelians }) {
   const [pembelianList, setPembelianList] = useState([]); // State untuk menyimpan daftar pembelian
   const [showForm, setShowForm] = useState(false); // State untuk menampilkan/menyembunyikan form
   const [totalPembelian, setTotalPembelian] = useState(0); // State untuk menyimpan total pembelian
+console.log(pembelians);
 
+  const downloadPDF = () => {
+    const pdf = new jsPDF();
+
+    pdf.autoTable({
+      head: [['id','Tanggal Pembelian','Nama Penjual', 'Nomor Hp','Nama Mobil', 'Harga','Tahun','Pajak','Kategori']], // Adjusted column headers
+      body: pembelians.map((pembelians) => [
+        pembelians.id, // Adjusted field names
+        pembelians.created_at,
+        pembelians.namaPembeli,
+        pembelians.noHp,
+        pembelians.namaMobil,
+        pembelians.harga,
+        pembelians.tahun,
+        pembelians.pajak,
+        pembelians.kategori,
+      ]),
+    });
+    pdf.save('Data_Pembelian.pdf');
+  };
   useEffect(() => {
 
     const total = pembelians.reduce((acc, pembelian) => {
@@ -68,6 +90,9 @@ function DataPembelian({ pembelians }) {
               Data Pembelian Mobil
 
             </h1>
+            <button onClick={downloadPDF} className="btn bg-teal-500 text-white rounded-full hover-button p-2 m-3">
+            Download as PDF
+          </button>
       <table style={{ borderCollapse: 'collapse', width: '100%' }}>
         <thead>
           <tr>

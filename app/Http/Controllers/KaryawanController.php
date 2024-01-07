@@ -11,8 +11,8 @@ use Illuminate\Support\Str;
 
 class KaryawanController extends Controller
 {
-    public function index(){
-        $karyawans = User::all();
+    public function index()
+    {    $karyawans = User::whereIn('role', ['admin', 'sales', 'manager'])->get();
         return response()->json($karyawans);
     }
 

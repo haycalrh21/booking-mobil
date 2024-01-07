@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Paginator } from '@/Pages/admin/Paginator';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import { data } from 'autoprefixer';
 
 const DataPenjualan = ({ penjualan, onMonthSelect }) => {
   const itemsPerPage = 10;
@@ -9,6 +12,26 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [canGoNext, setCanGoNext] = useState(true);
   const [selectedMonth, setSelectedMonth] = useState('');
+
+  const downloadPDF = () => {
+    const pdf = new jsPDF();
+
+    pdf.autoTable({
+      head: [['id','Id_Booking','Nama Pemesan', 'Email','Harga Mobil', 'Kode Mobil', 'Tanggal Pesanan',]], // Adjusted column headers
+      body: penjualan.map((penjualan) => [
+        penjualan.id, // Adjusted field names
+        penjualan.booking_id,
+        penjualan.namaPemesan,
+        penjualan.email,
+        penjualan.hargaMobil,
+        penjualan.kodeMobil,
+        penjualan.created_at,
+      ]),
+    });
+    console.log(penjualan);
+
+    pdf.save('data_Penjualan.pdf');
+  };
 
   const getCurrentPageData = () => {
     const filteredData = selectedMonth
@@ -79,6 +102,9 @@ const DataPenjualan = ({ penjualan, onMonthSelect }) => {
         <option value="12">Desember</option>
         {/* Tambahkan opsi untuk bulan-bulan lainnya */}
       </select>
+      <button onClick={downloadPDF} className="btn bg-teal-500 text-white rounded-full hover-button p-2 m-3">
+            Download as PDF
+          </button>
       <table className="min-w-full table border border-white">
         <thead>
           <tr>
